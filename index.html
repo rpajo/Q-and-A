@@ -11,7 +11,8 @@
     <body>
         <ul class="w3-navbar w3-border w3-dark-grey w3-center">
             <li style="width:15%" class="w3-padding-16 w3-hide-small">&nbsp;</li>
-            <li style="width:15%"><a class="w3-padding-16 w3-hover-orange" href="#">Home</a></li>
+            <li style="width:15%">
+                <a class="w3-padding-16 w3-hover-orange" href="#">Home</a></li>
             <li style="width:15%"><a class="w3-padding-16 w3-hover-orange" href="#">Ask Question</a></li>
             <li style="width:15%"><a class="w3-padding-16 w3-hover-orange" href="#">Profile</a></li>
             <li style="width:20%">
@@ -23,11 +24,77 @@
             <li style="width:15%" class="w3-hide-small">&nbsp;</li>
         </ul>
 
-        <div class="w3-row w3-blue wrapper">
+        <div class=" w3-container w3-row w3-blue wrapper">
             <h1> Main Body Wrapper </h1>
 
-            <div class="w3-green w3-container w3-threequarter">
-                <h2>Question section</h2> 
+            <div id="qSection" class="w3-pale-green w3-container w3-threequarter">
+                <h2>Question section</h2>
+                <div class="w3-card-4 w3-white w3-margin-bottom">
+                    <header class="w3-light-grey">
+                        <div class="w3-row">
+                            <div class="w3-threequarter w3-container">
+                                <h3>Question Title</h3>
+                            </div>
+                            <div class="w3-quarter w3-container ">
+                                <p class="w3-tag w3-red  w3-right">Unsolved</span>
+                            </div>
+                        </div>
+                        
+                        
+                    </header>
+                    <div class="w3-container">
+                        <!--<p>1 new friend request</p>-->
+                        <!--<hr>-->
+                        <img src="images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-top w3-margin-right" style="width:60px">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
+                        <hr style="margin-top: 0px">
+                        <div class="w3-row w3-padding-bottom">
+                            <span class="w3-tag w3-small w3-green">5 Answers</span>
+                            <span class="w3-tag w3-small w3-blue">3 Comments</span>
+                            <span class="w3-tag w3-small w3-amber">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                Rating: <span id="rating">+8</span>
+                            </span>
+                            
+                            <i class="fa fa-clock-o w3-right" aria-hidden="true"> Asked 3 hours ago</i>
+                        </div>
+                    </div>
+                    <button class="w3-btn-block w3-dark-grey w3-hover-orange" >Open Thread</button>
+                </div>
+
+                <div class="w3-card-4 w3-white w3-margin-bottom">
+                    <header class="w3-light-grey">
+                        <div class="w3-row">
+                            <div class="w3-threequarter w3-container">
+                                <h3>Question Title</h3>
+                            </div>
+                            <div class="w3-quarter w3-container ">
+                                <p class="w3-tag w3-red  w3-right">Unsolved</span>
+                            </div>
+                        </div>
+                        
+                        
+                    </header>
+                    <div class="w3-container">
+                        <!--<p>1 new friend request</p>-->
+                        <!--<hr>-->
+                        <img src="images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-top w3-margin-right" style="width:60px">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
+                        <hr style="margin-top: 0px">
+                        <div class="w3-row w3-padding-bottom">
+                            <span class="w3-tag w3-small w3-green">5 Answers</span>
+                            <span class="w3-tag w3-small w3-blue">3 Comments</span>
+                            <span class="w3-tag w3-small w3-amber">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                Rating: <span id="rating">+8</span>
+                            </span>
+                            
+                            <i class="fa fa-clock-o w3-right" aria-hidden="true"> Asked 3 hours ago</i>
+                        </div>
+                    </div>
+                    <button class="w3-btn-block w3-dark-grey w3-hover-orange">Open Thread</button>
+                </div>
+
             </div>
             <div class="w3-teal w3-container w3-quarter">
                 <h2>Widget section</h2> 
