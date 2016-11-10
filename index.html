@@ -16,19 +16,21 @@
             <li style="width:15%"><a class="w3-padding-16 w3-hover-orange" href="#">Ask Question</a></li>
             <li style="width:15%"><a class="w3-padding-16 w3-hover-orange" href="#">Profile</a></li>
             <li style="width:20%">
-                <input class="w3-input w3-hover-gray w3-dark-gray margin-t-8" type="text" placeholder="Search Questions...">
+                <input class="w3-input w3-hover-gray w3-dark-gray margin-t" type="text" placeholder="Search Questions...">
             </li>
             <li style="5%">
-                <a href="#" class="margin-t-8 w3-hover-orange"><i class="fa fa-search"></i></a>
+                <a href="#" class=" -t w3-hover-orange"><i class="fa fa-search"></i></a>
             </li>   
             <li style="width:15%" class="w3-hide-small">&nbsp;</li>
         </ul>
 
-        <div class=" w3-container w3-row w3-blue wrapper">
-            <h1> Main Body Wrapper </h1>
+        <div class=" w3-container w3-row wrapper w3-margin-top">
+            <!--<h1> Main Body Wrapper </h1>-->
 
-            <div id="qSection" class="w3-pale-green w3-container w3-threequarter">
-                <h2>Question section</h2>
+
+            <!--QUESTION SECTION-->
+            <div id="qSection" class="w3-container w3-threequarter">
+                <!--<h2>Question section</h2>-->
                 <div class="w3-card-4 w3-white w3-margin-bottom">
                     <header class="w3-light-grey">
                         <div class="w3-row">
@@ -43,14 +45,19 @@
                         
                     </header>
                     <div class="w3-container">
-                        <!--<p>1 new friend request</p>-->
-                        <!--<hr>-->
                         <img src="images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-top w3-margin-right" style="width:60px">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
                         <hr style="margin-top: 0px">
                         <div class="w3-row w3-padding-bottom">
-                            <span class="w3-tag w3-small w3-green">5 Answers</span>
-                            <span class="w3-tag w3-small w3-blue">3 Comments</span>
+                            <span class="w3-tag w3-small w3-green">
+                                <i class="fa fa-reply" aria-hidden="true"></i>
+                                5 Answers
+                            </span>
+
+                            <span class="w3-tag w3-small w3-blue">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                3 Comments
+                            </span>
                             <span class="w3-tag w3-small w3-amber">
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 Rating: <span id="rating">+8</span>
@@ -76,14 +83,57 @@
                         
                     </header>
                     <div class="w3-container">
-                        <!--<p>1 new friend request</p>-->
-                        <!--<hr>-->
                         <img src="images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-top w3-margin-right" style="width:60px">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
                         <hr style="margin-top: 0px">
                         <div class="w3-row w3-padding-bottom">
-                            <span class="w3-tag w3-small w3-green">5 Answers</span>
-                            <span class="w3-tag w3-small w3-blue">3 Comments</span>
+                            <span class="w3-tag w3-small w3-green">
+                                <i class="fa fa-reply" aria-hidden="true"></i>
+                                5 Answers
+                            </span>
+
+                            <span class="w3-tag w3-small w3-blue">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                3 Comments
+                            </span>
+                            <span class="w3-tag w3-small w3-amber">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                Rating: <span id="rating">+8</span>
+                            </span>
+                            
+                            <i class="fa fa-clock-o w3-right" aria-hidden="true"> Asked 3 hours ago</i>
+                        </div>
+                    </div>
+                    <button class="w3-btn-block w3-dark-grey w3-hover-orange">Open Thread</button>
+                </div>
+                
+                <div class="w3-card-4 w3-white w3-margin-bottom">
+                    <header class="w3-light-grey">
+                        <div class="w3-row">
+                            <div class="w3-threequarter w3-container">
+                                <h3>Question Title</h3>
+                            </div>
+                            <div class="w3-quarter w3-container ">
+                                <p class="w3-tag w3-red  w3-right">Unsolved</span>
+                            </div>
+                        </div>
+                        
+                        
+                    </header>
+                    <div class="w3-container">
+                        <img src="images/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-top w3-margin-right" style="width:60px">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
+                        <hr style="margin-top: 0px">
+                        <div class="w3-row w3-padding-bottom">
+                            <span class="w3-tag w3-small w3-green">
+                                <i class="fa fa-reply" aria-hidden="true"></i>
+                                5 Answers
+                            </span>
+
+                            <span class="w3-tag w3-small w3-blue">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                3 Comments
+                            </span>
                             <span class="w3-tag w3-small w3-amber">
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 Rating: <span id="rating">+8</span>
@@ -95,11 +145,106 @@
                     <button class="w3-btn-block w3-dark-grey w3-hover-orange">Open Thread</button>
                 </div>
 
-            </div>
-            <div class="w3-teal w3-container w3-quarter">
-                <h2>Widget section</h2> 
+                <!--PAGINATION-->
+                <div class="w3-center w3-margin-top">
+                    <ul class="w3-pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a class="w3-deep-orange" href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+
             </div>
 
+
+            <!--WIDGET SECTION-->
+            <div class="w3-container w3-quarter">
+                <!--<h2>Widget section</h2> -->
+
+                <!--LOGIN-->
+                <div class="w3-card-4 w3-white w3-margin-bottom w3-padding-bottom">
+                    <header class="w3-orange w3-container">
+                        <h3>Log In</h3>                                     
+                    </header>
+                    <form class="w3-container margin-t">
+
+                        <input class="w3-input w3-hover-amber margin-b" type="text" placeholder="Username">
+
+                        <input class="w3-input w3-hover-amber margin-b" type="password" placeholder="Password">
+
+                        <button class="w3-btn-block w3-deep-orange margin-t">LOG IN</button>
+                            
+                        <a href="#">Sign up</a>
+                    </form>
+                </div>
+
+                <!--USER PANEL-->
+                <div class="w3-card-4 w3-white w3-margin-bottom">
+                    <header class="w3-orange w3-container">
+                        <h3>Welcome, User</h3>                                     
+                    </header>
+                    <div>
+                        <ul class="w3-ul w3-hoverable">
+                            <li class="w3-hover-amber">My Profile</li>
+                            <li class="w3-hover-amber">My Questions</li>
+                            <li class="w3-hover-amber">Ask Question</li>
+                            <li class="w3-hover-amber">Search</li>
+                            <li class="w3-hover-amber">Log Out</li>                            
+                        </ul>
+                    </div>
+                </div>
+
+                <!--CATEGORIES-->
+                 <div class="w3-card-4 w3-white w3-margin-bottom">
+                     <header class="w3-orange w3-container">
+                        <h3>Categories</h3>                                     
+                    </header>
+                    <div>
+                        <ul class="clickable w3-ul w3-hoverable">
+                            <li class="w3-hover-amber">Health & Fitness</li>
+                            <li class="w3-hover-amber">Technology</li>
+                            <li class="w3-hover-amber">Science</li>
+                            <li class="w3-hover-amber">Entertainment</li>
+                            <li class="w3-hover-amber">Sports</li>                            
+                            <li class="w3-hover-amber">Pets</li>                            
+                            <li class="w3-hover-amber">Bussiness</li>                            
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="w3-card-4 w3-white w3-margin-bottom">
+                     <header class="w3-orange w3-container">
+                        <h3>Popular Tags</h3>                                     
+                    </header>
+                    <div class="w3-container w3-padding w3-center">
+                        <span class="margin-b w3-tag w3-red">Java</span>
+                        <span class="margin-b w3-tag w3-blue">Trump</span>
+                        <span class="margin-b w3-tag w3-red">Javascript</span>
+                        <span class="margin-b w3-tag w3-blue">Weightloss</span>
+                        <span class="margin-b w3-tag w3-red">C#</span>
+                        <span class="margin-b w3-tag w3-blue">Mars</span>
+                        <span class="margin-b w3-tag w3-red">Nutrition</span>
+                        <span class="margin-b w3-tag w3-blue">Got</span>
+                        <span class="margin-b w3-tag w3-red">Exercise</span>
+                        
+                        <!--<ul class="clickable w3-ul w3-hoverable">
+                            <li class="w3-hover-cyan">Health & Fitness</li>
+                            <li class="w3-hover-cyan">Technology</li>
+                            <li class="w3-hover-cyan">Science</li>
+                            <li class="w3-hover-cyan">Entertainment</li>
+                            <li class="w3-hover-cyan">Sports</li>                            
+                            <li class="w3-hover-cyan">Pets</li>                            
+                            <li class="w3-hover-cyan">Bussiness</li>                            
+                        </ul>-->
+                    </div>
+
+                </div>
+
+            </div>
         </div>
         
         <!-- <script type='text/javascript' src='app.js'></script> -->
