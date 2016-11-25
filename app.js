@@ -26,12 +26,12 @@ var search = function() {
 
 var hideShow = function(div) {
     var form = document.getElementById(div);
-    
-    console.log(form.clientHeight);
-    if (form.clientHeight) {
+        
+        if (form.clientHeight) {
         form.style.height = '0';
     }
     else {
+        var measure = document.getElementById(div+"Measure");
         console.log(measure.clientHeight);
         form.style.height = measure.clientHeight + 16 +'px';
     }
