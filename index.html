@@ -11,7 +11,7 @@
     <body>
 
     <div class="container color-red">
-        <h1 class="center lobster" style="font-size: 48px">Question Overflow</h1>
+        <h1 class="center lobster">Question Overflow</h1>
     </div>
 
     <div class=" container row wrapper margin-t-16">
@@ -21,19 +21,47 @@
         <!--QUESTION SECTION-->
         <div id="qSection" class="container col m12 l9">
             <!--<h2>Question section</h2>-->
+            <div class= "card color-white margin-b-16">
+                <header class="container color-default">
+                    <h3>Search</h3>
+                </header>
+
+                <div class="container" id="search">
+                    <form action="javascript:search();" class="margin-t-8 margin-b-8">
+                        <div class="row">
+                            <div class="col s12 m5">
+                                <label>Enter Search Term:</label>
+                                <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Enter search term"/>
+                            </div>
+                            <div class="col s12 m3">
+                                <label>Enter tags:</label>
+                                <input id="searchTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>    
+                            </div>
+                            <div class="col s12 m4">
+                                <label>Enter category:</label>
+                                <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categories" type="text" placeholder="e.g. Technology"/>
+                                <datalist id="categories"></datalist>
+                            </div>
+                        </div>
+
+                        <button class="btn-block color-accent1 hover-color-accent2">Search</button>
+                        
+                    </form>
+                </div>
+            </div>
+
             <div class="card color-white margin-b-16">
                 <header class="color-grey">
                     <div class="row">
-                        <div class="col s9 container">
+                        <div class="col s12 m9 container">
                             <h3>Question Title</h3>
                         </div>
-                        <div class="col s3 container ">
+                        <div class="col s12 m3 container ">
                             <p class="tag color-red right">Unsolved</p>
                         </div>
                     </div>
-                    
-                    
                 </header>
+
                 <div class="container">
                     <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
@@ -62,10 +90,10 @@
             <div class="card color-white margin-b-16">
                 <header class="color-grey">
                     <div class="row">
-                        <div class="col s9 container">
+                        <div class="col s12 m9 container">
                             <h3>Question Title</h3>
                         </div>
-                        <div class="col s3 container ">
+                        <div class="col s12 m3 container ">
                             <p class="tag color-green right">Solved</p>
                         </div>
                     </div>
@@ -100,10 +128,10 @@
             <div class="card color-white margin-b-16">
                 <header class="color-grey">
                     <div class="row">
-                        <div class="col s9 container">
+                        <div class="col s12 m9 container">
                             <h3>Question Title</h3> 
                         </div>
-                        <div class="col s3 container ">
+                        <div class="col s12 m3 container ">
                             <p class="tag color-red  right">Unsolved</p>
                         </div>
                     </div>
@@ -167,9 +195,9 @@
                 </header>
                 <form class="container margin-t">
 
-                    <input class="input hover-color-accent2 margin-b-8 margin-t-8" type="text" placeholder="Username">
+                    <input class="input margin-b-8 margin-t-8" type="text" placeholder="Username">
 
-                    <input class="input hover-color-accent2 margin-b-8 margin-t-8" type="password" placeholder="Password">
+                    <input class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
 
                     <button class="btn-block color-accent1 margin-t">LOG IN</button>
                         

@@ -140,13 +140,11 @@ ul.list li:last-child {
 
 .margin-r-8 { margin-right: 8px!important; }
 
-.margin-r-8 { margin-right: 8px!important; }
-
-.margin-r-16 { margin-right: 16px!important; }
-
 .margin-t-8 { margin-top: 8px!important; }
 
 .margin-b-8 { margin-bottom: 8px!important; }
+
+.margin-r-16 { margin-right: 16px!important; }
 
 .margin-t-16 { margin-top: 16px!important; }
 
@@ -167,11 +165,16 @@ ul.list li:last-child {
 }
 
 .input {
-    padding: 8px;
-    display: block;
+    padding: 10px;
     border: none;
-    border-bottom: 1px solid #808080;
-    width: 100%
+    border-bottom: solid 2px #c9c9c9;
+    transition: border 0.3s;
+    font-family: Verdana, sans-serif;
+    width: 100%;
+}
+
+.input:focus {
+    border-bottom: solid 2px #969696;
 }
 
 .clickable, .rateQ i {
@@ -309,6 +312,7 @@ ul.list li:last-child {
 
 .lobster {
     font-family: "Lobster", serif;
+    font-size: 48px;
 }
 
 .tagRound {
@@ -343,3 +347,9 @@ hr {
     margin: 20px 0;
 
 }
+
+label {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: dimgray
+}
+
