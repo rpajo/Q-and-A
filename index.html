@@ -21,32 +21,66 @@
         <!--QUESTION SECTION-->
         <div id="qSection" class="container col m12 l9">
             <!--<h2>Question section</h2>-->
-            <div class= "card color-white margin-b-16">
-                <header class="container color-default">
-                    <h3>Search</h3>
-                </header>
+            <div id="searchForm">
+                <div class= "card color-white margin-b-16" id="searchFormMeasure">
+                    <header class="container color-default">
+                        <h3>Search</h3>
+                    </header>
 
-                <div class="container" id="search">
-                    <form action="javascript:search();" class="margin-t-8 margin-b-8">
-                        <div class="row">
-                            <div class="col s12 m5">
-                                <label>Enter Search Term:</label>
-                                <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Enter search term"/>
+                    <div class="container">
+                        <form action="javascript:search();" class="margin-t-8 margin-b-8">
+                            <div class="row">
+                                <div class="col s12 m5">
+                                    <label>Enter Search Term:</label>
+                                    <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Enter search term"/>
+                                </div>
+                                <div class="col s12 m3">
+                                    <label>Enter tags:</label>
+                                    <input id="searchTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>    
+                                </div>
+                                <div class="col s12 m4">
+                                    <label>Enter category:</label>
+                                    <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categories" type="text" placeholder="e.g. Technology"/>
+                                    <datalist id="categories"></datalist>
+                                </div>
                             </div>
-                            <div class="col s12 m3">
-                                <label>Enter tags:</label>
-                                <input id="searchTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>    
-                            </div>
-                            <div class="col s12 m4">
-                                <label>Enter category:</label>
-                                <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categories" type="text" placeholder="e.g. Technology"/>
-                                <datalist id="categories"></datalist>
-                            </div>
-                        </div>
 
-                        <button class="btn-block color-accent1 hover-color-accent2">Search</button>
-                        
-                    </form>
+                            <button class="btn-block color-accent1 hover-color-accent2">Search</button>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--ASK QUESTION-->
+            <div id="askForm">
+                <div class= "card color-white margin-b-16" id="askFormMeasure">
+                    <header class="container color-default">
+                        <h3>Ask Question</h3>
+                    </header>
+
+                    <div class="container">
+                        <form action="javascript:submitQuestion();" id="answerField" class="margin-t-8 margin-b-8">
+                            <label>Question Title:</label>
+                            <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Please enter the desired question tile.."/>
+                            <textarea name="answer" id="questionDesc" required="required" placeholder="Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."></textarea>
+                            <br>
+                            <div class="row">
+                                <div class="col s12 m4 margin-r-8"> 
+                                    <label>Enter tags:</label>
+                                    <input id="questionTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>
+                                </div>
+                                <div class="col s12 m4">
+                                    <label>Enter category:</label>
+                                    <input id="questionCategory" class="categoryInput input margin-t-8 margin-b-8" list="categories" type="text" placeholder="e.g. Technology"/>
+                                    <datalist id="categories"></datalist>
+                                </div>
+                            </div>
+
+                            <button class="btn-block color-accent1 hover-color-accent2">Search</button>
+
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -184,9 +218,9 @@
             <!--<h2>Widget section</h2> -->
 
             <div class="card color-light-grey margin-b-16">
-                <button class="btn-block color-accent1 hover-color-default padding-16"><i class="fa fa-plus-square" aria-hidden="true"></i> ASK QUESTION</button>
+                <button class="btn-block color-accent1 hover-color-default padding-16" onclick="hideShow('askForm')"><i class="fa fa-plus-square" aria-hidden="true"></i> ASK QUESTION</button>
                 <div class="center">OR</div>
-                <button class="btn-block color-green hover-color-default padding-16"><i class="fa fa-search"></i> SEARCH</button>
+                <button class="btn-block color-green hover-color-default padding-16" onclick="hideShow('searchForm')"><i class="fa fa-search"></i> SEARCH</button>
             </div>
             <!--LOGIN-->
             <div class="card color-white margin-b-16 padding-b-8">

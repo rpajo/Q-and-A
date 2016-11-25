@@ -10,6 +10,7 @@ body{
     background-image: url("images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
     opacity: 0.9;
     font-family: Verdana, sans-serif;
     font-size: 15px;
@@ -352,4 +353,13 @@ label {
     font-family: "Segoe UI", Arial, sans-serif;
     color: dimgray
 }
+
+#searchForm, #askForm {
+    height: 0px;
+    overflow: hidden;
+    transition: height 1s;
+    -moz-transition: height 1s; /* Firefox 4 */
+    -webkit-transition: height 1s; /* Safari and Chrome */
+    -o-transition: height 1s; /* Opera */
+  }
 

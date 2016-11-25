@@ -6,12 +6,35 @@ var submitAnswer = function(qId) {
     document.getElementById("answer").value = "";
 }
 
+var submitQuestion = function() {
+    console.log("Submiting question");
+    var questionTitle = document.getElementById("questionTitle").value;
+    var questionDesc = document.getElementById("questionDesc").value;
+    var questionTags = document.getElementById("questionTags").value;
+    var questionCategory = document.getElementById("questionCategory").value;
+    console.log(questionTitle, questionDesc, questionTags, questionCategory);
+}
+
 var search = function() {
     console.log("searching...");
     var term = document.getElementById("searchTerm").value;
     var tags = document.getElementById("searchTags").value;
     var category = document.getElementById("searchCategory").value;
     console.log(term, tags, category);
+    
+}
+
+var hideShow = function(div) {
+    var form = document.getElementById(div);
+    
+    console.log(form.clientHeight);
+    if (form.clientHeight) {
+        form.style.height = '0';
+    }
+    else {
+        console.log(measure.clientHeight);
+        form.style.height = measure.clientHeight + 16 +'px';
+    }
     
 }
 
