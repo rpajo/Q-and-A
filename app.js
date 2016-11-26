@@ -1,5 +1,22 @@
 var caterogyList = ["Health & Fitness", "Technology", "Science", "Entertainment", "Sports", "Pets", "Bussiness"];
-var questionGet, answerGet;
+var questionGet, answerGet
+
+var loadCategories = function() {
+    // search bar autocomplete
+    var dataList1 = document.getElementById('categoriesSearch');
+    var dataList2 = document.getElementById('categoriesAsk');
+    var searchInput = document.getElementById('categoryInput');
+
+    caterogyList.forEach(function(item) {
+        // Create a new <option> element.
+        var option = document.createElement('option');
+        // Set the value using the item in the JSON array.
+        option.value = item;
+        // Add the <option> element to the <datalist>.
+        dataList1.appendChild(option);
+        dataList2.appendChild(option);
+    });
+}
 
 var submitAnswer = function(qId) {
     console.log("Submiting answer to question id: " + qId);
@@ -53,22 +70,12 @@ var getAnswers = function(type) {
     }
 }
 
-var loadCategories = function() {
-    // search bar autocomplete
-    var dataList1 = document.getElementById('categoriesSearch');
-    var dataList2 = document.getElementById('categoriesAsk');
-    var searchInput = document.getElementById('categoryInput');
-
-    caterogyList.forEach(function(item) {
-        // Create a new <option> element.
-        var option = document.createElement('option');
-        // Set the value using the item in the JSON array.
-        option.value = item;
-        // Add the <option> element to the <datalist>.
-        dataList1.appendChild(option);
-        dataList2.appendChild(option);
-    });
+var comment = function(id) {
+    var commentText = document.getElementById("post" + id).value;
+    console.log("comment to post id " + id, commentText);
 }
+
+
 
 var activeTab = function() {
     var url = window.location.href;

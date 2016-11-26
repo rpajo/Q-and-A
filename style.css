@@ -435,3 +435,7 @@ label {
 .low > label {
     padding: 2px 25px!important;
 }
+
+.commentInput {
+    height: 12px;
+}
