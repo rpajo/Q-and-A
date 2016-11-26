@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
-        <title>Q and A</title>
+        <title>Question Overflow</title>
         <!-- <link rel='stylesheet' type='text/css' href='style.css'/> -->
     </head>
     <body onload="loadCategories()">
@@ -40,8 +41,8 @@
                                 </div>
                                 <div class="col s12 m4">
                                     <label>Enter category:</label>
-                                    <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categories" type="text" placeholder="e.g. Technology"/>
-                                    <datalist id="categories"></datalist>
+                                    <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categoriesSearch" type="text" placeholder="e.g. Technology"/>
+                                    <datalist id="categoriesSearch"></datalist>
                                 </div>
                             </div>
 
@@ -72,8 +73,8 @@
                                 </div>
                                 <div class="col s12 m4">
                                     <label>Enter category:</label>
-                                    <input id="questionCategory" class="categoryInput input margin-t-8 margin-b-8" list="categories" type="text" placeholder="e.g. Technology"/>
-                                    <datalist id="categories"></datalist>
+                                    <input id="questionCategory" class="categoryInput input margin-t-8 margin-b-8" list="categoriesAsk" type="text" placeholder="e.g. Technology"/>
+                                    <datalist id="categoriesAsk"></datalist>
                                 </div>
                             </div>
                             
@@ -113,13 +114,13 @@
                         </span>
                         <span class="tag font-small color-accent2">
                             <i class="fa fa-star" aria-hidden="true"></i>
-                            <span id="rating">Rating: +8</span>
+                            <span>Rating: +8</span>
                         </span>
                         
                         <i class="fa fa-clock-o right" aria-hidden="true"> Asked 3 hours ago</i>
                     </div>
                 </div>
-                <a href="question.html"><button class="btn-block color-dark-grey hover-color-default" href="question.html">Open Thread</button></a>
+                <button class="btn-block color-dark-grey hover-color-default" onclick="location.href='question.html'">Open Thread</button>
             </div>
 
             <div class="card color-white margin-b-16">
@@ -151,13 +152,13 @@
                         </span>
                         <span class="tag font-small color-accent2">
                             <i class="fa fa-star" aria-hidden="true"></i>
-                            Rating: <span id="rating">+8</span>
+                            <span>Rating: +8</span>
                         </span>
                         
                         <i class="fa fa-clock-o right" aria-hidden="true"> Asked 3 hours ago</i>
                     </div>
                 </div>
-                <a href="question.html"><button class="btn-block color-dark-grey hover-color-default" href="question.html">Open Thread</button></a>
+                <button class="btn-block color-dark-grey hover-color-default" onclick="location.href='question.html'">Open Thread</button>
             </div>
             
             <div class="card color-white margin-b-16">
@@ -189,13 +190,13 @@
                         </span>
                         <span class="tag font-small color-accent2">
                             <i class="fa fa-star" aria-hidden="true"></i>
-                            Rating: <span id="rating">+8</span>
+                            <span>Rating: +8</span>
                         </span>
                         
                         <i class="fa fa-clock-o right" aria-hidden="true"> Asked 3 hours ago</i>
                     </div>
                 </div>
-                <a href="question.html"><button class="btn-block color-dark-grey hover-color-default" href="question.html">Open Thread</button></a>
+                <button class="btn-block color-dark-grey hover-color-default" onclick="location.href='question.html'">Open Thread</button>
             </div>
 
             <!--PAGINATION-->
@@ -247,10 +248,9 @@
                 </header>
                 <div>
                     <ul class="clickable list">
-                        <li class="hover-color-accent2">My Profile</li>
-                        <li class="hover-color-accent2">My Questions</li>
-                        <li class="hover-color-accent2">Ask Question</li>
-                        <li class="hover-color-accent2">Search</li>
+                        <li class="hover-color-accent2" onclick="location.href='profile.html#profile'">My Profile</li>
+                        <li class="hover-color-accent2" onclick="location.href='profile.html#activity'">My Questions</li>
+                        <li class="hover-color-accent2" onclick="location.href='profile.html#settings'">Profile Settings</li>
                         <li class="hover-color-accent2">Log Out</li>                            
                     </ul>
                 </div>
@@ -295,8 +295,8 @@
         </div>
     </div>
     
-    <!-- <script type='text/javascript' src='app.js'></script> -->
+    <script type='text/javascript' src='app.js'></script>
     </body>
 
-    <script type='text/javascript' src='app.js'></script>
+    
 </html>

@@ -41,7 +41,8 @@ var caterogyList = ["Health & Fitness", "Technology", "Science", "Entertainment"
 
 var loadCategories = function() {
     // search bar autocomplete
-    var dataList = document.getElementById('categories');
+    var dataList1 = document.getElementById('categoriesSearch');
+    var dataList2 = document.getElementById('categoriesAsk');
     var searchInput = document.getElementById('categoryInput');
 
     caterogyList.forEach(function(item) {
@@ -50,6 +51,23 @@ var loadCategories = function() {
         // Set the value using the item in the JSON array.
         option.value = item;
         // Add the <option> element to the <datalist>.
-        dataList.appendChild(option);
+        dataList1.appendChild(option);
+        dataList2.appendChild(option);
     });
+}
+
+var activeTab = function() {
+    var url = window.location.href;
+    var tab = url.split('#')[1];
+    console.log(tab);
+
+    if (tab == "profile" || tab == undefined) {
+        document.getElementById("tab1").checked = true;
+    }
+    else if (tab == "activity") {
+        document.getElementById("tab2").checked = true;
+    }
+    else if (tab == "settings") {
+        document.getElementById("tab3").checked = true;
+    }
 }

@@ -8,7 +8,7 @@
 
         <title>Q and A</title>
     </head>
-    <body>
+    <body onload="activeTab()">
 
     <div class="container color-red">
         <h1 class="center lobster">Question Overflow</h1>
@@ -149,10 +149,9 @@
                 </header>
                 <div>
                     <ul class="clickable list">
-                        <li class="hover-color-accent2">My Profile</li>
-                        <li class="hover-color-accent2">My Questions</li>
-                        <li class="hover-color-accent2">Ask Question</li>
-                        <li class="hover-color-accent2">Search</li>
+                        <li class="hover-color-accent2" onclick="location.href='profile.html#profile'">My Profile</li>
+                        <li class="hover-color-accent2" onclick="location.href='profile.html#activity'">My Questions</li>
+                        <li class="hover-color-accent2" onclick="location.href='profile.html#settings'">Profile Settings</li>
                         <li class="hover-color-accent2">Log Out</li>                            
                     </ul>
                 </div>
@@ -197,8 +196,7 @@
         </div>
     </div>
     
-    <!-- <script type='text/javascript' src='app.js'></script> -->
+    <script type='text/javascript' src='app.js'></script>
     </body>
 
-    <script type='text/javascript' src='app.js'></script>
 </html>
