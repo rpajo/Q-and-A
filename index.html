@@ -8,7 +8,7 @@
         <title>Q and A</title>
         <!-- <link rel='stylesheet' type='text/css' href='style.css'/> -->
     </head>
-    <body>
+    <body onload="loadCategories()">
 
     <div class="container color-red">
         <h1 class="center lobster">Question Overflow</h1>
@@ -77,8 +77,8 @@
                                 </div>
                             </div>
                             
-                            <button class="btn color-accent1 hover-color-accent2">Post</button>
-                            <input type="checkbox" name="showUser" value="anonymous"/>Post the question anonymously
+                            <input class="margin-b-16" type="checkbox" name="showUser" value="anonymous"/>Post the question anonymously
+                            <button class="btn-block color-accent1 hover-color-accent2">Search</button>
 
                         </form>
                     </div>

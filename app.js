@@ -32,7 +32,6 @@ var hideShow = function(div) {
     }
     else {
         var measure = document.getElementById(div+"Measure");
-        console.log(measure.clientHeight);
         form.style.height = measure.clientHeight + 16 +'px';
     }
     
@@ -40,15 +39,17 @@ var hideShow = function(div) {
 
 var caterogyList = ["Health & Fitness", "Technology", "Science", "Entertainment", "Sports", "Pets", "Bussiness"];
 
-// search bar autocomplete
-var dataList = document.getElementById('categories');
-var searchInput = document.getElementById('categoryInput');
+var loadCategories = function() {
+    // search bar autocomplete
+    var dataList = document.getElementById('categories');
+    var searchInput = document.getElementById('categoryInput');
 
-caterogyList.forEach(function(item) {
-    // Create a new <option> element.
-    var option = document.createElement('option');
-    // Set the value using the item in the JSON array.
-    option.value = item;
-    // Add the <option> element to the <datalist>.
-    dataList.appendChild(option);
-});
+    caterogyList.forEach(function(item) {
+        // Create a new <option> element.
+        var option = document.createElement('option');
+        // Set the value using the item in the JSON array.
+        option.value = item;
+        // Add the <option> element to the <datalist>.
+        dataList.appendChild(option);
+    });
+}
