@@ -426,8 +426,12 @@ label {
     display: block;
 }
 
-.showQ {
+.showQA {
     display: block!important;
     padding-left: 0!important;
     padding-right: 0!important;
+}
+
+.low > label {
+    padding: 2px 25px!important;
 }

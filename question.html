@@ -80,78 +80,90 @@
                 </div>
 
                 <!--ANSWER SECTION-->
+                
                 <div class="container">
 
                     <h3>2 Answers</h3>
                     <hr>
-
-                    <div class="row">
-                        <div class="container col s2 center rateQ">
-                            <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
-                            <span class="tagRound color-accent2">2</span>
-                            <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
-                        </div>
-                        <div class="container col s10 container">
-                            <span>Vivamus eu pulvinar tortor. Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Suspendisse aliquet facilisis maximus. Nullam ut ligula est.</span>
-                            
-                            <hr>
-                            <ul class="list font-small margin-t">
-                                <li>Have you tried turning it on and off again? 
-                                    <span class="font-color-dark-grey right">
-									    <sub> PowerUser on 13. November at 08.11</sub>
-                                    </span>
-								</li>
-
-                                <li>
-                                    <span class="font-color-dark-grey clickable">
-                                        <br>
-                                        Add Comment
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <hr>
-                    </div>
-
-                    <div class="row">
-                        <div class="container col s2 center rateQ">
-                            <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
-                            <span class="tagRound color-accent2">-5</span>
-                            <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
-                        </div>
-                        <div class="container col s10 container">
-                            <span>Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Nullam ut ligula est.</span>
-                            
-                            <hr>
-                            <ul class="list font-small margin-t">
-                                <li>This is stupid. Downvoted
-                                    <span class="font-color-dark-grey right">
-									    <sub> Asdf on 3. November at 14.44</sub>
-                                    </span>
-								</li>
-                                <li>
-                                    <span class="font-color-dark-grey clickable">
-                                        <br>
-                                        Add Comment
-                                    </span>
-                                </li>
-                            </ul>
+                    <div class="tabs low">
+                        <input id="tab1" type="radio" name="tabs" checked>
+                        <label for="tab1" onclick="getAnswers('top')"><i class="fa fa-star" aria-hidden="true"></i><span> Best Rated</span></label>
                         
-                        </div>
-                        <hr>
+                        <input id="tab2" type="radio" name="tabs">
+                        <label for="tab2" onclick="getAnswers('new')"><i class="fa fa-clock-o" aria-hidden="true"></i><span> Most Recent</span></label>
+                        
+                        <input id="tab3" type="radio" name="tabs">
+                        <label for="tab3" onclick="getAnswers('old')"><i class="fa fa-history" aria-hidden="true"></i><span> Oldest</span></label>
+
+                        <section class="showQA">
+                            <div class="row">
+                                <div class="container col s2 center rateQ">
+                                    <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
+                                    <span class="tagRound color-accent2">2</span>
+                                    <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                                </div>
+                                <div class="container col s10 container">
+                                    <span>Vivamus eu pulvinar tortor. Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Suspendisse aliquet facilisis maximus. Nullam ut ligula est.</span>
+                                    
+                                    <hr>
+                                    <ul class="list font-small margin-t">
+                                        <li>Have you tried turning it on and off again? 
+                                            <span class="font-color-dark-grey right">
+                                                <sub> PowerUser on 13. November at 08.11</sub>
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="font-color-dark-grey clickable">
+                                                <br>
+                                                Add Comment
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <hr>
+                            </div>
+
+                            <div class="row">
+                                <div class="container col s2 center rateQ">
+                                    <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
+                                    <span class="tagRound color-accent2">-5</span>
+                                    <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                                </div>
+                                <div class="container col s10 container">
+                                    <span>Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Nullam ut ligula est.</span>
+                                    
+                                    <hr>
+                                    <ul class="list font-small margin-t">
+                                        <li>This is stupid. Downvoted
+                                            <span class="font-color-dark-grey right">
+                                                <sub> Asdf on 3. November at 14.44</sub>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="font-color-dark-grey clickable">
+                                                <br>
+                                                Add Comment
+                                            </span>
+                                        </li>
+                                    </ul>
+                                
+                                </div>
+                                <hr>
+                            </div>
+
+                            <div>
+                                <h3>Your Answer</h3>
+
+                                <form action="javascript:submitAnswer(1);" id="answerField" class="padding-16">
+                                    <textarea name="answer" id="answer" required="required"></textarea>
+                                    <br>
+                                    <input class="color-default" type="submit">
+                                </form>
+                            </div>
+                        </section>
                     </div>
-
-                    <div>
-                        <h3>Your Answer</h3>
-
-                        <form action="javascript:submitAnswer(1);" id="answerField" class="padding-16">
-                            <textarea name="answer" id="answer" required="required"></textarea>
-                            <br>
-                            <input class="color-default" type="submit">
-                        </form>
-                    </div>
-
                 </div>
             </div>
 

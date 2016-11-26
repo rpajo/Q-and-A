@@ -1,5 +1,5 @@
 var caterogyList = ["Health & Fitness", "Technology", "Science", "Entertainment", "Sports", "Pets", "Bussiness"];
-var questionGet;
+var questionGet, answerGet;
 
 var submitAnswer = function(qId) {
     console.log("Submiting answer to question id: " + qId);
@@ -43,6 +43,13 @@ var getQuestions = function(type) {
     if (questionGet != type) {
         console.log("fetch new data... ", type);
         questionGet = type;
+    }
+}
+
+var getAnswers = function(type) {
+    if (answerGet != type) {
+        console.log("fetch new data... ", type);
+        answerGet = type;
     }
 }
 
