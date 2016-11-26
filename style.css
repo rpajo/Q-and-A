@@ -425,3 +425,9 @@ label {
     width: 100%;
     display: block;
 }
+
+.showQ {
+    display: block!important;
+    padding-left: 0!important;
+    padding-right: 0!important;
+}

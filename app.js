@@ -1,3 +1,5 @@
+var caterogyList = ["Health & Fitness", "Technology", "Science", "Entertainment", "Sports", "Pets", "Bussiness"];
+var questionGet;
 
 var submitAnswer = function(qId) {
     console.log("Submiting answer to question id: " + qId);
@@ -37,7 +39,12 @@ var hideShow = function(div) {
     
 }
 
-var caterogyList = ["Health & Fitness", "Technology", "Science", "Entertainment", "Sports", "Pets", "Bussiness"];
+var getQuestions = function(type) {
+    if (questionGet != type) {
+        console.log("fetch new data... ", type);
+        questionGet = type;
+    }
+}
 
 var loadCategories = function() {
     // search bar autocomplete
