@@ -23,8 +23,9 @@ body{
 }
 
 .wrapper {
-    width: 75%;
     margin: auto;
+    margin-left:auto;
+	margin-right:auto;
 }
 
 .row::after {
@@ -64,6 +65,7 @@ body{
     .col.m12 { width: 99.99999%; }
 
 @media only screen and (min-width: 601px) {
+    .wrapper { width:100% };
     .col.m1 { width: 8.33333%; }
     .col.m2 { width: 16.66666%; }
     .col.m3 { width: 24.99999%; }
@@ -79,6 +81,7 @@ body{
 
 }
 @media only screen and (min-width: 993px) {
+    .wrapper { width:75% };
     .col.l1 { width: 8.33333%; }
     .col.l2 { width: 16.66666%; }
     .col.l3 { width: 24.99999%; }
@@ -185,7 +188,7 @@ ul.list li:last-child {
 .tags span {
     cursor: pointer;
     margin-bottom: 8px;
-    
+
 }
 
 .rateQ i {
@@ -433,7 +436,7 @@ label {
         font-size: 0;
     }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .tabs label {
     padding: 15px;
   }
