@@ -100,6 +100,7 @@
                         <div class="col s12 m4">
                             <!--<label for="profilePic">Profile Picture</label>-->
                             <img id="profilePic" src="images/avatar.png">
+                            <button id="webCamBtn" class="btn"><i class="fa fa-camera" aria-hidden="true"></i> Snap picture</button>
                         </div>
                         <div class="col s12 m8">
                             <label>Display name:</label>
@@ -190,13 +191,25 @@
                     <span class="margin-b-8 tag color-blue">Got</span>
                     <span class="margin-b-8 tag color-red">Exercise</span>
                 </div>
-
             </div>
 
         </div>
     </div>
+
+    <!-- The Modal -->
+    <div id="modalWindow" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">x</span>
+            <video id="video" width="640" height="480" autoplay></video>
+            <button class="btn-block margin-t-8 margin-b-8 hover-color-dark-grey" id="snap">Snap Photo</button>
+            <canvas id="canvas" width="640" height="480"></canvas>
+            <button onClick="saveCam()" class="btn color-green">Save Profile Picture</button>
+        </div>
+    </div>
     
     <script type='text/javascript' src='app.js'></script>
+    <script type='text/javascript' src='cam.js'></script>
     </body>
 
 </html>

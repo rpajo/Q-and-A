@@ -80,7 +80,6 @@ var comment = function(id) {
 var activeTab = function() {
     var url = window.location.href;
     var tab = url.split('#')[1];
-    console.log(tab);
 
     if (tab == "profile" || tab == undefined) {
         document.getElementById("tab1").checked = true;
