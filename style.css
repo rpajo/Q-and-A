@@ -178,8 +178,14 @@ ul.list li:last-child {
     border-bottom: solid 2px #969696;
 }
 
-.clickable, .rateQ i {
+.clickable, .rateQ i, .tags span {
     cursor: pointer;
+}
+
+.tags span {
+    cursor: pointer;
+    margin-bottom: 8px;
+    
 }
 
 .rateQ i {
@@ -314,6 +320,11 @@ ul.list li:last-child {
 .lobster {
     font-family: "Lobster", serif;
     font-size: 48px;
+    padding-bottom: 4px;
+}
+
+.lobster:hover {
+    cursor: pointer;
 }
 
 .tagRound {
