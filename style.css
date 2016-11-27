@@ -65,7 +65,7 @@ body{
     .col.m12 { width: 99.99999%; }
 
 @media only screen and (min-width: 601px) {
-    .wrapper { width:100% };
+    .wrapper { width:100%; }
     .col.m1 { width: 8.33333%; }
     .col.m2 { width: 16.66666%; }
     .col.m3 { width: 24.99999%; }
@@ -81,7 +81,7 @@ body{
 
 }
 @media only screen and (min-width: 993px) {
-    .wrapper { width:75% };
+    .wrapper { width:75%; }
     .col.l1 { width: 8.33333%; }
     .col.l2 { width: 16.66666%; }
     .col.l3 { width: 24.99999%; }

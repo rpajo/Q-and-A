@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+<html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel='stylesheet' type='text/css' href='style.css'/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
@@ -33,9 +34,7 @@
                 <section id="content1">
                     <div class="row">
                         <div class="col s12 m3">
-                            <!--<label for="profilePic">Profile Picture</label>-->
-                            <img id="profilePic" src="images/avatar.png">
-
+                            <img id="profilePic" alt="profile picture" src="images/avatar.png">
                         </div>  
 
                         <div class="col s12 m6" >
@@ -85,7 +84,7 @@
                             </span>
                         </li>
                         <li>
-                            <span maxlength="10">How is the first instruction of VirtualMachine is fetched (in KVM-QEMU)</span>
+                            <span>How is the first instruction of VirtualMachine is fetched (in KVM-QEMU)</span>
                             <span class="tag font-small color-red right">Unsolved</span>
                             <span class="tag font-small color-blue right margin-r-8">
                                 <i class="fa fa-reply" aria-hidden="true"></i>
@@ -98,8 +97,7 @@
                 <section id=content3>
                     <div class="row">
                         <div class="col s12 m4">
-                            <!--<label for="profilePic">Profile Picture</label>-->
-                            <img id="profilePic" src="images/avatar.png">
+                            <img id="profilePicEdit" alt="edit profile picture" src="images/avatar.png">
                             <button id="webCamBtn" class="btn"><i class="fa fa-camera" aria-hidden="true"></i> Snap picture</button>
                         </div>
                         <div class="col s12 m8">
@@ -111,6 +109,7 @@
                             <textarea class="margin-t-8 margin-b-8" name="editAbout" id="editAbout" required="required" placeholder="Tell us a little bit about yourself so people can get to know you"></textarea>
                         </div>
                         <button class="btn-block color-accent1 hover-color-accent2" onclick="saveProfile()">Save Changes</button>
+                    </div>
                 </section>
             </div>
 
