@@ -354,7 +354,7 @@ label {
     color: dimgray
 }
 
-#searchForm, #askForm {
+#searchForm, #askForm, #regForm {
     height: 0px;
     overflow: hidden;
     transition: height 1s;
@@ -370,8 +370,12 @@ label {
     margin-bottom: 16px;
 }
 
-.tabs > input {
+.tabs > input, #register {
     display: none;
+}
+
+#register + label {
+    margin: 16px;
 }
 
 .tabs > section {
@@ -407,6 +411,10 @@ label {
 #tab2:checked ~ #content2,
 #tab3:checked ~ #content3 {
     display: block;
+}
+
+#register:checked ~ #regForm {
+    height: 200px;
 }
 
 @media screen and (max-width: 650px) {

@@ -75,7 +75,9 @@ var comment = function(id) {
     console.log("comment to post id " + id, commentText);
 }
 
-
+var register = function() {
+    console.log("Register user");
+}
 
 var activeTab = function() {
     var url = window.location.href;
