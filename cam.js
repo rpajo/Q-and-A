@@ -16,7 +16,7 @@ btn.onclick = function() {
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+var closeModal = function() {
     modal.style.display = "none";
     _stream.stop();
 }
@@ -50,5 +50,5 @@ var saveCam = function() {
 
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 640, 480);
+	context.drawImage(video, 0, 0, 320, 240);
 });
