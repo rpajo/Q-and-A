@@ -11,6 +11,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    background-attachment: fixed;
     opacity: 0.9;
     font-family: Verdana, sans-serif;
     font-size: 15px;
