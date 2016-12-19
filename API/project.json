@@ -19,12 +19,12 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.NETCore.App": "1.1.0",
     "MySql.Data": "7.0.6-IR31",
-    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
-    "SapientGuardian.EntityFrameworkCore.MySql": "7.1.14",
     "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
-    "Pomelo.EntityFrameworkCore.MySql": "1.1.1-prerelease-10003",
-    "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.1-prerelease-10003"
+    "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
+    "System.Net.Primitives": "4.3.0",
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.1.0",
+    "Newtonsoft.Json": "9.0.2-beta1"
   },
 
   "tools": {

@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
+using MySql.Data;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace API
 {
@@ -40,8 +42,8 @@ namespace API
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddMvc();
 
-            var connection = @"server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
-            services.AddDbContext<questionoverflowContext>(options => options.UseMySql(connection));
+            //var connection = @"server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
+            //services.AddDbContext<questionoverflowContext>(options => options.UseMySQL (connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

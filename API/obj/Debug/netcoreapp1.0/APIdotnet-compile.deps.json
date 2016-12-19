@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "63254a7bd740f396c82b60e25c5c107bf9eb3433"
+    "signature": "8001a31eca9ef75a10b08a1178d19abf94e51132"
   },
   "compilationOptions": {
     "defines": [
@@ -35,12 +35,12 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
           "Microsoft.NETCore.App": "1.1.0",
           "MySql.Data": "7.0.6-IR31",
-          "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
-          "SapientGuardian.EntityFrameworkCore.MySql": "7.1.14",
           "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
           "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
-          "Pomelo.EntityFrameworkCore.MySql": "1.1.1-prerelease-10003",
-          "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.1-prerelease-10003"
+          "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
+          "System.Net.Primitives": "4.3.0",
+          "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.1.0",
+          "Newtonsoft.Json": "9.0.2-beta1"
         },
         "compile": {
           "API.dll": {}
@@ -111,6 +111,15 @@
         },
         "compile": {
           "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.2": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.22",
+          "Newtonsoft.Json": "9.0.2-beta1"
+        },
+        "compile": {
+          "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.1.0": {
@@ -314,7 +323,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Reflection.TypeExtensions": "4.3.0"
         },
         "compile": {
@@ -483,12 +492,26 @@
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.1.0",
           "Microsoft.Extensions.WebEncoders": "1.1.0",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Buffers": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
         "compile": {
           "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ViewFeatures.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.WebApiCompatShim/1.1.0": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.2.2",
+          "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
+          "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.1.0",
+          "Microsoft.AspNetCore.WebUtilities": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Runtime.Serialization.Xml": "4.3.0",
+          "System.Xml.XmlSerializer": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.WebApiCompatShim.dll": {}
         }
       },
       "Microsoft.AspNetCore.Razor/1.1.0": {
@@ -506,7 +529,7 @@
           "Microsoft.Extensions.CommandLineUtils": "1.1.0",
           "Microsoft.Extensions.DependencyInjection": "1.1.0",
           "Microsoft.NETCore.App": "1.1.0",
-          "Newtonsoft.Json": "9.0.1"
+          "Newtonsoft.Json": "9.0.2-beta1"
         },
         "compile": {
           "lib/netcoreapp1.0/Microsoft.AspNetCore.Razor.Design.dll": {}
@@ -622,6 +645,12 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.WebUtilities.dll": {}
         }
       },
+      "Microsoft.Bcl/1.1.9": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "1.0.14"
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
       "Microsoft.CodeAnalysis.Analyzers/1.1.0": {},
       "Microsoft.CodeAnalysis.Common/1.3.0": {
         "dependencies": {
@@ -663,7 +692,7 @@
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XDocument": "4.3.0",
           "System.Xml.XPath.XDocument": "4.0.1",
-          "System.Xml.XmlDocument": "4.0.1"
+          "System.Xml.XmlDocument": "4.3.0"
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.CodeAnalysis.dll": {}
@@ -737,7 +766,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "Microsoft.Extensions.DependencyModel": "1.1.0",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.Packaging": "3.5.0-beta2-1484",
           "NuGet.RuntimeModel": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.3.0",
@@ -916,7 +945,7 @@
           "Microsoft.Extensions.Configuration": "1.1.0",
           "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
@@ -945,7 +974,7 @@
       "Microsoft.Extensions.DependencyModel/1.1.0": {
         "dependencies": {
           "Microsoft.DotNet.PlatformAbstractions": "1.1.0",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Diagnostics.Debug": "4.3.0",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Linq": "4.3.0"
@@ -1133,6 +1162,16 @@
           "lib/netstandard1.0/Microsoft.Extensions.WebEncoders.dll": {}
         }
       },
+      "Microsoft.Net.Http/2.2.22": {
+        "dependencies": {
+          "Microsoft.Bcl": "1.1.9",
+          "Microsoft.Bcl.Build": "1.0.14"
+        },
+        "compile": {
+          "lib/portable-net45+win8/System.Net.Http.Extensions.dll": {},
+          "lib/portable-net45+win8/System.Net.Http.Primitives.dll": {}
+        }
+      },
       "Microsoft.Net.Http.Headers/1.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -1309,27 +1348,6 @@
           "lib/netstandard1.6/MySql.Data.EntityFrameworkCore.dll": {}
         }
       },
-      "MySqlConnector/0.9.1": {
-        "dependencies": {
-          "System.Buffers": "4.3.0",
-          "System.Collections.Concurrent": "4.3.0",
-          "System.Data.Common": "4.3.0",
-          "System.IO": "4.3.0",
-          "System.IO.Compression": "4.3.0",
-          "System.IO.FileSystem": "4.3.0",
-          "System.Linq": "4.3.0",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.Security": "4.3.0",
-          "System.Net.Sockets": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
-          "System.Text.RegularExpressions": "4.3.0",
-          "System.Threading.Tasks.Extensions": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/MySqlConnector.dll": {}
-        }
-      },
       "NETStandard.Library/1.6.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -1378,7 +1396,7 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/9.0.2-beta1": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "System.Collections": "4.3.0",
@@ -1394,6 +1412,7 @@
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Numerics": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0",
           "System.Text.Encoding": "4.3.0",
           "System.Text.Encoding.Extensions": "4.3.0",
@@ -1404,7 +1423,7 @@
           "System.Xml.XDocument": "4.3.0"
         },
         "compile": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.1/Newtonsoft.Json.dll": {}
         }
       },
       "NuGet.Common/3.5.0-beta2-1484": {
@@ -1494,7 +1513,7 @@
       "NuGet.ProjectModel/3.5.0-beta2-1484": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.DependencyResolver.Core": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Threading.Thread": "4.3.0"
@@ -1518,7 +1537,7 @@
       "NuGet.Protocol.Core.v3/3.5.0-beta2-1484": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.Common": "3.5.0-beta2-1484",
           "NuGet.Packaging": "3.5.0-beta2-1484",
           "NuGet.Protocol.Core.Types": "3.5.0-beta2-1484",
@@ -1540,7 +1559,7 @@
       "NuGet.RuntimeModel/3.5.0-beta2-1484": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.Frameworks": "3.5.0-beta2-1484",
           "NuGet.Versioning": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.3.0",
@@ -1556,37 +1575,6 @@
         },
         "compile": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
-        }
-      },
-      "Pomelo.EntityFrameworkCore.MySql/1.1.1-prerelease-10003": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
-          "MySqlConnector": "0.9.1",
-          "Pomelo.JsonObject": "1.1.0",
-          "System.Threading.Tasks": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Pomelo.EntityFrameworkCore.MySql.dll": {}
-        }
-      },
-      "Pomelo.EntityFrameworkCore.MySql.Design/1.1.1-prerelease-10003": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
-          "Microsoft.Extensions.DependencyInjection": "1.1.0",
-          "Microsoft.Extensions.Logging.Console": "1.1.0",
-          "MySqlConnector": "0.9.1",
-          "Pomelo.EntityFrameworkCore.MySql": "1.1.1-prerelease-10003"
-        },
-        "compile": {
-          "lib/netstandard1.3/Pomelo.EntityFrameworkCore.MySql.Design.dll": {}
-        }
-      },
-      "Pomelo.JsonObject/1.1.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.3/Pomelo.JsonObject.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -1669,57 +1657,6 @@
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.win7-x64.runtime.native.System.Data.SqlClient.sni/4.3.0": {},
       "runtime.win7-x86.runtime.native.System.Data.SqlClient.sni/4.3.0": {},
-      "SapientGuardian.EntityFrameworkCore.MySql/7.1.14": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "SapientGuardian.MySql.Data": "6.9.813",
-          "System.Linq": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/SapientGuardian.EntityFrameworkCore.MySql.dll": {}
-        }
-      },
-      "SapientGuardian.MySql.Data/6.9.813": {
-        "dependencies": {
-          "Microsoft.CSharp": "4.3.0",
-          "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
-          "System.Collections": "4.3.0",
-          "System.Collections.NonGeneric": "4.3.0",
-          "System.Collections.Specialized": "4.3.0",
-          "System.ComponentModel.TypeConverter": "4.3.0",
-          "System.Console": "4.3.0",
-          "System.Data.Common": "4.3.0",
-          "System.Diagnostics.Debug": "4.3.0",
-          "System.Diagnostics.TraceSource": "4.0.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.IO.FileSystem": "4.3.0",
-          "System.Linq": "4.3.0",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Net.Security": "4.3.0",
-          "System.Net.Sockets": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Extensions": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.3.0",
-          "System.Resources.Writer": "4.0.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
-          "System.Runtime.Serialization.Primitives": "4.3.0",
-          "System.Security.Cryptography.Algorithms": "4.3.0",
-          "System.Security.Cryptography.Primitives": "4.3.0",
-          "System.Security.Cryptography.X509Certificates": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0",
-          "System.Text.RegularExpressions": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Timer": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/SapientGuardian.MySql.Data.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -1804,9 +1741,6 @@
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.3/System.Collections.Specialized.dll": {}
         }
       },
       "System.ComponentModel/4.3.0": {
@@ -2541,6 +2475,35 @@
           "ref/netstandard1.3/System.ObjectModel.dll": {}
         }
       },
+      "System.Private.DataContractSerialization/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Reflection.Primitives": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XDocument": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0",
+          "System.Xml.XmlSerializer": "4.3.0"
+        }
+      },
       "System.Reflection/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -2680,19 +2643,6 @@
           "ref/netstandard1.0/System.Resources.ResourceManager.dll": {}
         }
       },
-      "System.Resources.Writer/4.0.0": {
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.IO": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Text.Encoding": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/System.Resources.Writer.dll": {}
-        }
-      },
       "System.Runtime/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -2785,6 +2735,19 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Xml/4.3.0": {
+        "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Private.DataContractSerialization": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Runtime.Serialization.Xml.dll": {}
         }
       },
       "System.Security.Claims/4.3.0": {
@@ -3170,7 +3133,7 @@
           "ref/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "System.Xml.XmlDocument/4.0.1": {
+      "System.Xml.XmlDocument/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
@@ -3182,6 +3145,30 @@
           "System.Text.Encoding": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
+        }
+      },
+      "System.Xml.XmlSerializer/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Reflection.Primitives": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
       "System.Xml.XPath/4.0.1": {
@@ -3233,12 +3220,12 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
           "Microsoft.NETCore.App": "1.1.0",
           "MySql.Data": "7.0.6-IR31",
-          "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
-          "SapientGuardian.EntityFrameworkCore.MySql": "7.1.14",
           "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
           "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
-          "Pomelo.EntityFrameworkCore.MySql": "1.1.1-prerelease-10003",
-          "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.1-prerelease-10003"
+          "MySql.Data.EntityFrameworkCore": "7.0.6-IR31",
+          "System.Net.Primitives": "4.3.0",
+          "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.1.0",
+          "Newtonsoft.Json": "9.0.2-beta1"
         },
         "runtime": {
           "API.dll": {}
@@ -3309,6 +3296,15 @@
         },
         "runtime": {
           "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll": {}
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.2": {
+        "dependencies": {
+          "Microsoft.Net.Http": "2.2.22",
+          "Newtonsoft.Json": "9.0.2-beta1"
+        },
+        "runtime": {
+          "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.1.0": {
@@ -3512,7 +3508,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Reflection.TypeExtensions": "4.3.0"
         },
         "runtime": {
@@ -3681,12 +3677,26 @@
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.1.0",
           "Microsoft.Extensions.WebEncoders": "1.1.0",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Buffers": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
         "runtime": {
           "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ViewFeatures.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.WebApiCompatShim/1.1.0": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.2.2",
+          "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
+          "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.1.0",
+          "Microsoft.AspNetCore.WebUtilities": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "System.Runtime.Serialization.Xml": "4.3.0",
+          "System.Xml.XmlSerializer": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.WebApiCompatShim.dll": {}
         }
       },
       "Microsoft.AspNetCore.Razor/1.1.0": {
@@ -3704,7 +3714,7 @@
           "Microsoft.Extensions.CommandLineUtils": "1.1.0",
           "Microsoft.Extensions.DependencyInjection": "1.1.0",
           "Microsoft.NETCore.App": "1.1.0",
-          "Newtonsoft.Json": "9.0.1"
+          "Newtonsoft.Json": "9.0.2-beta1"
         },
         "runtime": {
           "lib/netcoreapp1.0/Microsoft.AspNetCore.Razor.Design.dll": {}
@@ -3820,6 +3830,12 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.WebUtilities.dll": {}
         }
       },
+      "Microsoft.Bcl/1.1.9": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "1.0.14"
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
       "Microsoft.CodeAnalysis.Analyzers/1.1.0": {},
       "Microsoft.CodeAnalysis.Common/1.3.0": {
         "dependencies": {
@@ -3861,7 +3877,7 @@
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XDocument": "4.3.0",
           "System.Xml.XPath.XDocument": "4.0.1",
-          "System.Xml.XmlDocument": "4.0.1"
+          "System.Xml.XmlDocument": "4.3.0"
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.CodeAnalysis.dll": {}
@@ -3938,7 +3954,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "Microsoft.Extensions.DependencyModel": "1.1.0",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.Packaging": "3.5.0-beta2-1484",
           "NuGet.RuntimeModel": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.3.0",
@@ -4117,7 +4133,7 @@
           "Microsoft.Extensions.Configuration": "1.1.0",
           "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
@@ -4146,7 +4162,7 @@
       "Microsoft.Extensions.DependencyModel/1.1.0": {
         "dependencies": {
           "Microsoft.DotNet.PlatformAbstractions": "1.1.0",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "System.Diagnostics.Debug": "4.3.0",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Linq": "4.3.0"
@@ -4334,6 +4350,16 @@
           "lib/netstandard1.0/Microsoft.Extensions.WebEncoders.dll": {}
         }
       },
+      "Microsoft.Net.Http/2.2.22": {
+        "dependencies": {
+          "Microsoft.Bcl": "1.1.9",
+          "Microsoft.Bcl.Build": "1.0.14"
+        },
+        "runtime": {
+          "lib/portable-net45+win8/System.Net.Http.Extensions.dll": {},
+          "lib/portable-net45+win8/System.Net.Http.Primitives.dll": {}
+        }
+      },
       "Microsoft.Net.Http.Headers/1.1.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "1.1.0",
@@ -4504,27 +4530,6 @@
           "lib/netstandard1.6/MySql.Data.EntityFrameworkCore.dll": {}
         }
       },
-      "MySqlConnector/0.9.1": {
-        "dependencies": {
-          "System.Buffers": "4.3.0",
-          "System.Collections.Concurrent": "4.3.0",
-          "System.Data.Common": "4.3.0",
-          "System.IO": "4.3.0",
-          "System.IO.Compression": "4.3.0",
-          "System.IO.FileSystem": "4.3.0",
-          "System.Linq": "4.3.0",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.Security": "4.3.0",
-          "System.Net.Sockets": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
-          "System.Text.RegularExpressions": "4.3.0",
-          "System.Threading.Tasks.Extensions": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/MySqlConnector.dll": {}
-        }
-      },
       "NETStandard.Library/1.6.1": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -4573,7 +4578,7 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/9.0.1": {
+      "Newtonsoft.Json/9.0.2-beta1": {
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
           "System.Collections": "4.3.0",
@@ -4589,6 +4594,7 @@
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Numerics": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0",
           "System.Text.Encoding": "4.3.0",
           "System.Text.Encoding.Extensions": "4.3.0",
@@ -4599,7 +4605,7 @@
           "System.Xml.XDocument": "4.3.0"
         },
         "runtime": {
-          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.1/Newtonsoft.Json.dll": {}
         }
       },
       "NuGet.Common/3.5.0-beta2-1484": {
@@ -4689,7 +4695,7 @@
       "NuGet.ProjectModel/3.5.0-beta2-1484": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.DependencyResolver.Core": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.3.0",
           "System.Threading.Thread": "4.3.0"
@@ -4713,7 +4719,7 @@
       "NuGet.Protocol.Core.v3/3.5.0-beta2-1484": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.Common": "3.5.0-beta2-1484",
           "NuGet.Packaging": "3.5.0-beta2-1484",
           "NuGet.Protocol.Core.Types": "3.5.0-beta2-1484",
@@ -4735,7 +4741,7 @@
       "NuGet.RuntimeModel/3.5.0-beta2-1484": {
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1",
+          "Newtonsoft.Json": "9.0.2-beta1",
           "NuGet.Frameworks": "3.5.0-beta2-1484",
           "NuGet.Versioning": "3.5.0-beta2-1484",
           "System.Dynamic.Runtime": "4.3.0",
@@ -4751,37 +4757,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
-        }
-      },
-      "Pomelo.EntityFrameworkCore.MySql/1.1.1-prerelease-10003": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
-          "MySqlConnector": "0.9.1",
-          "Pomelo.JsonObject": "1.1.0",
-          "System.Threading.Tasks": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Pomelo.EntityFrameworkCore.MySql.dll": {}
-        }
-      },
-      "Pomelo.EntityFrameworkCore.MySql.Design/1.1.1-prerelease-10003": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.0",
-          "Microsoft.Extensions.DependencyInjection": "1.1.0",
-          "Microsoft.Extensions.Logging.Console": "1.1.0",
-          "MySqlConnector": "0.9.1",
-          "Pomelo.EntityFrameworkCore.MySql": "1.1.1-prerelease-10003"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Pomelo.EntityFrameworkCore.MySql.Design.dll": {}
-        }
-      },
-      "Pomelo.JsonObject/1.1.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "9.0.1"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Pomelo.JsonObject.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -4864,57 +4839,6 @@
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.win7-x64.runtime.native.System.Data.SqlClient.sni/4.3.0": {},
       "runtime.win7-x86.runtime.native.System.Data.SqlClient.sni/4.3.0": {},
-      "SapientGuardian.EntityFrameworkCore.MySql/7.1.14": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "1.1.0",
-          "Microsoft.EntityFrameworkCore.Relational": "1.1.0",
-          "NETStandard.Library": "1.6.1",
-          "SapientGuardian.MySql.Data": "6.9.813",
-          "System.Linq": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/SapientGuardian.EntityFrameworkCore.MySql.dll": {}
-        }
-      },
-      "SapientGuardian.MySql.Data/6.9.813": {
-        "dependencies": {
-          "Microsoft.CSharp": "4.3.0",
-          "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
-          "System.Collections": "4.3.0",
-          "System.Collections.NonGeneric": "4.3.0",
-          "System.Collections.Specialized": "4.3.0",
-          "System.ComponentModel.TypeConverter": "4.3.0",
-          "System.Console": "4.3.0",
-          "System.Data.Common": "4.3.0",
-          "System.Diagnostics.Debug": "4.3.0",
-          "System.Diagnostics.TraceSource": "4.0.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.IO.FileSystem": "4.3.0",
-          "System.Linq": "4.3.0",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Net.Security": "4.3.0",
-          "System.Net.Sockets": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Extensions": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.3.0",
-          "System.Resources.Writer": "4.0.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0",
-          "System.Runtime.Serialization.Primitives": "4.3.0",
-          "System.Security.Cryptography.Algorithms": "4.3.0",
-          "System.Security.Cryptography.Primitives": "4.3.0",
-          "System.Security.Cryptography.X509Certificates": "4.3.0",
-          "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0",
-          "System.Text.RegularExpressions": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Timer": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/SapientGuardian.MySql.Data.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -5667,6 +5591,38 @@
           "lib/netstandard1.3/System.ObjectModel.dll": {}
         }
       },
+      "System.Private.DataContractSerialization/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Reflection.Primitives": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XDocument": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0",
+          "System.Xml.XmlSerializer": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
+        }
+      },
       "System.Reflection/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -5794,19 +5750,6 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.Resources.Writer/4.0.0": {
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.IO": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Text.Encoding": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/System.Resources.Writer.dll": {}
-        }
-      },
       "System.Runtime/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -5887,6 +5830,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Xml/4.3.0": {
+        "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Private.DataContractSerialization": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Runtime.Serialization.Xml.dll": {}
         }
       },
       "System.Security.Claims/4.3.0": {
@@ -6248,7 +6204,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "System.Xml.XmlDocument/4.0.1": {
+      "System.Xml.XmlDocument/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
@@ -6263,6 +6219,30 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
+        }
+      },
+      "System.Xml.XmlSerializer/4.3.0": {
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Reflection.Emit": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Extensions": "4.3.0",
+          "System.Reflection.Primitives": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Xml.ReaderWriter": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
       "System.Xml.XPath/4.0.1": {
@@ -6324,6 +6304,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-2pe22FuypQRT5YNd4cIehYqDduxiQzt1o/585LgG6vJmOfuX7aF2h4uSI5epRrvu1EikuoZEzBchAR6U8cBybQ=="
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YVq+s0WeXrPxJk57CoElbtMYf95j76uJcW6nue3Cs4eIer9sgUp4rasSo0gALX3ls1Zf2jMceOLik9X/sJyrwA=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.1.0": {
       "type": "package",
@@ -6475,6 +6460,11 @@
       "serviceable": true,
       "sha512": "sha512-Odd9+gRi4DCH3RalGZEdS0xLRcUh8LV9UTCnOVjGwotI1i6Fk2VSxtkAxrVRMd44BL0WfRqJFiTkCixxA2zFig=="
     },
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TVhrza+tSF0DndKR+85CwLssIDwi5KuflX7h4n0T7/jDU3DEsVbFKr0xHI/CsKAnUcwmNc2bLxSzL0JCZ+5wpA=="
+    },
     "Microsoft.AspNetCore.Razor/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -6529,6 +6519,16 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-9w3aHPRUAx+1xOTcsZF6AJCS42viNqWeTcgIE1dmlK/G3NCFkes+MVxwvKt9U9pFIomxqRnD+MGRoBeruEKPbQ=="
+    },
+    "Microsoft.Bcl/1.1.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-USQ55innJy8K+tAXvVa1O8dUTp2s7pmJ5cJj6Tl02HtGc2xBDj0P2QH5620HbGXIWKWYhydoeQF8Rm/JRDBGhw=="
+    },
+    "Microsoft.Bcl.Build/1.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cDLKSvNvRa519hplsbSoYqO69TjdDIhfjtKUM0g20/nVROoWsGav9KCI9HtnGjLmdV1+TcUUDhbotcllibjPEA=="
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
       "type": "package",
@@ -6760,6 +6760,11 @@
       "serviceable": true,
       "sha512": "sha512-YnUfcLe/FYL3Mft5HPv7dSSKfZZCZwLG2GQfv3vuxdY4AbWOYLqq/3wIPCNIrgMXvzralWdkESNsb9iw5gKdpg=="
     },
+    "Microsoft.Net.Http/2.2.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bqVLJ2UimlAEs2bn3y28lB1pmFRxuysv9pFyB0A86WEMYGYTfDyfjAGjm0fiaSRjlMNU1jVnp8Mxt8qe4OmpXQ=="
+    },
     "Microsoft.Net.Http.Headers/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -6835,20 +6840,15 @@
       "serviceable": true,
       "sha512": "sha512-2G/fGusd3MRLalOqH3uveWUBOWxg8MFooKdGqzux2h4fLpGlVGnGjcRzb1exJUFfMXGzsp3U/6oBFN2E8x8+Hg=="
     },
-    "MySqlConnector/0.9.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-5L8g1HA5ROYs+/gWyMvKy4I+BLHVa3hcS2VmRlYD1xkox95ukrp4nDdkK4EOENATdg1Cy0KriC9VqeTBBm7DCg=="
-    },
     "NETStandard.Library/1.6.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-WcSp3+vP+yHNgS8EV5J7pZ9IRpeDuARBPN28by8zqff1wJQXm26PVU8L3/fYLBJVU7BtDyqNVWq2KlCVvSSR4A=="
     },
-    "Newtonsoft.Json/9.0.1": {
+    "Newtonsoft.Json/9.0.2-beta1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw=="
+      "sha512": "sha512-bq5DjCtCJpy9R5rsEeQlKz8qGF1Bh3wGaJKMlRwmCoKZ8WUCIFtU3JlyMOdAkSn66KCehCCAxMZFOQD4nNnH/w=="
     },
     "NuGet.Common/3.5.0-beta2-1484": {
       "type": "package",
@@ -6919,21 +6919,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-Stok+SI5lWxOkTgZZM7jT4xuAZogm5+j85mKJeHSXb8o0OAbB+qDX9jkdM2wIEnjoR8R29J0nQYwk2Kl2lWFpA=="
-    },
-    "Pomelo.EntityFrameworkCore.MySql/1.1.1-prerelease-10003": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Pa8alSA//sORMzPr24lpau35RBoG59+X0G1ecR08d09nLEsnoltBY7v/1TsSzwo3OWu30jC2Fal75+HSx0XMhQ=="
-    },
-    "Pomelo.EntityFrameworkCore.MySql.Design/1.1.1-prerelease-10003": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-H87bllngViiw+uc5hHaxLptsrnNOKDH5sqejEglcojXapFnzZGS5wA7ZyhA7Ns2vZpJsX9Gt12F0WYFxil4OXg=="
-    },
-    "Pomelo.JsonObject/1.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-RoVZSaGOiJ4FcCVM+oc5bYsL6dpXwMXk9LsfDFVgxy1BW5h+CGcaJTxEoOgGetSmcPqBP1mGyRYBv19cc8MOSw=="
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",
@@ -7039,16 +7024,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-4cXRTIcttvIreAoqK/5hzTtzepeggac+m5A0rzH+9zLtnFh2J0rLuGeJR4KjNLyKqPzO0kjqrs5lkRJEKX8HAA=="
-    },
-    "SapientGuardian.EntityFrameworkCore.MySql/7.1.14": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-EEOMT28qjJQyO5caREwJPWfAd3Jm9l9pUCVccq1n/OC1jo8NVN+LGpzcKsJiUT1vKavasmgZhCE3vz7UD2cIcA=="
-    },
-    "SapientGuardian.MySql.Data/6.9.813": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-9umAXTPXeO66iSThDL7mOB3cDD1zu3N5Kl4X/1jLLJJZVtEAtpOCeGXSGG99u6On9lZKSLEjEC7EJ+YBIGWyCw=="
     },
     "System.AppContext/4.3.0": {
       "type": "package",
@@ -7310,6 +7285,11 @@
       "serviceable": true,
       "sha512": "sha512-bdX+80eKv9bN6K4N+d77OankKHGn6CH711a6fcOpMQu2Fckp/Ft4L/kW9WznHpyR0NRAvJutzOMHNNlBGvxQzQ=="
     },
+    "System.Private.DataContractSerialization/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yDaJ2x3mMmjdZEDB4IbezSnCsnjQ4BxinKhRAaP6kEgL6Bb6jANWphs5SzyD8imqeC/3FxgsuXT6ykkiH1uUmA=="
+    },
     "System.Reflection/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -7365,11 +7345,6 @@
       "serviceable": true,
       "sha512": "sha512-/zrcPkkWdZmI4F92gL/TPumP98AVDu/Wxr3CSJGQQ+XN6wbRZcyfSKVoPo17ilb3iOr0cCRqJInGwNMolqhS8A=="
     },
-    "System.Resources.Writer/4.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Hz+ZS81dVSNy93YyJhhL3GwzmMhfcQ8FbUooAt9MO4joIe0vPM4gclv0C82ko1tuN/Kw6CvZFLYkgk6n9xvEkg=="
-    },
     "System.Runtime/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -7414,6 +7389,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-Wz+0KOukJGAlXjtKr+5Xpuxf8+c8739RI1C+A2BoQZT+wMCCoMDDdO8/4IRHfaVINqL78GO8dW8G2lW/e45Mcw=="
+    },
+    "System.Runtime.Serialization.Xml/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nUQx/5OVgrqEba3+j7OdiofvVq9koWZAC7Z3xGI8IIViZqApWnZ5+lLcwYgTlbkobrl/Rat+Jb8GeD4WQESD2A=="
     },
     "System.Security.Claims/4.3.0": {
       "type": "package",
@@ -7545,10 +7525,15 @@
       "serviceable": true,
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ=="
     },
-    "System.Xml.XmlDocument/4.0.1": {
+    "System.Xml.XmlDocument/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-uIavSXxClPrXopPyZ1IMPltwCxTA7v4cjIX47Ka01Dul34FAg3kdd5MhPOJXpbIqODjVbFrOuJke9olLMfqaVg=="
+      "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww=="
+    },
+    "System.Xml.XmlSerializer/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q=="
     },
     "System.Xml.XPath/4.0.1": {
       "type": "package",
