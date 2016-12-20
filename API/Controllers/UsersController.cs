@@ -84,7 +84,7 @@ namespace API.Controllers
         public ActionResult Put(int id, [FromBody]Users value)
         {
             UsersHelper uh = new UsersHelper();
-            bool success = uh.updateUser(id, value, "desc");
+            bool success = uh.updateUser(id, value);
 
             if (success) return Ok("User with successfuly changed");
 

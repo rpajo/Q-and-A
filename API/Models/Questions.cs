@@ -7,7 +7,7 @@ namespace API.Models
     {
         public int QuestionId { get; set; }
         public int UserId { get; set; }
-        public byte[] Anonymous { get; set; }
+        public int Anonymous { get; set; }
         public int Comments { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }

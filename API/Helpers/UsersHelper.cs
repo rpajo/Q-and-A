@@ -57,7 +57,7 @@ namespace API.Helpers
             else return null;
         } 
 
-        public bool updateUser(int id, Users user, string type)
+        public bool updateUser(int id, Users user)
         {
             MySqlDataReader mySqlReader;
 
@@ -95,7 +95,6 @@ namespace API.Helpers
             MySqlCommand cmd = new MySqlCommand(sqlString, connection);
             try
             {
-                cmd.EnableCaching = true;
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException sqlEx)
