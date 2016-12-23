@@ -15,13 +15,6 @@ using System.Collections;
 namespace API.Controllers
 {
 
-    //public class Response
-    //{
-    //    public String status { set; get; }
-    //    public 
-
-    //}
-
     [Route("api/[controller]")]
     public class AnswerController : ApiController
     {

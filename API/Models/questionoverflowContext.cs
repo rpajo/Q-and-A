@@ -63,7 +63,7 @@ namespace API.Models
 
             modelBuilder.Entity<Comments>(entity =>
             {
-                entity.HasKey(e => new { e.CommentId, e.QuestionId })
+                entity.HasKey(e => new { e.CommentId, e.QuestionId, e.UserId })
                     .HasName("PK_comments");
 
                 entity.ToTable("comments");
@@ -96,10 +96,6 @@ namespace API.Models
                     .HasColumnName("parentId")
                     .HasColumnType("int(10) unsigned")
                     .HasDefaultValueSql("0");
-
-                entity.Property(e => e.Rating)
-                    .HasColumnName("rating")
-                    .HasColumnType("varchar(45)");
             });
 
             modelBuilder.Entity<Questions>(entity =>

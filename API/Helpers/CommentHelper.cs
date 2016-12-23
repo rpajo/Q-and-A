@@ -9,12 +9,12 @@ using System.Collections;
 
 namespace API.Helpers
 {
-    public class AnswerHelper
+    public class CommentHelper
     {
 
         private MySqlConnection connection;
 
-        public AnswerHelper()
+        public CommentHelper()
         {
             string _connectionString;
             _connectionString = "server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
@@ -30,38 +30,40 @@ namespace API.Helpers
             }
         }
 
-        public ArrayList getAnswers(int questionId, string order)
+        public ArrayList getAll(int questionId)
         {
             ArrayList answerList = new ArrayList();
 
            
             MySqlDataReader mySqlReader;
 
-            String sqlString = String.Format("select * from answers where questionId = {0} order by {1} desc", questionId, order);
+            String sqlString = String.Format("select * from comments where questionId = {0}", questionId);
             MySqlCommand cmd = new MySqlCommand(sqlString, connection);
 
             mySqlReader = cmd.ExecuteReader();
 
             while (mySqlReader.Read())
             {
-                Answers answer = new Answers();
+                Comments comment = new Comments();
 
-                answer.AnswerId = mySqlReader.GetInt32(0);
-                answer.UserId = mySqlReader.GetInt32(2);
-                answer.Description = mySqlReader.GetString(3);
-                answer.Rating = mySqlReader.GetInt32(4);
-                answer.Date = mySqlReader.GetDateTime(5);
+                comment.CommentId = mySqlReader.GetInt32(0);
+                comment.QuestionId = mySqlReader.GetInt32(1);
+                comment.UserId = mySqlReader.GetInt32(2);
+                comment.ParentId = mySqlReader.GetInt32(3);
+                comment.Description = mySqlReader.GetString(4);
+                comment.Author = mySqlReader.GetString(5);
+                comment.Date = mySqlReader.GetDateTime(6);
 
-                answerList.Add(answer);
+                answerList.Add(comment);
             }
 
             return answerList;
         }
 
-        public long newAnswer(int questionId, Answers answer)
+        public long newComment(int questionId, Comments comment)
         {
-            String sqlString = String.Format("insert into answers(questionId, userId, description, rating, date) values ({0}, {1}, '{2}', '{3}', '{4}')",
-                questionId, answer.UserId, answer.Description.Replace("\'", "\\'"), answer.Rating != null ? answer.Rating : 0, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            String sqlString = String.Format("insert into comments (questionId, userId, parentId, description, author, date) values ({0}, {1}, {2}, '{3}', '{4}', '{5}')",
+                questionId, comment.UserId, comment.ParentId, comment.Description.Replace("\'", "\\'"), comment.Author, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
             MySqlCommand cmd = new MySqlCommand(sqlString, connection);
             try
@@ -83,8 +85,9 @@ namespace API.Helpers
             return id;
         }
 
-        public bool updateAnswer(int id, Answers answer)
+        public bool updateComment(int questionId, Comments answer)
         {
+            /*
             MySqlDataReader mySqlReader;
 
             String sqlString = "select * from answers where answerId = " + id.ToString();
@@ -108,7 +111,8 @@ namespace API.Helpers
                 return true;
 
             }
-            else return false;
+            else
+            */return false;
         }
 
     }

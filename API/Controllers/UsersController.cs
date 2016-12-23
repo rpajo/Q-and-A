@@ -15,13 +15,6 @@ using Newtonsoft.Json   ;
 namespace API.Controllers
 {
 
-    //public class Response
-    //{
-    //    public String status { set; get; }
-    //    public 
-
-    //}
-
     [Route("api/[controller]")]
     public class UsersController : ApiController
     {

@@ -7,9 +7,10 @@ namespace API.Models
     {
         public int CommentId { get; set; }
         public int QuestionId { get; set; }
+        public int UserId { set; get; }
+        public string Description { get; set; }
         public string Author { get; set; }
         public DateTime Date { get; set; }
         public int ParentId { get; set; }
-        public string Rating { get; set; }
     }
 }
