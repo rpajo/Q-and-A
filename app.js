@@ -55,14 +55,14 @@ var hideShow = function(div) {
     }
     
 }
-
+/*
 var getQuestions = function(type) {
     if (questionGet != type) {
         console.log("fetch new data... ", type);
         questionGet = type;
     }
 }
-
+*/
 var getAnswers = function(type) {
     if (answerGet != type) {
         console.log("fetch new data... ", type);
