@@ -10,6 +10,7 @@
 
         <script type='text/javascript' src='js/jquery-3.1.1.min.js'></script>
         <script type='text/javascript' src='js/knockout.js'></script>
+        <script type='text/javascript' src='js/sammy.js'></script>
         <script type='text/javascript' src='js/index.js'></script>
         <script type='text/javascript' src='app.js'></script>
 
@@ -31,13 +32,13 @@
             <!--<h2>Question section</h2>-->
 
             <div class="tabs">
-                <input id="tab1" type="radio" name="tabs" data-bind="click: function(){$root.selectOrder('date')}" checked>
+                <input id="tab1" type="radio" name="tabs" value="date" data-bind="checked: order, click: $root.getQuestions()">
                 <label for="tab1"><i class="fa fa-clock-o" aria-hidden="true"></i><span> RECENT</span></label>
                 
-                <input id="tab2" type="radio" name="tabs" data-bind="click: function(){$root.selectOrder('rating')}">
+                <input id="tab2" type="radio" name="tabs" value="rating" data-bind="checked: order, click: $root.getQuestions()">
                 <label for="tab2"><i class="fa fa-fire" aria-hidden="true"></i><span> POPULAR</span></label>
                 
-                <input id="tab3" type="radio" name="tabs" data-bind="click: function(){$root.selectOrder('comments')}">
+                <input id="tab3" type="radio" name="tabs" value="answers" data-bind="checked: order, click: $root.getQuestions()">
                 <label for="tab3"><i class="fa fa-users" aria-hidden="true"></i><span> MOST ANSWERED</span></label>
 
                 <input id="tab4" onclick="hideShow('searchForm')" name="askSearch">
@@ -46,7 +47,7 @@
                 <input id="tab5" onclick="hideShow('askForm')" name="askSearch">
                 <label for="tab5"><i class="fa fa-plus-square" aria-hidden="true"></i><span> ASK QUESTION</span></label>
 
-                <section class="showQA">
+                <section class="showQA" >
                     <div id="searchForm">
                         <div class= "card color-white margin-b-16" id="searchFormMeasure">
                             <header class="container color-default">
@@ -110,119 +111,47 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card color-white margin-b-16">
-                        <header class="color-grey">
-                            <div class="row">
-                                <div class="col s9 container">
-                                    <h3>Question Title</h3>
+                    <h3 class="center margin-b-16 padding-b-8" data-bind="visible: questions().length == 0">NO QUESTIONS TO DISPLAY :(</h3>
+                    <div data-bind="foreach: questions">
+                        <div class="card color-white margin-b-16">
+                            <header class="color-grey">
+                                <div class="row">
+                                    <div class="col s9 container">
+                                        <h3 data-bind="text: title"></h3>
+                                    </div>
+                                    <div class="col s3 container ">
+                                        <p class="tag color-red right">Unsolved</p>
+                                    </div>
                                 </div>
-                                <div class="col s3 container ">
-                                    <p class="tag color-red right">Unsolved</p>
+                            </header>
+
+                            <div class="container">
+                                <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
+                                <p data-bind="text: description"></p><br>
+                                <hr style="margin-top: 0px">
+                                <div class="row padding-b-8">
+                                    <span class="tag font-small color-green">
+                                        <i class="fa fa-reply" aria-hidden="true"></i>
+                                        <span data-bind="text: answers + ' Answers'"></span>
+                                    </span>
+
+                                    <!--<span class="tag font-small color-blue">
+                                        <i class="fa fa-comment" aria-hidden="true"></i>
+                                        3 Comments
+                                    </span>-->
+
+                                    <span class="tag font-small color-accent2">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <span data-bind="text: 'Rating ' + rating"></span>
+                                    </span>
+                                    
+                                    <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true" data-bind="text: 'Asked on: ' + date"></i>
                                 </div>
                             </div>
-                        </header>
-
-                        <div class="container">
-                            <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
-                            <hr style="margin-top: 0px">
-                            <div class="row padding-b-8">
-                                <span class="tag font-small color-green">
-                                    <i class="fa fa-reply" aria-hidden="true"></i>
-                                    5 Answers
-                                </span>
-
-                                <span class="tag font-small color-blue">
-                                    <i class="fa fa-comment" aria-hidden="true"></i>
-                                    3 Comments
-                                </span>
-                                <span class="tag font-small color-accent2">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <span>Rating: +8</span>
-                                </span>
-                                
-                                <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true"> Asked 3 hours ago</i>
-                            </div>
+                            <button class="btn-block color-dark-grey hover-color-default" data-bind="click: function(){$root.viewQuestion(this)}">Open Thread</button>
                         </div>
-                        <button class="btn-block color-dark-grey hover-color-default" onclick="location.href='question.html'">Open Thread</button>
-                    </div>
-
-                    <div class="card color-white margin-b-16">
-                        <header class="color-grey">
-                            <div class="row">
-                                <div class="col s9 container">
-                                    <h3>Question Title</h3>
-                                </div>
-                                <div class="col s3 container ">
-                                    <p class="tag color-green right">Solved</p>
-                                </div>
-                            </div>
-                            
-                            
-                        </header>
-                        <div class="container">
-                            <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
-                            <hr style="margin-top: 0px">
-                            <div class="row padding-b-8">
-                                <span class="tag font-small color-green">
-                                    <i class="fa fa-reply" aria-hidden="true"></i>
-                                    5 Answers
-                                </span>
-
-                                <span class="tag font-small color-blue">
-                                    <i class="fa fa-comment" aria-hidden="true"></i>
-                                    3 Comments
-                                </span>
-                                <span class="tag font-small color-accent2">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <span>Rating: +8</span>
-                                </span>
-                                
-                                <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true"> Asked 3 hours ago</i>
-                            </div>
-                        </div>
-                        <button class="btn-block color-dark-grey hover-color-default" onclick="location.href='question.html'">Open Thread</button>
                     </div>
                     
-                    <div class="card color-white margin-b-16">
-                        <header class="color-grey">
-                            <div class="row">
-                                <div class="col s9 container">
-                                    <h3>Question Title</h3> 
-                                </div>
-                                <div class="col s3 container ">
-                                    <p class="tag color-red right">Unsolved</p>
-                                </div>
-                            </div>
-                            
-                            
-                        </header>
-                        <div class="container">
-                            <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pulvinar nunc a sagittis molestie. In aliquet eget eros nec venenatis. Praesent lectus neque, bibendum molestie pretium nec, aliquet ut justo. Maecenas porta libero eget leo dictum, feugiat euismod elit commodo. Sed gravida, metus scelerisque pretium hendrerit, mi felis commodo tortor, a gravida nisi orci in nisi. </p><br>
-                            <hr style="margin-top: 0px">
-                            <div class="row padding-b-8">
-                                <span class="tag font-small color-green">
-                                    <i class="fa fa-reply" aria-hidden="true"></i>
-                                    5 Answers
-                                </span>
-
-                                <span class="tag font-small color-blue">
-                                    <i class="fa fa-comment" aria-hidden="true"></i>
-                                    3 Comments
-                                </span>
-                                <span class="tag font-small color-accent2">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <span>Rating: +8</span>
-                                </span>
-                                
-                                <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true"> Asked 3 hours ago</i>
-                            </div>
-                        </div>
-                        <button class="btn-block color-dark-grey hover-color-default" onclick="location.href='question.html'">Open Thread</button>
-                    </div>
 
                     <!--PAGINATION-->
                     <div class="center margin-t-16">
@@ -238,10 +167,6 @@
                     </div>
                 </section>
             </div>
-
-
-            
-
         </div>
 
 
