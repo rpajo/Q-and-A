@@ -28,147 +28,297 @@
 
 
         <!--QUESTION SECTION-->
-        <div id="qSection" class="container col m12 l9">
-            <!--<h2>Question section</h2>-->
+        <div id="mainSection" data-bind="if: navigation() == 'main'">
+            <div class="container col m12 l9">
+                <!--<h2>Question section</h2>-->
 
-            <div class="tabs">
-                <input id="tab1" type="radio" name="tabs" value="date" data-bind="checked: order, click: $root.getQuestions()">
-                <label for="tab1"><i class="fa fa-clock-o" aria-hidden="true"></i><span> RECENT</span></label>
-                
-                <input id="tab2" type="radio" name="tabs" value="rating" data-bind="checked: order, click: $root.getQuestions()">
-                <label for="tab2"><i class="fa fa-fire" aria-hidden="true"></i><span> POPULAR</span></label>
-                
-                <input id="tab3" type="radio" name="tabs" value="answers" data-bind="checked: order, click: $root.getQuestions()">
-                <label for="tab3"><i class="fa fa-users" aria-hidden="true"></i><span> MOST ANSWERED</span></label>
-
-                <input id="tab4" onclick="hideShow('searchForm')" name="askSearch">
-                <label for="tab4"><i class="fa fa-search" aria-hidden="true"></i><span> SEARCH</span></label>
-
-                <input id="tab5" onclick="hideShow('askForm')" name="askSearch">
-                <label for="tab5"><i class="fa fa-plus-square" aria-hidden="true"></i><span> ASK QUESTION</span></label>
-
-                <section class="showQA" >
-                    <div id="searchForm">
-                        <div class= "card color-white margin-b-16" id="searchFormMeasure">
-                            <header class="container color-default">
-                                <h3>Search</h3>
-                            </header>
-
-                            <div class="container">
-                                <form action="javascript:search();" class="margin-t-8 margin-b-8">
-                                    <div class="row">
-                                        <div class="col s12 m5">
-                                            <label>Enter Search Term:</label>
-                                            <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Enter search term"/>
-                                        </div>
-                                        <div class="col s12 m3">
-                                            <label>Enter tags:</label>
-                                            <input id="searchTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>    
-                                        </div>
-                                        <div class="col s12 m4">
-                                            <label>Enter category:</label>
-                                            <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categoriesSearch" type="text" placeholder="e.g. Technology"/>
-                                            <datalist id="categoriesSearch"></datalist>
-                                        </div>
-                                    </div>
-
-                                    <button class="btn-block color-accent1 hover-color-accent2">Search</button>
-                                    
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--ASK QUESTION-->
-                    <div id="askForm">
-                        <div class= "card color-white margin-b-16" id="askFormMeasure">
-                            <header class="container color-default">
-                                <h3>Ask Question</h3>
-                            </header>
-
-                            <div class="container">
-                                <form action="javascript:submitQuestion();" id="answerField" class="margin-t-8 margin-b-8">
-                                    <label>Question Title:</label>
-                                    <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Please enter the desired question tile.."/>
-                                    <textarea name="answer" id="questionDesc" required="required" placeholder="Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."></textarea>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col s12 m4 margin-r-8"> 
-                                            <label>Enter tags:</label>
-                                            <input id="questionTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>
-                                        </div>
-                                        <div class="col s12 m4">
-                                            <label>Enter category:</label>
-                                            <input id="questionCategory" class="categoryInput input margin-t-8 margin-b-8" list="categoriesAsk" type="text" placeholder="e.g. Technology"/>
-                                            <datalist id="categoriesAsk"></datalist>
-                                        </div>
-                                    </div>
-                                    
-                                    <input class="margin-b-16" type="checkbox" name="showUser" value="anonymous"/>Post the question anonymously
-                                    <button class="btn-block color-accent1 hover-color-accent2">Search</button>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="center margin-b-16 padding-b-8" data-bind="visible: questions().length == 0">NO QUESTIONS TO DISPLAY :(</h3>
-                    <div data-bind="foreach: questions">
-                        <div class="card color-white margin-b-16">
-                            <header class="color-grey">
-                                <div class="row">
-                                    <div class="col s9 container">
-                                        <h3 data-bind="text: title"></h3>
-                                    </div>
-                                    <div class="col s3 container ">
-                                        <p class="tag color-red right">Unsolved</p>
-                                    </div>
-                                </div>
-                            </header>
-
-                            <div class="container">
-                                <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
-                                <p data-bind="text: description"></p><br>
-                                <hr style="margin-top: 0px">
-                                <div class="row padding-b-8">
-                                    <span class="tag font-small color-green">
-                                        <i class="fa fa-reply" aria-hidden="true"></i>
-                                        <span data-bind="text: answers + ' Answers'"></span>
-                                    </span>
-
-                                    <!--<span class="tag font-small color-blue">
-                                        <i class="fa fa-comment" aria-hidden="true"></i>
-                                        3 Comments
-                                    </span>-->
-
-                                    <span class="tag font-small color-accent2">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <span data-bind="text: 'Rating ' + rating"></span>
-                                    </span>
-                                    
-                                    <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true" data-bind="text: 'Asked on: ' + date"></i>
-                                </div>
-                            </div>
-                            <button class="btn-block color-dark-grey hover-color-default" data-bind="click: function(){$root.viewQuestion(this)}">Open Thread</button>
-                        </div>
-                    </div>
+                <div class="tabs">
+                    <input id="tab1" type="radio" name="tabs" value="date" data-bind="checked: order, click: $root.getQuestions">
+                    <label for="tab1"><i class="fa fa-clock-o" aria-hidden="true"></i><span> RECENT</span></label>
                     
+                    <input id="tab2" type="radio" name="tabs" value="rating" data-bind="checked: order, click: $root.getQuestions">
+                    <label for="tab2"><i class="fa fa-fire" aria-hidden="true"></i><span> POPULAR</span></label>
+                    
+                    <input id="tab3" type="radio" name="tabs" value="answers" data-bind="checked: order, click: $root.getQuestions">
+                    <label for="tab3"><i class="fa fa-users" aria-hidden="true"></i><span> MOST ANSWERED</span></label>
 
-                    <!--PAGINATION-->
-                    <div class="center margin-t-16">
-                        <ul class="pagination color-white">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a class="color-accent1" href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>
-                </section>
+                    <input id="tab4" onclick="hideShow('searchForm')" name="askSearch">
+                    <label for="tab4"><i class="fa fa-search" aria-hidden="true"></i><span> SEARCH</span></label>
+
+                    <input id="tab5" onclick="hideShow('askForm')" name="askSearch">
+                    <label for="tab5"><i class="fa fa-plus-square" aria-hidden="true"></i><span> ASK QUESTION</span></label>
+
+                    <section class="showQA" >
+                        <div id="searchForm">
+                            <div class= "card color-white margin-b-16" id="searchFormMeasure">
+                                <header class="container color-default">
+                                    <h3>Search</h3>
+                                </header>
+
+                                <div class="container">
+                                    <form action="javascript:search();" class="margin-t-8 margin-b-8">
+                                        <div class="row">
+                                            <div class="col s12 m5">
+                                                <label>Enter Search Term:</label>
+                                                <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Enter search term"/>
+                                            </div>
+                                            <div class="col s12 m3">
+                                                <label>Enter tags:</label>
+                                                <input id="searchTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>    
+                                            </div>
+                                            <div class="col s12 m4">
+                                                <label>Enter category:</label>
+                                                <input id="searchCategory" class="categoryInput input margin-t-8 margin-b-8" list="categoriesSearch" type="text" placeholder="e.g. Technology"/>
+                                                <datalist id="categoriesSearch"></datalist>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn-block color-accent1 hover-color-accent2">Search</button>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--ASK QUESTION-->
+                        <div id="askForm">
+                            <div class= "card color-white margin-b-16" id="askFormMeasure">
+                                <header class="container color-default">
+                                    <h3>Ask Question</h3>
+                                </header>
+
+                                <div class="container">
+                                    <form action="javascript:submitQuestion();" id="answerField" class="margin-t-8 margin-b-8">
+                                        <label>Question Title:</label>
+                                        <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Please enter the desired question tile.."/>
+                                        <textarea name="answer" id="questionDesc" required="required" placeholder="Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."></textarea>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col s12 m4 margin-r-8"> 
+                                                <label>Enter tags:</label>
+                                                <input id="questionTags" class="searchInput input margin-t-8 margin-b-8 " type="text" placeholder="e.g. javascript, json"/>
+                                            </div>
+                                            <div class="col s12 m4">
+                                                <label>Enter category:</label>
+                                                <input id="questionCategory" class="categoryInput input margin-t-8 margin-b-8" list="categoriesAsk" type="text" placeholder="e.g. Technology"/>
+                                                <datalist id="categoriesAsk"></datalist>
+                                            </div>
+                                        </div>
+                                        
+                                        <input class="margin-b-16" type="checkbox" name="showUser" value="anonymous"/>Post the question anonymously
+                                        <button class="btn-block color-accent1 hover-color-accent2">Search</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="center margin-b-16 padding-b-8" data-bind="visible: questionList().length == 0">FETCHING QUESIONS FOR YOU</h3>
+                        <div data-bind="foreach: questionList">
+                            <div class="card color-white margin-b-16">
+                                <header class="color-grey">
+                                    <div class="row">
+                                        <div class="col s9 container">
+                                            <h3 data-bind="text: title"></h3>
+                                        </div>
+                                        <div class="col s3 container ">
+                                            <p class="tag color-red right">Unsolved</p>
+                                        </div>
+                                    </div>
+                                </header>
+
+                                <div class="container">
+                                    <img src="images/avatar.png" alt="Avatar" class="left circle margin-t-16 margin-r-16" style="width:60px">
+                                    <p data-bind="text: description"></p><br>
+                                    <hr style="margin-top: 0px">
+                                    <div class="row padding-b-8">
+                                        <span class="tag font-small color-green">
+                                            <i class="fa fa-reply" aria-hidden="true"></i>
+                                            <span data-bind="text: answers + ' Answers'"></span>
+                                        </span>
+
+                                        <!--<span class="tag font-small color-blue">
+                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                            3 Comments
+                                        </span>-->
+
+                                        <span class="tag font-small color-accent2">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <span data-bind="text: 'Rating ' + rating"></span>
+                                        </span>
+                                        
+                                        <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true" data-bind="text: 'Asked on: ' + date"></i>
+                                    </div>
+                                </div>
+                                <button class="btn-block color-dark-grey hover-color-default" data-bind="click: function(){$root.bla(this)}">Open Thread</button>
+                            </div>
+                        </div>
+                        
+
+                        <!--PAGINATION-->
+                        <div class="center margin-t-16">
+                            <ul class="pagination color-white">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a class="color-accent1" href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
 
+        <div id="questionsSection" data-bind="if: navigation() == 'question'">
+            <div class="container col m12 l9">
+                <!--<h2>Question section</h2>-->
+                <div class="card color-white margin-b-16" data-bind="with: question">
+                    <header class="color-grey">
+                        <div class="row">
+                            <div class="container col s9">
+                                <h3 data-bind="text: title"></h3>
+                            </div>
+                            <div class="container col s3">
+                                <p class="tag color-red right">Unsolved</p>
+                            </div>
+                        </div>
+                        
+                        
+                    </header>
+                    <div class="row">
+                        <div class="container col s2 center rateQ">
+                            <i class="fa fa-angle-up fa-4x" aria-hidden="true"></i>
+                            <span class="tagRound font-large color-accent2" data-bind="text: rating"></span>
+                            <i class="fa fa-angle-down fa-4x" aria-hidden="true"></i>
+                        </div>
+                        <div class="container col s10 container">
+                            <p data-bind="text: description"></p>
+                            <br>
+                            <div class="row padding-b-8">
+                                <span class="tag font-small color-blue">
+                                    <i class="fa fa-comment" aria-hidden="true"></i>
+                                    <!--<span >2 Comments</span>-->
+                                </span>
+                                
+                                <i class="fa fa-clock-o right"  style="padding-top:4px" aria-hidden="true"><span data-bind="text: date"></span></i>
+
+                                <hr>
+                                <ul class="list font-small margin-t">
+                                    <li>Have you tried turning it on and off again? 
+                                        <span class="font-color-dark-grey">
+                                            <sub>AnotherMemeber on 3. November at 13.37</sub>
+                                        </span>
+                                    </li>
+                                    <li>I can confirm that this is happening to my apps too
+                                        <span class="font-color-dark-grey">
+                                            <sub>RandomCitizen on 1. November at 12.66</sub>
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <input id="post1" class="input commentInput" type="text" maxlength="70">
+                                        <span class="font-color-dark-grey clickable" onclick="comment(1)">
+                                            Add Comment
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--ANSWER SECTION-->        
+                    <div class="container">
+
+                        <h3 data-bind="answers"></h3>
+                        <hr>
+                        <div class="tabs low">
+                            <input id="tab1" type="radio" name="tabs" checked>
+                            <label for="tab1" onclick="getAnswers('top')"><i class="fa fa-star" aria-hidden="true"></i><span> Best Rated</span></label>
+                            
+                            <input id="tab2" type="radio" name="tabs">
+                            <label for="tab2" onclick="getAnswers('new')"><i class="fa fa-clock-o" aria-hidden="true"></i><span> Most Recent</span></label>
+                            
+                            <input id="tab3" type="radio" name="tabs">
+                            <label for="tab3" onclick="getAnswers('old')"><i class="fa fa-history" aria-hidden="true"></i><span> Oldest</span></label>
+
+                            <section class="showQA">
+                                <div class="row">
+                                    <div class="container col s2 center rateQ">
+                                        <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
+                                        <span class="tagRound color-accent2">2</span>
+                                        <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="container col s10 container">
+                                        <span>Vivamus eu pulvinar tortor. Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Suspendisse aliquet facilisis maximus. Nullam ut ligula est.</span>
+                                        
+                                        <hr>
+                                        <ul class="list font-small margin-t">
+                                            <li>Have you tried turning it on and off again? 
+                                                <span class="font-color-dark-grey">
+                                                    <sub> PowerUser on 13. November at 08.11</sub>
+                                                </span>
+                                            </li>
+
+                                            <li>
+                                                <input id="post2" class="input commentInput" type="text" maxlength="70">
+                                                <span class="font-color-dark-grey clickable" onclick="comment(2)">
+                                                    Add Comment
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <hr>
+                                </div>
+
+                                <div class="row">
+                                    <div class="container col s2 center rateQ">
+                                        <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
+                                        <span class="tagRound color-accent2">-5</span>
+                                        <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="container col s10 container">
+                                        <span>Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Nullam ut ligula est.</span>
+                                        
+                                        <hr>
+                                        <ul class="list font-small margin-t">
+                                            <li>This is stupid. Downvoted
+                                                <span class="font-color-dark-grey">
+                                                    <sub> Asdf on 3. November at 14.44</sub>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <input id="post3" class="input commentInput" type="text" maxlength="70">
+                                                <span class="font-color-dark-grey clickable" onclick="comment(3)">
+                                                    Add Comment
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    
+                                    </div>
+                                    <hr>
+                                </div>
+
+                                <div>
+                                    <h3>Your Answer</h3>
+
+                                    <form action="javascript:submitAnswer(1);" id="answerField" class="padding-16">
+                                        <textarea name="answer" id="answer" required="required"></textarea>
+                                        <br>
+                                        <input class="color-default" type="submit">
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+            
 
         <!--WIDGET SECTION-->
         <div class="container col m12 l3">
