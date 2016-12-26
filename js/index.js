@@ -39,10 +39,71 @@ function questionViewModel() {
     var self = this;
     self.navigation = ko.observable();
 
+    self.qId = 0;
     self.question = ko.observable();
+    self.answers = ko.observableArray();
+    self.comments = ko.observableArray();
     self.order = ko.observable("date");
     
-    self.getAnswers = 
+    self.getAnswers = function() {
+        $.ajax({
+            type: "get",
+            url: "http://localhost:62713/api/question/" + self.qId,
+            dataType: "json",
+            success: function (response) {
+                response.comments = ko.observableArray([]);
+                self.question(response);
+                console.log(self.question());
+
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:62713/api/answer/" + self.order() + "/" + self.qId,
+                    dataType: "json",
+                    success: function (response) {
+                        response.forEach(function(element) {
+                            console.log("ADD ARRAY")
+                            element.comments = ko.observableArray([]);
+                        });
+                        self.answers(response);
+                        console.log(self.answers());
+
+                        $.ajax({
+                            type: "get",
+                            url: "http://localhost:62713/api/comment/" + self.qId,
+                            dataType: "json",
+                            success: function (response) {
+                                self.comments(response);
+                                console.log(self.comments());
+                                self.sortComments();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    self.sortComments = function() {
+        console.log("Sorting comments");
+        self.comments().forEach(function(comment) {
+            //console.log(comment);
+            if (comment.parentId == 0) {
+                console.log("comment to question");
+                self.question().comments.push(comment);
+            }
+            else {
+                self.answers().forEach(function(answer) {
+                    //console.log(answer);
+                    if (answer.answerId == comment.parentId) {
+                        console.log("comment to answer with id: " + answer.answerId);
+                        answer.comments.push(comment);
+                        //break;
+                    }
+                });
+                console.log(self.answers());
+            }
+        });
+    }
 
 }
 
@@ -63,10 +124,11 @@ $(document).ready(function(){
         });
         
         this.get('#/question/:id', function(context) {
-            questionVM.
-
+            questionVM.qId = context.params.id;
+            questionVM.getAnswers();
             mainVM.navigation('question');
             questionVM.navigation('question');
+
         });
     }).run('#/');
 

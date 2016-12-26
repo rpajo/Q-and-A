@@ -27,7 +27,7 @@
         <!--<h1> Main Body Wrapper </h1>-->
 
 
-        <!--QUESTION SECTION-->
+        <!--MAIN SECTION-->
         <div id="mainSection" data-bind="if: navigation() == 'main'">
             <div class="container col m12 l9">
                 <!--<h2>Question section</h2>-->
@@ -171,12 +171,14 @@
             </div>
         </div>
 
+
+        <!--QUESTION VIEW SECTION-->
         <div id="questionsSection" data-bind="if: navigation() == 'question'">
             <div class="container col m12 l9">
                 <!--<h2>Question section</h2>-->
-                <div class="card color-white margin-b-16" data-bind="with: question">
+                <div class="card color-white margin-b-16">
                     <header class="color-grey">
-                        <div class="row">
+                        <div class="row" data-bind="with: question">
                             <div class="container col s9">
                                 <h3 data-bind="text: title"></h3>
                             </div>
@@ -184,10 +186,9 @@
                                 <p class="tag color-red right">Unsolved</p>
                             </div>
                         </div>
-                        
-                        
                     </header>
-                    <div class="row">
+
+                    <div class="row" data-bind="with: question">
                         <div class="container col s2 center rateQ">
                             <i class="fa fa-angle-up fa-4x" aria-hidden="true"></i>
                             <span class="tagRound font-large color-accent2" data-bind="text: rating"></span>
@@ -199,24 +200,23 @@
                             <div class="row padding-b-8">
                                 <span class="tag font-small color-blue">
                                     <i class="fa fa-comment" aria-hidden="true"></i>
-                                    <!--<span >2 Comments</span>-->
+                                    <span data-bind="text: comments().length + ' Comments'"></span>
                                 </span>
                                 
                                 <i class="fa fa-clock-o right"  style="padding-top:4px" aria-hidden="true"><span data-bind="text: date"></span></i>
 
                                 <hr>
-                                <ul class="list font-small margin-t">
-                                    <li>Have you tried turning it on and off again? 
+                                
+                                <ul class="list font-small margin-t" data-bind="foreach: comments">
+                                    <li>
+                                        <span data-bind="text: description"></span>
                                         <span class="font-color-dark-grey">
-                                            <sub>AnotherMemeber on 3. November at 13.37</sub>
-                                        </span>
-                                    </li>
-                                    <li>I can confirm that this is happening to my apps too
-                                        <span class="font-color-dark-grey">
-                                            <sub>RandomCitizen on 1. November at 12.66</sub>
+                                            <br><sub data-bind="text: author + ' on ' + date">Author on date</sub>
                                         </span>
                                     </li>
 
+                                </ul>
+                                <ul class="list font-small margin-t" >
                                     <li>
                                         <input id="post1" class="input commentInput" type="text" maxlength="70">
                                         <span class="font-color-dark-grey clickable" onclick="comment(1)">
@@ -231,39 +231,41 @@
                     <!--ANSWER SECTION-->        
                     <div class="container">
 
-                        <h3 data-bind="answers"></h3>
+                        <h3 data-bind="text: answers().length + ' Answers'"></h3>
                         <hr>
                         <div class="tabs low">
-                            <input id="tab1" type="radio" name="tabs" checked>
+                            <input id="tab1" type="radio" name="tabsQ" checked>
                             <label for="tab1" onclick="getAnswers('top')"><i class="fa fa-star" aria-hidden="true"></i><span> Best Rated</span></label>
                             
-                            <input id="tab2" type="radio" name="tabs">
+                            <input id="tab2" type="radio" name="tabsQ">
                             <label for="tab2" onclick="getAnswers('new')"><i class="fa fa-clock-o" aria-hidden="true"></i><span> Most Recent</span></label>
                             
-                            <input id="tab3" type="radio" name="tabs">
+                            <input id="tab3" type="radio" name="tabsQ">
                             <label for="tab3" onclick="getAnswers('old')"><i class="fa fa-history" aria-hidden="true"></i><span> Oldest</span></label>
 
-                            <section class="showQA">
+                            <section class="showQA" data-bind="foreach: answers">
                                 <div class="row">
                                     <div class="container col s2 center rateQ">
                                         <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
-                                        <span class="tagRound color-accent2">2</span>
+                                        <span class="tagRound color-accent2" data-bind="text: rating"></span>
                                         <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
                                     </div>
                                     <div class="container col s10 container">
-                                        <span>Vivamus eu pulvinar tortor. Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Suspendisse aliquet facilisis maximus. Nullam ut ligula est.</span>
+                                        <span data-bind="text: description"></span>
                                         
                                         <hr>
-                                        <ul class="list font-small margin-t">
-                                            <li>Have you tried turning it on and off again? 
+                                        <ul class="list font-small margin-t" data-bind="foreach: $data.comments">
+                                            <li>
+                                                <span data-bind="text: description"></span> 
                                                 <span class="font-color-dark-grey">
-                                                    <sub> PowerUser on 13. November at 08.11</sub>
+                                                     <br><sub data-bind="text: author + ' on ' + date">Author on date</sub>
                                                 </span>
                                             </li>
-
+                                        </ul>
+                                        <ul class="list font-small margin-t" >
                                             <li>
-                                                <input id="post2" class="input commentInput" type="text" maxlength="70">
-                                                <span class="font-color-dark-grey clickable" onclick="comment(2)">
+                                                <input id="post1" class="input commentInput" type="text" maxlength="70">
+                                                <span class="font-color-dark-grey clickable" onclick="comment(1)">
                                                     Add Comment
                                                 </span>
                                             </li>
@@ -271,46 +273,17 @@
                                     </div>
 
                                     <hr>
-                                </div>
-
-                                <div class="row">
-                                    <div class="container col s2 center rateQ">
-                                        <i class="fa fa-angle-up fa-2x" aria-hidden="true"></i>
-                                        <span class="tagRound color-accent2">-5</span>
-                                        <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="container col s10 container">
-                                        <span>Proin pellentesque nibh placerat, finibus turpis ultricies, tincidunt sem. Nullam ut ligula est.</span>
-                                        
-                                        <hr>
-                                        <ul class="list font-small margin-t">
-                                            <li>This is stupid. Downvoted
-                                                <span class="font-color-dark-grey">
-                                                    <sub> Asdf on 3. November at 14.44</sub>
-                                                </span>
-                                            </li>
-                                            <li>
-                                                <input id="post3" class="input commentInput" type="text" maxlength="70">
-                                                <span class="font-color-dark-grey clickable" onclick="comment(3)">
-                                                    Add Comment
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    
-                                    </div>
-                                    <hr>
-                                </div>
-
-                                <div>
-                                    <h3>Your Answer</h3>
-
-                                    <form action="javascript:submitAnswer(1);" id="answerField" class="padding-16">
-                                        <textarea name="answer" id="answer" required="required"></textarea>
-                                        <br>
-                                        <input class="color-default" type="submit">
-                                    </form>
                                 </div>
                             </section>
+                            <div>
+                                <h3>Your Answer</h3>
+
+                                <form action="javascript:submitAnswer(1);" id="answerField" class="padding-16">
+                                    <textarea name="answer" id="answer" required="required"></textarea>
+                                    <br>
+                                    <input class="color-default" type="submit">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
