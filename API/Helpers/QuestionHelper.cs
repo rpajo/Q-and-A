@@ -46,7 +46,7 @@ namespace API.Helpers
                 question.UserId = mySqlReader.GetInt32(1);
                 question.Title = mySqlReader.GetString(2);
                 question.Description = mySqlReader.GetString(3);
-                question.Comments = mySqlReader.GetInt32(4);
+                question.Answers = mySqlReader.GetInt32(4);
                 question.Rating = mySqlReader.GetInt32(5);
                 question.Date = mySqlReader.GetDateTime(6);
                 question.Anonymous = mySqlReader.GetInt16(7);
@@ -101,7 +101,7 @@ namespace API.Helpers
                 question.UserId = mySqlReader.GetInt32(1);
                 question.Title = mySqlReader.GetString(2);
                 question.Description = mySqlReader.GetString(3);
-                question.Comments = mySqlReader.GetInt32(4);
+                question.Answers = mySqlReader.GetInt32(4);
                 question.Rating = mySqlReader.GetInt32(5);
                 question.Date = mySqlReader.GetDateTime(6);
                 question.Anonymous = mySqlReader.GetInt16(7);
@@ -126,14 +126,14 @@ namespace API.Helpers
             {
                 update.Title = question.Title != null ? question.Title : mySqlReader.GetString(2);
                 update.Description = question.Description != null ? question.Description : mySqlReader.GetString(3);
-                update.Comments = question.Comments != 0 ? mySqlReader.GetInt32(4) + question.Comments : mySqlReader.GetInt32(4);
+                update.Answers = question.Answers != 0 ? mySqlReader.GetInt32(4) + question.Answers : mySqlReader.GetInt32(4);
                 update.Rating = question.Rating != 0 ? mySqlReader.GetInt32(5) + question.Rating : mySqlReader.GetInt32(5);
                 update.Anonymous = question.Anonymous != 0 ? question.Anonymous : mySqlReader.GetInt32(7);
 
                 mySqlReader.Close();
 
                 sqlString = String.Format("update questions set title='{0}', description='{1}', comments={2}, rating={3}, anonymous={4} where questionId = {5}",
-                    update.Title, update.Description, update.Comments, update.Rating, update.Anonymous, id);
+                    update.Title, update.Description, update.Answers, update.Rating, update.Anonymous, id);
 
                 cmd = new MySqlCommand(sqlString, connection);
                 cmd.ExecuteNonQuery();

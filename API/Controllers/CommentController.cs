@@ -5,17 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using API.Helpers;
-using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http;
-using System.Net;
 using Newtonsoft.Json;
 using System.Collections;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
 
     [Route("api/comment")]
+    [EnableCors("AllowAll")]
     public class CommentControler : ApiController
     {
         // COMMENTS API CALLS --------------------------------------------

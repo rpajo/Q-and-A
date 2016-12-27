@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using API.Models;
 using MySql.Data;
 using MySQL.Data.EntityFrameworkCore.Extensions;
+using Microsoft.AspNetCore.Cors;
 
 namespace API
 {
@@ -41,6 +42,8 @@ namespace API
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddMvc();
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
+
 
             //var connection = @"server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
             //services.AddDbContext<questionoverflowContext>(options => options.UseMySQL (connection));
@@ -57,6 +60,8 @@ namespace API
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseMvc();
+
+            app.UseCors("AllowAll");
         }
     }
 }

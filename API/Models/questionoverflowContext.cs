@@ -122,7 +122,7 @@ namespace API.Models
                     .HasColumnType("binary(1)")
                     .HasDefaultValueSql("0");
 
-                entity.Property(e => e.Comments)
+                entity.Property(e => e.Answers)
                     .HasColumnName("comments")
                     .HasColumnType("int(10) unsigned zerofill")
                     .HasDefaultValueSql("0000000000");

@@ -25,7 +25,7 @@ namespace API.Helpers
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -55,7 +55,31 @@ namespace API.Helpers
                 return user;
             }
             else return null;
-        } 
+        }
+
+        public int login(Users credentials)
+        {
+            Users user = new Users();
+            MySqlDataReader mySqlReader;
+
+            String sqlString = String.Format("select * from users where email = '{0}'", credentials.Email);
+            MySqlCommand cmd = new MySqlCommand(sqlString, connection);
+
+            mySqlReader = cmd.ExecuteReader();
+
+            if (mySqlReader.Read())
+            {
+                user.UserId = mySqlReader.GetInt32(0);
+                user.Username = mySqlReader.GetString(1);
+                user.Email = mySqlReader.GetString(2);
+                user.Password = mySqlReader.GetString(3);
+
+
+                if (credentials.Password == user.Password) return 0;
+                else return -1;
+            }
+            else return 404;
+        }
 
         public bool updateUser(int id, Users user)
         {
