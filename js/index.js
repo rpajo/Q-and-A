@@ -43,9 +43,10 @@ function questionViewModel() {
     self.question = ko.observable();
     self.answers = ko.observableArray();
     self.comments = ko.observableArray();
-    self.order = ko.observable("date");
+    self.order = ko.observable("rating");
     
     self.getAnswers = function() {
+        //console.log(self.order());  
         $.ajax({
             type: "get",
             url: "http://localhost:62713/api/question/" + self.qId,
@@ -81,6 +82,8 @@ function questionViewModel() {
                 });
             }
         });
+
+        return true;
     }
 
     self.sortComments = function() {
