@@ -217,10 +217,10 @@
                                     </li>
 
                                 </ul>
-                                <ul class="list font-small margin-t" data-bind="if: $root.userLoggedIn() > 0">
+                                <ul class="list font-small margin-t" data-bind="ifnot: $root.userLoggedIn() == 0">
                                     <li>
-                                        <input id="post1" class="input commentInput" type="text" maxlength="70">
-                                        <span class="font-color-dark-grey clickable" onclick="comment(1)">
+                                        <input data-bind="attr: {id: 'comment' + 0}" class="input commentInput" type="text" maxlength="70">
+                                        <span class="font-color-dark-grey clickable" data-bind="click: function(){$root.postComment(0)}">
                                             Add Comment
                                         </span>
                                     </li>
@@ -263,10 +263,10 @@
                                                 </span>
                                             </li>
                                         </ul>
-                                        <ul class="list font-small margin-t" data-bind="if: $root.userLoggedIn() > 0">
+                                        <ul class="list font-small margin-t" data-bind="ifnot: $root.userLoggedIn() == 0">
                                             <li>
-                                                <input id="post1" class="input commentInput" type="text" maxlength="70">
-                                                <span class="font-color-dark-grey clickable" onclick="comment(1)">
+                                                <input data-bind="attr: {id: 'comment' + answerId}" class="input commentInput" type="text" maxlength="70">
+                                                <span class="font-color-dark-grey clickable" data-bind="click: function(){$root.postComment(answerId)}">
                                                     Add Comment
                                                 </span>
                                             </li>
@@ -279,13 +279,13 @@
                             <div>
                                 <h3>Your Answer</h3>
 
-                                <form id="answerField" class="padding-16" data-bind="if: $root.userLoggedIn() > 0">
+                                <form id="answerField" class="padding-16" data-bind="ifnot: $root.userLoggedIn() == 0">
                                     <textarea name="answer" id="answer" required="required"></textarea>
                                     <br>
                                     <input class="color-default" type="submit" data-bind="click: $root.submitAnswer">
                                 </form>
 
-                                <h4 data-bind="ifnot: $root.userLoggedIn() > 0" class="center">YOU MUST BE LOGGED IN TO COMMENT AND POST ANSWERS</h4>
+                                <h4 data-bind="if: $root.userLoggedIn() == 0" class="center">YOU MUST BE LOGGED IN TO COMMENT AND POST ANSWERS</h4>
                             </div>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
         <div class="container col m12 l3" id="widgetSection">
             <!--<h2>Widget section</h2> -->
             <!--LOGIN-->
-            <div data-bind="ifnot: userLoggedIn() > 0">
+            <div data-bind="if: userLoggedIn() == 0">
                 <div class="card color-white margin-b-16 padding-b-8">
                     <header class="color-default container">
                         <h3>Log In</h3>                                     
@@ -329,7 +329,7 @@
                 
 
             <!--USER PANEL-->
-            <div data-bind="if: userLoggedIn() > 0">
+            <div data-bind="ifnot: userLoggedIn() == 0">
                 <div class="card color-white margin-b-16">
                     <header class="color-default container">
                         <h3>Welcome, User</h3>                                     

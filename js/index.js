@@ -113,29 +113,52 @@ function questionViewModel() {
 
     self.submitAnswer = function() {
         var text = $("#answer")[0].value;
-
-        $.ajaxSetup({
+        if ($.trim(text).length > 0) {
+            $.ajaxSetup({
             contentType : 'application/json'
-        });
-        $.ajax({
-            type: "post",
-            url: "http://localhost:62713/api/answer/" + self.qId,
-            data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn(), "description": text}),
-            success: function (response) {
-                //console.log(response);
-                self.getAnswers();
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        });
-
+            });
+            $.ajax({
+                type: "post",
+                url: "http://localhost:62713/api/answer/" + self.qId,
+                data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn(), "description": text}),
+                success: function (response) {
+                    //console.log(response);
+                    self.getAnswers();
+                    var text = $("#answer")[0].value = "";
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        }
+        
         return true;
     };
 
-    self.postComment = function() {
+    self.postComment = function(answerId) {
+        var text = $("#comment" + answerId)[0].value;
 
-    }
+        if ($.trim(text).length > 0) {
+            $.ajaxSetup({
+                contentType : 'application/json'
+            });
+            $.ajax({
+                type: "post",
+                url: "http://localhost:62713/api/comment/" + self.qId,
+                data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "parentId": answerId, "description": text, "author": self.userLoggedIn().username}),
+                success: function (response) {
+                    console.log(response);
+                    self.getComments();
+                    var text = $("#comment" + answerId)[0].value = "";
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        return true;
+    };
 
 }
 
