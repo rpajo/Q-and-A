@@ -278,10 +278,10 @@
                             <div>
                                 <h3>Your Answer</h3>
 
-                                <form action="javascript:submitAnswer(1);" id="answerField" class="padding-16">
+                                <form id="answerField" class="padding-16">
                                     <textarea name="answer" id="answer" required="required"></textarea>
                                     <br>
-                                    <input class="color-default" type="submit">
+                                    <input class="color-default" type="submit" data-bind="click: $root.submitAnswer">
                                 </form>
                             </div>
                         </div>
@@ -294,49 +294,54 @@
             
 
         <!--WIDGET SECTION-->
-        <div class="container col m12 l3">
+        <div class="container col m12 l3" id="widgetSection">
             <!--<h2>Widget section</h2> -->
             <!--LOGIN-->
-            <div class="card color-white margin-b-16 padding-b-8">
-                <header class="color-default container">
-                    <h3>Log In</h3>                                     
-                </header>
-                <form class="container margin-t">
+            <div data-bind="ifnot: userLoggedIn() > 0">
+                <div class="card color-white margin-b-16 padding-b-8">
+                    <header class="color-default container">
+                        <h3>Log In</h3>                                     
+                    </header>
+                    <div class="container margin-t">
 
-                    <input class="input margin-b-8 margin-t-8" type="text" placeholder="Username">
+                        <input id="usernameLogin" class="input margin-b-8 margin-t-8" type="text" placeholder="Username">
 
-                    <input class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
+                        <input id="passwordLogin" class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
 
-                    <button class="btn-block color-accent1 margin-t">LOG IN</button>
-                    
-                </form>
+                        <button id="btnLogin" class="btn-block color-accent1 margin-t" data-bind="click: $root.login">LOG IN</button>
+                        
+                    </div>
 
-                <input id="register" type="checkbox" >
-                <label for="register"><span> Sign Up</span></label>
+                    <input id="register" type="checkbox" >
+                    <label for="register"><span> Sign Up</span></label>
 
-                <form class="container" id="regForm">
-                    <input class="input margin-b-8 margin-t-8" type="email" placeholder="email">
-                    <input class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
-                    <input class="input margin-b-8 margin-t-8" type="password" placeholder="Re-enter password">
-                    <button class="btn-block color-accent1 margin-t" onclick="register()">Register</button>
-                </form>
-            </div>
-
-            <!--USER PANEL-->
-            <div class="card color-white margin-b-16">
-                <header class="color-default container">
-                    <h3>Welcome, User</h3>                                     
-                </header>
-                <div>
-                    <ul class="clickable list">
-                        <li class="hover-color-accent2" onclick="location.href='profile.html#profile'">My Profile</li>
-                        <li class="hover-color-accent2" onclick="location.href='profile.html#activity'">My Questions</li>
-                        <li class="hover-color-accent2" onclick="location.href='profile.html#settings'">Profile Settings</li>
-                        <li class="hover-color-accent2">Log Out</li>                            
-                    </ul>
+                    <form class="container" id="regForm">
+                        <input class="input margin-b-8 margin-t-8" type="email" placeholder="email">
+                        <input class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
+                        <input class="input margin-b-8 margin-t-8" type="password" placeholder="Re-enter password">
+                        <button class="btn-block color-accent1 margin-t" onclick="register()">Register</button>
+                    </form>
                 </div>
             </div>
+                
 
+            <!--USER PANEL-->
+            <div data-bind="if: userLoggedIn() > 0">
+                <div class="card color-white margin-b-16">
+                    <header class="color-default container">
+                        <h3>Welcome, User</h3>                                     
+                    </header>
+                    <div>
+                        <ul class="clickable list">
+                            <li class="hover-color-accent2" onclick="location.href='profile.html#profile'">My Profile</li>
+                            <li class="hover-color-accent2" onclick="location.href='profile.html#activity'">My Questions</li>
+                            <li class="hover-color-accent2" onclick="location.href='profile.html#settings'">Profile Settings</li>
+                            <li class="hover-color-accent2" data-bind="click: $root.logOut">Log Out</li>                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                
             <!--CATEGORIES-->
                 <div class="card color-white margin-b-16">
                     <header class="color-default container">

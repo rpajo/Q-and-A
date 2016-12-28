@@ -10,7 +10,7 @@ function mainViewModel() {
 
 
     self.getQuestions = function() {
-        console.log(self.order());
+        //console.log(self.order());
         $.ajax({
             type: "get",
             url: "http://localhost:62713/api/question/" + self.order() + "/" + self.page(),
@@ -68,16 +68,7 @@ function questionViewModel() {
                         self.answers(response);
                         console.log(self.answers());
 
-                        $.ajax({
-                            type: "get",
-                            url: "http://localhost:62713/api/comment/" + self.qId,
-                            dataType: "json",
-                            success: function (response) {
-                                self.comments(response);
-                                console.log(self.comments());
-                                self.sortComments();
-                            }
-                        });
+                        self.getComments();
                     }
                 });
             }
@@ -86,26 +77,84 @@ function questionViewModel() {
         return true;
     }
 
-    self.sortComments = function() {
-        console.log("Sorting comments");
-        self.comments().forEach(function(comment) {
-            //console.log(comment);
-            if (comment.parentId == 0) {
-                console.log("comment to question");
-                self.question().comments.push(comment);
-            }
-            else {
-                self.answers().forEach(function(answer) {
-                    //console.log(answer);
-                    if (answer.answerId == comment.parentId) {
-                        console.log("comment to answer with id: " + answer.answerId);
-                        answer.comments.push(comment);
-                        //break;
+    self.getComments = function() {
+        $.ajax({
+            type: "get",
+            url: "http://localhost:62713/api/comment/" + self.qId,
+            dataType: "json",
+            success: function (response) {
+                self.comments(response);
+                //console.log(self.comments());
+                //console.log("Sorting comments");
+                self.comments().forEach(function(comment) {
+                    //console.log(comment);
+                    if (comment.parentId == 0) {
+                        //console.log("comment to question");
+                        self.question().comments.push(comment);
+                    }
+                    else {
+                        self.answers().forEach(function(answer) {
+                            //console.log(answer);
+                            if (answer.answerId == comment.parentId) {
+                                //console.log("comment to answer with id: " + answer.answerId);
+                                answer.comments.push(comment);
+                            }
+                        });
+                        console.log(self.answers());
                     }
                 });
-                console.log(self.answers());
             }
         });
+
+        return true;    
+    }
+
+    self.submitAnswer = function() {
+        var text = $("#answer")[0].value;
+        var body = { };
+    }
+
+}
+
+var widgetViewModel = function() {
+    var self = this;
+
+    self.userLoggedIn = ko.observable(0);       // 0 - user not logged in, else it stores the userId
+
+    self.login = function() {
+        var username = $("#usernameLogin")[0].value;
+        var password = $("#passwordLogin")[0].value;
+
+        $("#btnLogin").attr("disable", true);
+        $("#btnLogin").text("Logging in");
+        $.ajaxSetup({
+            contentType : 'application/json',
+            processData : false
+        });
+        $.ajax({
+            type: "put",
+            url: "http://localhost:62713/api/users/login",
+            data: JSON.stringify({"email": username, "password": password}),
+            success: function (xhr, response) {
+                //console.log(xhr, response);
+                $("#btnLogin").attr("disable", false);
+                $("#btnLogin").text("LOG IN");;
+                
+                self.userLoggedIn(xhr);
+                console.log(self.userLoggedIn());
+            },
+            error : function(err){
+                console.log(err);
+            }
+        });
+
+        return true;
+    }
+
+    self.logOut = function() {
+        self.userLoggedIn(0);
+
+        return true;
     }
 
 }
@@ -117,6 +166,8 @@ $(document).ready(function(){
     var questionVM = new questionViewModel();
     ko.applyBindings(questionVM, $("#questionsSection")[0]);
 
+    var widgetVM = new widgetViewModel();
+    ko.applyBindings(widgetVM, $("#widgetSection")[0]);
 
     $.sammy(function() {
         this.get('#/', function(context) {
