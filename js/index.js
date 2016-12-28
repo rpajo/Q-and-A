@@ -120,7 +120,7 @@ function questionViewModel() {
             $.ajax({
                 type: "post",
                 url: "http://localhost:62713/api/answer/" + self.qId,
-                data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn(), "description": text}),
+                data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "description": text}),
                 success: function (response) {
                     //console.log(response);
                     self.getAnswers();
