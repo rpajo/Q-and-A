@@ -26,7 +26,8 @@ function mainViewModel() {
         return true;
     };
 
-    self.bla = function(q) {
+
+    self.goToQuestion = function(q) {
         location.hash = '/question/' + q.questionId;
 
         return true;
@@ -39,6 +40,7 @@ function questionViewModel() {
     var self = this;
     self.navigation = ko.observable();
 
+    self.userLoggedIn = ko.observable().subscribeTo("logged");
     self.qId = 0;
     self.question = ko.observable();
     self.answers = ko.observableArray();
@@ -46,7 +48,7 @@ function questionViewModel() {
     self.order = ko.observable("rating");
     
     self.getAnswers = function() {
-        //console.log(self.order());  
+        console.log(self.order());  
         $.ajax({
             type: "get",
             url: "http://localhost:62713/api/question/" + self.qId,
@@ -111,7 +113,22 @@ function questionViewModel() {
 
     self.submitAnswer = function() {
         var text = $("#answer")[0].value;
-        var body = { };
+
+        $.ajaxSetup({
+            contentType : 'application/json'
+        });
+        $.ajax({
+            type: "post",
+            url: "http://localhost:62713/api/answer/" + self.qId,
+            data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn(), "description": text}),
+            success: function (response) {
+                //console.log(response);
+                self.getAnswers();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
     }
 
 }
@@ -119,7 +136,7 @@ function questionViewModel() {
 var widgetViewModel = function() {
     var self = this;
 
-    self.userLoggedIn = ko.observable(0);       // 0 - user not logged in, else it stores the userId
+    self.userLoggedIn = ko.observable(0).publishOn("logged");       // 0 - user not logged in, else it stores the userId
 
     self.login = function() {
         var username = $("#usernameLogin")[0].value;

@@ -10,6 +10,7 @@
 
         <script type='text/javascript' src='js/jquery-3.1.1.min.js'></script>
         <script type='text/javascript' src='js/knockout.js'></script>
+        <script type='text/javascript' src='js/knockout-postbox.min.js'></script>
         <script type='text/javascript' src='js/sammy.js'></script>
         <script type='text/javascript' src='js/index.js'></script>
         <script type='text/javascript' src='app.js'></script>
@@ -149,7 +150,7 @@
                                         <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true" data-bind="text: 'Asked on: ' + date"></i>
                                     </div>
                                 </div>
-                                <button class="btn-block color-dark-grey hover-color-default" data-bind="click: function(){$root.bla(this)}">Open Thread</button>
+                                <button class="btn-block color-dark-grey hover-color-default" data-bind="click: $root.goToQuestion">Open Thread</button>
                             </div>
                         </div>
                         
@@ -216,7 +217,7 @@
                                     </li>
 
                                 </ul>
-                                <ul class="list font-small margin-t" >
+                                <ul class="list font-small margin-t" data-bind="if: $root.userLoggedIn() > 0">
                                     <li>
                                         <input id="post1" class="input commentInput" type="text" maxlength="70">
                                         <span class="font-color-dark-grey clickable" onclick="comment(1)">
@@ -262,7 +263,7 @@
                                                 </span>
                                             </li>
                                         </ul>
-                                        <ul class="list font-small margin-t" >
+                                        <ul class="list font-small margin-t" data-bind="if: $root.userLoggedIn() > 0">
                                             <li>
                                                 <input id="post1" class="input commentInput" type="text" maxlength="70">
                                                 <span class="font-color-dark-grey clickable" onclick="comment(1)">
@@ -278,11 +279,13 @@
                             <div>
                                 <h3>Your Answer</h3>
 
-                                <form id="answerField" class="padding-16">
+                                <form id="answerField" class="padding-16" data-bind="if: $root.userLoggedIn() > 0">
                                     <textarea name="answer" id="answer" required="required"></textarea>
                                     <br>
                                     <input class="color-default" type="submit" data-bind="click: $root.submitAnswer">
                                 </form>
+
+                                <h4 data-bind="ifnot: $root.userLoggedIn() > 0" class="center">YOU MUST BE LOGGED IN TO COMMENT AND POST ANSWERS</h4>
                             </div>
                         </div>
                     </div>
