@@ -45,10 +45,10 @@ function questionViewModel() {
     self.question = ko.observable();
     self.answers = ko.observableArray();
     self.comments = ko.observableArray();
-    self.order = ko.observable("rating");
+    self.order = ko.observable("-date");
     
     self.getAnswers = function() {
-        console.log(self.order());  
+        //console.log(self.order());  
         $.ajax({
             type: "get",
             url: "http://localhost:62713/api/question/" + self.qId,
@@ -64,7 +64,6 @@ function questionViewModel() {
                     dataType: "json",
                     success: function (response) {
                         response.forEach(function(element) {
-                            console.log("ADD ARRAY")
                             element.comments = ko.observableArray([]);
                         });
                         self.answers(response);
@@ -157,6 +156,52 @@ function questionViewModel() {
             });
         }
 
+        return true;
+    };
+
+    self.editPost = function(answerId, rating) {
+        var data;
+        if (rating != 0) data = JSON.stringify( {"rating": rating} );
+        if (answerId == 0) {
+            $.ajaxSetup({
+                contentType : 'application/json'
+            });
+            $.ajax({
+                type: "put",
+                url: "http://localhost:62713/api/question/" + self.qId,
+                data: data,
+                success: function (response) {
+                    //self.getAnswers();
+                    var temp = self.question();
+                    temp.rating = temp.rating + rating;
+                    self.question(temp);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        else {
+            console.log("http://localhost:62713/api/answer/" + answerId);
+            
+            $.ajaxSetup({
+                contentType : 'application/json'
+            });
+            $.ajax({
+                type: "put",
+                url: "http://localhost:62713/api/answer/" + answerId,
+                data: data,
+                success: function (response) {
+                    self.getAnswers();
+
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });      
+        }
+        
         return true;
     };
 
