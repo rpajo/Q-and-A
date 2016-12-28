@@ -109,7 +109,7 @@ function questionViewModel() {
         });
 
         return true;    
-    }
+    };
 
     self.submitAnswer = function() {
         var text = $("#answer")[0].value;
@@ -129,6 +129,12 @@ function questionViewModel() {
                 console.log(err);
             }
         });
+
+        return true;
+    };
+
+    self.postComment = function() {
+
     }
 
 }
@@ -152,13 +158,23 @@ var widgetViewModel = function() {
             type: "put",
             url: "http://localhost:62713/api/users/login",
             data: JSON.stringify({"email": username, "password": password}),
-            success: function (xhr, response) {
+            success: function (id, response) {
                 //console.log(xhr, response);
                 $("#btnLogin").attr("disable", false);
                 $("#btnLogin").text("LOG IN");;
                 
-                self.userLoggedIn(xhr);
-                console.log(self.userLoggedIn());
+                if (id > 0) {
+                    $.ajax({
+                        type: "get",
+                        url: "http://localhost:62713/api/users/" + id,
+                        dataType: "json",
+                        success: function (user, response) {
+                            console.log(user, response);
+                            self.userLoggedIn(user);
+                        }
+                    });
+                }
+                //to do display error message                 
             },
             error : function(err){
                 console.log(err);
