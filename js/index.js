@@ -267,6 +267,58 @@ function widgetViewModel() {
         return true;
     };
 
+    self.register = function() {
+        var regForm = $("#regForm :input");
+        var status = $("#registerStatus");
+        var btn = regForm[4];
+
+        var username = regForm[0].value;
+        var email = regForm[1].value;
+        var pass = regForm[2].value;
+        var pass2 = regForm[3].value;
+        
+        console.log(username, email, pass, pass2);
+
+        if ($.trim(username).length == 0 || $.trim(email).length == 0 || $.trim(pass).length == 0) {
+            status.text("Form not valid");
+        }
+        else if ( !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) ) {
+            status.text("Email not valid");
+        }
+        else if (pass != pass2) {
+            status.text("Passwords don't match");
+        }
+        else {
+            $(btn).attr("disabled", true);
+            $(btn).html("Working...");
+
+            $.ajaxSetup({
+                contentType : 'application/json',
+                processData : false
+            });
+            $.ajax({
+                type: "post",
+                url: "http://localhost:62713/api/users/",
+                data: JSON.stringify({"username": username, "email": email, "password": pass, "description": ""}),
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    status.text("User Created");
+                    $(btn).html("Done");
+                },
+                error: function(err) {
+                    status.text("Username or email already in use");
+                    console.log("Error ", err);
+                    $(btn).attr("disabled", false);
+                    $(btn).html("REGISTER");
+                }
+            });
+        }
+        
+
+        return true;
+    };
+
     self.goToProfile = function(userId, section) {
         location.hash = '/profile/' + userId;
         self.profileSection(section);        

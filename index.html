@@ -398,7 +398,7 @@
                     </header>
                     <div class="container margin-t">
 
-                        <input id="usernameLogin" class="input margin-b-8 margin-t-8" type="text" placeholder="Username">
+                        <input id="usernameLogin" class="input margin-b-8 margin-t-8" type="text" placeholder="Email">
 
                         <input id="passwordLogin" class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
 
@@ -409,13 +409,14 @@
                     <input id="register" type="checkbox" >
                     <label for="register"><span> Sign Up</span></label>
 
-                    <form class="container" id="regForm">
+                    <div class="container" id="regForm">
                         <input class="input margin-b-8 margin-t-8" type="text" placeholder="username">
                         <input class="input margin-b-8 margin-t-8" type="email" placeholder="email">
                         <input class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
                         <input class="input margin-b-8 margin-t-8" type="password" placeholder="Re-enter password">
-                        <button class="btn-block color-accent1 margin-t" onclick="register()">Register</button>
-                    </form>
+                        <button class="btn-block color-accent1 margin-t" data-bind="click: $root.register">Register</button>
+                        <span class="font-small" id="registerStatus"></span>
+                    </div>
                 </div>
             </div>
                 
