@@ -429,7 +429,7 @@ label {
 }
 
 #register:checked ~ #regForm {
-    height: 200px;
+    height: 250px;
 }
 
 @media screen and (max-width: 650px) {

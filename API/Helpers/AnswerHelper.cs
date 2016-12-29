@@ -95,8 +95,8 @@ namespace API.Helpers
             Answers update = new Answers();
             if (mySqlReader.Read())
             {
-                update.Description = answer.Description != null ? answer.Description : mySqlReader.GetString(2);
-                update.Rating = answer.Rating != 0 ? mySqlReader.GetInt32(3) + answer.Rating : mySqlReader.GetInt32(3);
+                update.Description = answer.Description != null ? answer.Description : mySqlReader.GetString(3);
+                update.Rating = answer.Rating != 0 ? mySqlReader.GetInt32(4) + answer.Rating : mySqlReader.GetInt32(4);
 
                 mySqlReader.Close();
 

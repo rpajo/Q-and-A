@@ -45,7 +45,6 @@ namespace API.Helpers
             while (mySqlReader.Read())
             {
                 Comments comment = new Comments();
-
                 comment.CommentId = mySqlReader.GetInt32(0);
                 comment.QuestionId = mySqlReader.GetInt32(1);
                 comment.UserId = mySqlReader.GetInt32(2);
@@ -56,6 +55,8 @@ namespace API.Helpers
 
                 answerList.Add(comment);
             }
+
+            mySqlReader.Close();
 
             return answerList;
         }

@@ -59,7 +59,7 @@ namespace API.Helpers
         public long newQuestion(Questions question)
         {
             String sqlString = String.Format("insert into questions (userId, title, description, date, anonymous) values ({0}, '{1}', '{2}', '{3}', {4})",
-                question.UserId, question.Title, question.Description, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), question.Anonymous);
+                question.UserId, question.Title, question.Description.Replace("\'", "\\'"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), question.Anonymous);
 
             MySqlCommand cmd = new MySqlCommand(sqlString, connection);
             try
@@ -132,8 +132,8 @@ namespace API.Helpers
 
                 mySqlReader.Close();
 
-                sqlString = String.Format("update questions set title='{0}', description='{1}', comments={2}, rating={3}, anonymous={4} where questionId = {5}",
-                    update.Title, update.Description, update.Answers, update.Rating, update.Anonymous, id);
+                sqlString = String.Format("update questions set title='{0}', description='{1}', answers={2}, rating={3}, anonymous={4} where questionId = {5}",
+                    update.Title, update.Description.Replace("\'", "\\'"), update.Answers, update.Rating, update.Anonymous, id);
 
                 cmd = new MySqlCommand(sqlString, connection);
                 cmd.ExecuteNonQuery();

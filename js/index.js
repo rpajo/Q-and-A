@@ -306,8 +306,6 @@ function profileViewModel() {
                         success: function (response) {
                             self.recentQuestions(response[0]);
                             self.recentAnswers(response[1]);
-                            console.log(self.recentQuestions());
-                            console.log(self.recentAnswers());
                         }
                     });
 

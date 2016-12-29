@@ -6,6 +6,7 @@ using MySql.Data;
 using API.Models;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+using System.Collections;
 
 namespace API.Helpers
 {
@@ -52,6 +53,8 @@ namespace API.Helpers
                 user.Questions = mySqlReader.GetInt32(8);
                 user.Reputation = mySqlReader.GetInt32(9);
 
+                mySqlReader.Close();
+
                 return user;
             }
             else return null;
@@ -74,11 +77,73 @@ namespace API.Helpers
                 user.Email = mySqlReader.GetString(2);
                 user.Password = mySqlReader.GetString(3);
 
+                mySqlReader.Close();
 
-                if (credentials.Password == user.Password) return 0;
+                if (credentials.Password == user.Password) return user.UserId;
                 else return -1;
             }
-            else return 404;
+            else return 0;
+        }
+
+        public ArrayList getRecent(int userId)
+        {
+            ArrayList recentList = new ArrayList();
+
+
+            int index = 8;
+
+            MySqlDataReader mySqlReader;
+            String sqlString = String.Format("select * from questions where userId = {0} order by date limit 8", userId);
+            MySqlCommand cmd = new MySqlCommand(sqlString, connection);
+
+            mySqlReader = cmd.ExecuteReader();
+            ArrayList questionList = new ArrayList();
+            while (index > 0 && mySqlReader.Read())
+            {
+                Questions question = new Questions();
+
+                question.QuestionId = mySqlReader.GetInt32(0);
+                question.UserId = mySqlReader.GetInt32(1);
+                question.Title = mySqlReader.GetString(2);
+                question.Description = mySqlReader.GetString(3);
+                question.Answers = mySqlReader.GetInt32(4);
+                question.Rating = mySqlReader.GetInt32(5);
+                question.Date = mySqlReader.GetDateTime(6);
+                question.Anonymous = mySqlReader.GetInt16(7);
+
+                questionList.Add(question);
+
+                index--;
+            }
+            mySqlReader.Close();
+
+            recentList.Add(questionList);
+
+            index = 8;
+            sqlString = String.Format("select * from answers where userId = {0} order by date", userId);
+            cmd = new MySqlCommand(sqlString, connection);
+            mySqlReader = cmd.ExecuteReader();
+
+            ArrayList answerList = new ArrayList();
+            while (index > 0 && mySqlReader.Read())
+            {
+                Answers answer = new Answers();
+
+                answer.AnswerId = mySqlReader.GetInt32(0);
+                answer.UserId = mySqlReader.GetInt32(2);
+                answer.Description = mySqlReader.GetString(3);
+                answer.Rating = mySqlReader.GetInt32(4);
+                answer.Date = mySqlReader.GetDateTime(5);
+
+                answerList.Add(answer);
+
+                index--;
+            }
+            mySqlReader.Close();
+
+            recentList.Add(answerList);
+
+            return recentList;
         }
 
         public bool updateUser(int id, Users user)

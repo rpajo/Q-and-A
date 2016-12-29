@@ -8,6 +8,7 @@ using API.Helpers;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
+using System.Collections;
 
 namespace API.Controllers
 {
@@ -26,7 +27,7 @@ namespace API.Controllers
         }
         */
         // GET api/users
-        [EnableCors("AllowAll")]
+        
         [HttpGet]
         public ActionResult Get()
         {   
@@ -52,9 +53,7 @@ namespace API.Controllers
             UsersHelper uh = new UsersHelper();
             int logged = uh.login(credentials);
 
-            if (logged == 404) return NotFound();
-            else if (logged == -1) return BadRequest();
-            else return Ok("User logged in");
+            return Ok(logged);
         }
 
         // GET api/users/5
@@ -65,6 +64,16 @@ namespace API.Controllers
             Users user = uh.getUser(id);
 
             return Ok(user);
+        }
+
+        // GET api/users/5
+        [HttpGet("{id}/recent")]
+        public ActionResult GetRecent(int id)
+        {
+            UsersHelper uh = new UsersHelper();
+            ArrayList recentList = uh.getRecent(id);
+
+            return Ok(recentList);
         }
 
         // POST api/users
@@ -89,7 +98,7 @@ namespace API.Controllers
             UsersHelper uh = new UsersHelper();
             bool success = uh.updateUser(id, value);
 
-            if (success) return Ok("User with successfuly changed");
+            if (success) return Ok("User successfuly changed");
 
             else return BadRequest("User not found");
         }

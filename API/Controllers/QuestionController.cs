@@ -40,7 +40,7 @@ namespace API.Controllers
             return Ok(questionList);
         }
 
-        // POST api/users
+        // POST api/question
         [HttpPost]
         public ActionResult Post([FromBody]Questions value)
         {
@@ -55,7 +55,7 @@ namespace API.Controllers
             }
         }
 
-        // PUT api/users/5
+        // PUT api/question/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Questions value)
         {

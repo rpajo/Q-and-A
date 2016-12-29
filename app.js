@@ -13,8 +13,10 @@ var loadCategories = function() {
         // Set the value using the item in the JSON array.
         option.value = item;
         // Add the <option> element to the <datalist>.
-        dataList1.appendChild(option);
-        dataList2.appendChild(option);
+       
+       //temp commented
+        //dataList1.appendChild(option);
+        //dataList2.appendChild(option);
     });
 }
 
