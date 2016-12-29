@@ -339,7 +339,7 @@ ul.list li:last-child {
     border-radius: 50%;
 }
 
-#answerField textarea, #editAbout {
+#answerField textarea, #askField textarea, #editAbout {
     width: 100%;
     height: 150px;
     padding: 12px 20px;

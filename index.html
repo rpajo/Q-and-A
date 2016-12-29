@@ -89,10 +89,10 @@
                                 </header>
 
                                 <div class="container">
-                                    <form action="javascript:submitQuestion();" id="answerField" class="margin-t-8 margin-b-8">
+                                    <form data-bind="submit: $root.submitQuestion" id="askField" class="margin-t-8 margin-b-8">
                                         <label>Question Title:</label>
-                                        <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Please enter the desired question tile.."/>
-                                        <textarea name="answer" id="questionDesc" required="required" placeholder="Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."></textarea>
+                                        <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" required="required" type="text" placeholder="Please enter the desired question tile.."/>
+                                        <textarea name="question" id="questionDesc" required="required" placeholder="Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."></textarea>
                                         <br>
                                         <div class="row">
                                             <div class="col s12 m4 margin-r-8"> 
@@ -106,8 +106,14 @@
                                             </div>
                                         </div>
                                         
-                                        <input class="margin-b-16" type="checkbox" name="showUser" value="anonymous"/>Post the question anonymously
-                                        <button class="btn-block color-accent1 hover-color-accent2">Search</button>
+                                        <input id="anonymousQ" class="margin-b-16" type="checkbox" name="showUser" value="anonymous"/>Post the question anonymously
+                                        <!-- ko if: $root.userLoggedIn -->
+                                        <button type="submit" class="btn-block color-accent1 hover-color-accent2">Submit</button>
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: userLoggedIn -->
+                                        <h4 class="center">YOU MUST BE LOGGED IN TO POST QUESTIONS</h4>
+                                        <!-- /ko -->
+                                        <span class="font-small center" id="submitQstatus"> &nbsp </span>
 
                                     </form>
                                 </div>

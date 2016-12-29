@@ -3,11 +3,44 @@
 function mainViewModel() {
     var self = this;
     self.navigation = ko.observable().publishOn("navigation");
-    
+    self.userLoggedIn = ko.observable().subscribeTo("logged");
+
     self.order = ko.observable("date");
     self.questionList = ko.observableArray();
     self.page = ko.observable(1);
 
+
+    self.submitQuestion = function(form) {
+        var title = $("#questionTitle")[0].value;
+        var description = $("#questionDesc")[0].value;
+        var anonymous = ($('#anonymousQ').is(":checked")) ? 1 : 0;
+
+        if ($.trim(title).length > 0 || $.trim(description).length > 0) {
+            $.ajaxSetup({
+                contentType : 'application/json'
+            });
+            $.ajax({
+                type: "post",
+                url: "http://localhost:62713/api/question/",
+                data: JSON.stringify({ "userId": self.userLoggedIn().userId, "title": title, "description": description, "anonymous": anonymous }),
+                success: function (response) {
+                    //console.log(response);
+                    self.getQuestions();
+                    $("#questionTitle").val("");
+                    $("#questionDesc").val("");
+                    $("#submitQstatus").text("Question submited");
+
+                },
+                error: function(err) {
+                    console.log(err);
+                    $("#submitQstatus").text("Something went wrong - question not submited");
+                }
+            });
+        }
+        
+        return true;
+
+    };
 
     self.getQuestions = function() {
         //console.log(self.order());
@@ -31,7 +64,7 @@ function mainViewModel() {
         location.hash = '/question/' + q.questionId;
 
         return true;
-    }
+    };
 
 };
 
@@ -114,7 +147,7 @@ function questionViewModel() {
         var text = $("#answer")[0].value;
         if ($.trim(text).length > 0) {
             $.ajaxSetup({
-            contentType : 'application/json'
+                contentType : 'application/json'
             });
             $.ajax({
                 type: "post",
@@ -451,6 +484,10 @@ $(document).ready(function(){
             mainVM.navigation('profile');
             profileVM.getUser(context.params.userId);
         });
+
+        this._checkFormSubmission = function(form) {
+            return (false);
+        };
     }).run('#/');
 
 
