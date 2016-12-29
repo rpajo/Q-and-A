@@ -279,11 +279,11 @@
                             <div>
                                 <h3>Your Answer</h3>
 
-                                <form id="answerField" class="padding-16" data-bind="ifnot: $root.userLoggedIn() == 0">
+                                <div id="answerField" class="padding-16" data-bind="ifnot: $root.userLoggedIn() == 0">
                                     <textarea name="answer" id="answer" required="required"></textarea>
                                     <br>
-                                    <input class="color-default" type="submit" data-bind="click: $root.submitAnswer">
-                                </form>
+                                    <button type="button" class="btn-block color-dark-grey hover-color-default" data-bind="click: $root.submitAnswer">Submit</button>
+                                </div>
 
                                 <h4 data-bind="if: $root.userLoggedIn() == 0" class="center">YOU MUST BE LOGGED IN TO COMMENT AND POST ANSWERS</h4>
                             </div>

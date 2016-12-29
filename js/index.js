@@ -147,7 +147,14 @@ function questionViewModel() {
                 data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "parentId": answerId, "description": text, "author": self.userLoggedIn().username}),
                 success: function (response) {
                     console.log(response);
+                    //clear comments
+                    self.question().comments([]);
+                    self.answers().forEach(function(answer) {
+                        answer.comments([]);
+                    });
+
                     self.getComments();
+
                     var text = $("#comment" + answerId)[0].value = "";
                 },
                 error: function(err) {
