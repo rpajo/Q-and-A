@@ -179,9 +179,21 @@ namespace API.Helpers
 
         public long savePerson(Users newUser)
         {
-            String sqlString = String.Format("insert into users (username, email, password, description, memberSince, location) values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
-                newUser.Username, newUser.Email, newUser.Password, newUser.Description, DateTime.Now.ToString("yyyy-MM-dd"), newUser.Location);
+
+            String sqlString = String.Format("select count(*) from users where username='{0}' or email='{1}'", newUser.Username, newUser.Email);
             MySqlCommand cmd = new MySqlCommand(sqlString, connection);
+
+            Int64 exists = (Int64)cmd.ExecuteScalar();
+
+            if (exists > 0)
+            {
+                return -2;
+            }
+
+
+            sqlString = String.Format("insert into users (username, email, password, description, memberSince, location) values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
+                newUser.Username, newUser.Email, newUser.Password, newUser.Description, DateTime.Now.ToString("yyyy-MM-dd"), newUser.Location);
+            cmd = new MySqlCommand(sqlString, connection);
             try
             {
                 cmd.ExecuteNonQuery();

@@ -84,10 +84,13 @@ namespace API.Controllers
             int id = (int)uh.savePerson(value);
             value.UserId = id;
 
-            if (id <= 0) return BadRequest("Query not successful - user not created");
+            if (id == -1) return BadRequest("Query not successful - user not created");
 
-            else {
-                return Created(new Uri(Request.RequestUri, String.Format("users/{0}",id)), JsonConvert.SerializeObject(value));
+            else if (id < -1) return BadRequest("User already exists");
+
+            else
+            {
+                return Created(new Uri(Request.RequestUri, String.Format("users/{0}", id)), JsonConvert.SerializeObject(value));
             }
         }
 
