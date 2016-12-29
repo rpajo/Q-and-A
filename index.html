@@ -216,7 +216,7 @@
                                 
                                 <ul class="list font-small margin-t" data-bind="foreach: comments">
                                     <li>
-                                        <span data-bind="text: description"></span>
+                                        <p data-bind="text: description"></p>
                                         <span class="font-color-dark-grey">
                                             <br><sub data-bind="text: author + ' on ' + date">Author on date</sub>
                                         </span>
@@ -258,12 +258,12 @@
                                         <i class="fa fa-angle-down fa-2x" aria-hidden="true" data-bind="click: function(){$root.editPost(answerId, -1)}"></i>
                                     </div>
                                     <div class="container col s10 container">
-                                        <span data-bind="text: description"></span>
+                                        <p data-bind="text: description"></p>
                                         
                                         <hr>
                                         <ul class="list font-small margin-t" data-bind="foreach: $data.comments">
                                             <li>
-                                                <span data-bind="text: description"></span> 
+                                                <p data-bind="text: description"></p> 
                                                 <span class="font-color-dark-grey">
                                                      <br><sub data-bind="text: author + ' on ' + date">Author on date</sub>
                                                 </span>

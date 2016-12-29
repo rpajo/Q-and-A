@@ -505,3 +505,7 @@ label {
 #video, #canvas {
     border: 2px dotted black;
 }
+
+#questionsSection p, #profileSection .tabs section p {
+   white-space: pre-wrap;
+}
