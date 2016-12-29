@@ -294,7 +294,98 @@
 
             </div>
         </div>
-            
+
+        <!--PROFILE VIEW SECTION-->
+        <div id="profileSection" data-bind="if: navigation() == 'profile'">
+            <div class="col m12 l9">
+                <div class="tabs">
+                    <input id="tab1" type="radio" name="tabsP" value="profile" data-bind="checked: profileSection">
+                    <label for="tab1"><i class="fa fa-user" aria-hidden="true"></i><span> PROFILE</span></label>
+                    
+                    <input id="tab2" type="radio" name="tabsP" value="activity" data-bind="checked: profileSection">
+                    <label for="tab2"><i class="fa fa-fire" aria-hidden="true"></i><span> ACTIVITY</span></label>
+                    
+                    <!-- ko if: $root.hasSettings() -->
+                    <input id="tab3" type="radio" name="tabsP" value="settings" data-bind="checked: profileSection">
+                    <label for="tab3"><i class="fa fa-cog" aria-hidden="true"></i><span> SETTINGS</span></label>
+                    <!-- /ko -->
+                    <section id="content1" data-bind="with: user">
+                        <div class="row">
+                            <div class="col s12 m3">
+                                <img id="profilePic" alt="profile picture" src="images/avatar.png">
+                            </div>  
+
+                            <div class="col s12 m6" >
+                                <h3 data-bind="text: username">Username1234</h3>
+                                <p data-bind="text: description"></p>
+                            </div>
+                            <div class="col s12 m3 right statistics">
+                                <ul class="list">
+                                    <li><i class="fa fa-history" aria-hidden="true" data-bind="text: ' Member since '+ memberSince"> Member since 11.11.2011</i></li>
+                                    <li><i class="fa fa-map-marker" aria-hidden="true" data-bind="text: ' From '+ location"> From Ljubljana, Slovenija</i></li>
+                                    <li><i class="fa fa-reply" aria-hidden="true" data-bind="text: ' '+ answers + ' Answers'"> 55 Answers</i></li>
+                                    <li><i class="fa fa-question" aria-hidden="true" data-bind="text: ' '+ questions + ' Questions'"> 12 Questions</i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true" data-bind="text: ' Reputation '+ reputation"> Reputation +135</i></li>                            
+                                </ul>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section id="content2">
+                        <div data-bind="with: user">
+                            <h3 data-bind="text: username + '\'s recent questions'"></h3>
+                        </div>
+                        
+                        <h4 class="center" data-bind="if: recentQuestions().length == 0">User has no posted questions</h4>
+                        <ul class="list" data-bind="foreach: recentQuestions">
+                            <li>
+                                <span data-bind="text: title"></span>
+                                <span class="tag font-small color-green" data-bind="text: 'Rating ' + rating"></span>
+                                <span class="tag font-small color-blue margin-r-8">
+                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                    <span data-bind="text: answers + ' Answers'"></span>
+                                </span>
+                            </li>
+                        </ul>
+                        <!--
+                        <ul class="list" data-bind="foreach: recentAnswers">
+                            <li>
+                                <span data-bind="text: title"></span>
+                                <span class="tag font-small color-green" data-bind="text: 'Rating ' + rating"></span>
+                                <span class="tag font-small color-blue margin-r-8">
+                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                    <span data-bind="text: answers + ' Answers'"></span>
+                                </span>
+                            </li>
+                        </ul>
+                        -->
+
+                    </section>
+
+                    <section id=content3 data-bind="with: user">
+                        <div class="row">
+                            <div class="col s12 m4">
+                                <img id="profilePicEdit" alt="edit profile picture" src="images/avatar.png">
+                                <!--<button id="webCamBtn" class="btn"><i class="fa fa-camera" aria-hidden="true"></i> Snap picture</button>-->
+                                <p class="margin-b-16" id="userUpdateStatus"></p>
+                            </div>
+                            <div class="col s12 m8">
+                                <!--<label>Display name:</label>
+                                <input id="editName" class="input margin-t-8 margin-b-8" type="text" data-bind="value: username"/>-->
+                                <label>Where are you from:</label>
+                                <input id="editLocation" class="input margin-t-8 margin-b-8" type="text" data-bind="value: location"/>
+                                <label>About you:</label>
+                                <textarea class="margin-t-8 margin-b-8" name="editAbout" id="editAbout" placeholder="Tell us a little bit about yourself so people can get to know you" data-bind="value: description"></textarea>
+
+                            </div>
+                            <button class="btn-block color-accent1 hover-color-accent2" data-bind="click: $root.updateProfile">Save Changes</button>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
 
         <!--WIDGET SECTION-->
         <div class="container col m12 l3" id="widgetSection">
@@ -336,9 +427,9 @@
                     </header>
                     <div>
                         <ul class="clickable list">
-                            <li class="hover-color-accent2" onclick="location.href='profile.html#profile'">My Profile</li>
-                            <li class="hover-color-accent2" onclick="location.href='profile.html#activity'">My Questions</li>
-                            <li class="hover-color-accent2" onclick="location.href='profile.html#settings'">Profile Settings</li>
+                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'profile') }">My Profile</li>
+                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'activity') }">My Questions</li>
+                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'settings') }">Profile Settings</li>
                             <li class="hover-color-accent2" data-bind="click: $root.logOut">Log Out</li>                            
                         </ul>
                     </div>

@@ -2,7 +2,7 @@
 // View Model for Questions
 function mainViewModel() {
     var self = this;
-    self.navigation = ko.observable();
+    self.navigation = ko.observable().publishOn("navigation");
     
     self.order = ko.observable("date");
     self.questionList = ko.observableArray();
@@ -38,7 +38,7 @@ function mainViewModel() {
 
 function questionViewModel() {
     var self = this;
-    self.navigation = ko.observable();
+    self.navigation = ko.observable().subscribeTo("navigation");;
 
     self.userLoggedIn = ko.observable().subscribeTo("logged");
     self.qId = 0;
@@ -212,12 +212,14 @@ function questionViewModel() {
         return true;
     };
 
-}
+};
 
-var widgetViewModel = function() {
+function widgetViewModel() {
     var self = this;
 
     self.userLoggedIn = ko.observable(0).publishOn("logged");       // 0 - user not logged in, else it stores the userId
+    self.profileSection = ko.observable('profile').syncWith("profileSection");;
+
 
     self.login = function() {
         var username = $("#usernameLogin")[0].value;
@@ -257,14 +259,114 @@ var widgetViewModel = function() {
         });
 
         return true;
-    }
+    };
 
     self.logOut = function() {
         self.userLoggedIn(0);
 
         return true;
-    }
+    };
 
+    self.goToProfile = function(userId, section) {
+        location.hash = '/profile/' + userId;
+        self.profileSection(section);        
+    }
+};
+
+function profileViewModel() {
+    var self = this;
+
+    self.navigation = ko.observable().subscribeTo("navigation");;
+    self.userLoggedIn = ko.observable().syncWith("logged");
+
+    self.profileSection = ko.observable('profile').syncWith("profileSection");;
+
+    self.user = ko.observable();
+    self.recentQuestions = ko.observableArray([]);
+    self.recentAnswers = ko.observableArray([]);
+
+    self.getUser = function(userId) {
+        //console.log(self.userLoggedIn());
+        if (self.userLoggedIn() != undefined && userId == self.userLoggedIn().userId) {
+            self.user(self.userLoggedIn());
+        }
+        else {
+            $.ajax({
+                type: "get",
+                url: "http://localhost:62713/api/users/" + userId,
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    self.user(response);
+
+                    $.ajax({
+                        type: "get",
+                        url: "http://localhost:62713/api/users/" + userId + "/recent",
+                        dataType: "json",
+                        success: function (response) {
+                            self.recentQuestions(response[0]);
+                            self.recentAnswers(response[1]);
+                            console.log(self.recentQuestions());
+                            console.log(self.recentAnswers());
+                        }
+                    });
+
+                },
+                error: function(err) {
+                    console.log("Error: " + err);
+                }
+            });
+        }
+
+        return true;
+    };
+
+    self.hasSettings = function() {
+        if (self.userLoggedIn() == undefined || self.user() == undefined) {
+            return false;
+        }
+
+        else {
+            return self.userLoggedIn().userId == self.user().userId;
+        }
+    };
+
+    self.updateProfile = function() {
+        var location = $("#editLocation")[0].value;
+        var about = $("#editAbout")[0].value;
+        $("#userUpdateStatus").text("----- saved");
+        $.ajaxSetup({
+            contentType : 'application/json'
+        });
+        $.ajax({
+            type: "put",
+            url: "http://localhost:62713/api/users/" + self.user().userId,
+            data: JSON.stringify({"location": location, "description": about}),
+            success: function (response) {
+                console.log(response);
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:62713/api/users/" + self.user().userId,
+                    dataType: "json",
+                    success: function (response) {
+                        self.user(response);
+                        self.userLoggedIn(response);
+                        $("#userUpdateStatus").text("Changes saved");
+                    },
+                    error: function(err) {
+                        $("#userUpdateStatus").text("Something went wrong");
+                        console.log("Error", err);
+                    }
+                });
+            },
+            error: function(err) {
+                $("#userUpdateStatus").text("Something went wrong");
+                console.log("Error", err);
+            }
+        });
+
+        return true;
+    };
 }
 
 $(document).ready(function(){
@@ -277,20 +379,27 @@ $(document).ready(function(){
     var widgetVM = new widgetViewModel();
     ko.applyBindings(widgetVM, $("#widgetSection")[0]);
 
+    var profileVM = new profileViewModel();
+    ko.applyBindings(profileVM, $("#profileSection")[0]);
+
     $.sammy(function() {
         this.get('#/', function(context) {
             mainVM.getQuestions();
 
             mainVM.navigation('main');
-            questionVM.navigation('main');
+            //questionVM.navigation('main');
         });
         
         this.get('#/question/:id', function(context) {
             questionVM.qId = context.params.id;
             questionVM.getAnswers();
             mainVM.navigation('question');
-            questionVM.navigation('question');
+            //questionVM.navigation('question');
+        });
 
+        this.get("#/profile/:userId", function(context) {
+            mainVM.navigation('profile');
+            profileVM.getUser(context.params.userId);
         });
     }).run('#/');
 
