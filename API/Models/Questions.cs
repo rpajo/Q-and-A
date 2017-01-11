@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace API.Models
 {
-    public partial class Questions
+    public class Questions
     {
         public int QuestionId { get; set; }
         public int UserId { get; set; }

@@ -59,12 +59,22 @@ function mainViewModel() {
         return true;
     };
 
-
     self.goToQuestion = function(q) {
         location.hash = '/question/' + q.questionId;
 
         return true;
     };
+
+    self.changePage = function(nav) {
+        var p = self.page();
+        console.log(self.page(), self.questionList().length)
+        if (self.page() + nav >= 1) {
+            console.log(self.questionList().length)
+            self.page(p + nav);
+            self.getQuestions();
+        }
+        
+    }
 
 };
 
@@ -268,12 +278,13 @@ function widgetViewModel() {
             type: "put",
             url: "http://localhost:62713/api/users/login",
             data: JSON.stringify({"email": username, "password": password}),
-            success: function (id, response) {
-                //console.log(xhr, response);
+            success: function (user, response) {
+                console.log(user, response);
                 $("#btnLogin").attr("disable", false);
                 $("#btnLogin").text("LOG IN");;
                 
-                if (id > 0) {
+                self.userLoggedIn(user);
+                /*if (id > 0) {
                     $.ajax({
                         type: "get",
                         url: "http://localhost:62713/api/users/" + id,
@@ -283,12 +294,13 @@ function widgetViewModel() {
                             self.userLoggedIn(user);
                         }
                     });
-                }
+                }*/
                 //to do display error message                 
             },
             error : function(err){
                 console.log(err);
             }
+
         });
 
         return true;

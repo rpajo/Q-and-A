@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
-using API.Helpers;
 using System.Web.Http;
 using Newtonsoft.Json;
 using System.Collections;
@@ -17,13 +16,26 @@ namespace API.Controllers
     [EnableCors("AllowAll")]
     public class AnswerController : ApiController
     {
-        // ANSWERS API CALLS --------------------------------------------
+
+        questionoverflowContext context = new questionoverflowContext();
+
         // GET api/answer/{order}/1
         [HttpGet("{order}/{questionId}")]
         public ActionResult Get(string order, int questionId)
         {
-            AnswerHelper ah = new AnswerHelper();
-            ArrayList answerList = ah.getAnswers(questionId, order);
+            var answerList = new List<Answers>();
+            if (order == "date")
+            {
+                answerList = context.Answers.Where(a => a.QuestionId == questionId).OrderByDescending(q => q.Date).ToList();
+            }
+            else if (order == "-date")
+            {
+                answerList = context.Answers.Where(a => a.QuestionId == questionId).OrderBy(q => q.Date).ToList();
+            }
+            else if (order == "rating")
+            {
+                answerList = context.Answers.Where(a => a.QuestionId == questionId).OrderByDescending(q => q.Rating).ToList();
+            }
 
             if (answerList == null) return BadRequest();
 
@@ -32,28 +44,27 @@ namespace API.Controllers
 
         // POST api/answer/{questionId}
         [HttpPost("{questionId}")]
-        public ActionResult Post(int questionId, [FromBody]Answers value)
+        public ActionResult Post(int questionId, [FromBody]Answers answer)
         {
-            AnswerHelper ah = new AnswerHelper();
-            int answerId = (int)ah.newAnswer(questionId, value);
-            value.AnswerId = answerId;
+            answer.Date = DateTime.Now;
+            context.Add(answer);
+            context.SaveChanges();
 
-            if (answerId <= 0) return BadRequest("Query not successful - answer not posted");
 
-            else
-            {
-                return Created(new Uri(Request.RequestUri, String.Format("answer/{0}", questionId)), JsonConvert.SerializeObject(value));
-            }
+            return Ok("Answer submited");
         }
 
         // PUT api/answer/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Answers value)
         {
-            AnswerHelper ah = new AnswerHelper();
-            bool success = ah.updateAnswer(id, value);
-
-            if (success) return Ok("Answer successfuly changed");
+            Answers answer = context.Answers.FirstOrDefault(q => q.AnswerId == id);
+            if (answer != null)
+            {
+                answer.Rating = answer.Rating + value.Rating;
+                context.SaveChanges();
+                return Ok("Answer successfuly updated");
+            }
 
             else return BadRequest("Answer not updated");
         }

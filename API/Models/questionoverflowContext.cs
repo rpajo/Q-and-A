@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using API.Models;
 
-namespace API.Models
+namespace API
 {
     public partial class questionoverflowContext : DbContext
     {
@@ -11,22 +12,17 @@ namespace API.Models
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-        public questionoverflowContext(DbContextOptions<questionoverflowContext> options) : base(options)
-        {
-
-        }
-        /*
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseMySql(@"server=localhost; user id=root; password=admin; persist security info=True;database=questionoverflow;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            optionsBuilder.UseMySql(@"Server=localhost;User Id=root;Password=admin;Database=questionoverflow");
         }
-        */
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Answers>(entity =>
             {
-                entity.HasKey(e => new { e.AnswerId, e.QuestionId })
+                entity.HasKey(e => new { e.AnswerId, e.QuestionId, e.UserId })
                     .HasName("PK_answers");
 
                 entity.ToTable("answers");
@@ -36,7 +32,10 @@ namespace API.Models
                     .IsUnique();
 
                 entity.HasIndex(e => e.QuestionId)
-                    .HasName("questionId");
+                    .HasName("questionIdAnswer");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("userId_idx");
 
                 entity.Property(e => e.AnswerId)
                     .HasColumnName("answerId")
@@ -46,9 +45,14 @@ namespace API.Models
                     .HasColumnName("questionId")
                     .HasColumnType("int(10) unsigned");
 
+                entity.Property(e => e.UserId)
+                    .HasColumnName("userId")
+                    .HasColumnType("int(10) unsigned")
+                    .HasDefaultValueSql("0");
+
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -59,6 +63,12 @@ namespace API.Models
                     .HasColumnName("rating")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("0");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AnswersNavigation)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("userIdAnswer");
             });
 
             modelBuilder.Entity<Comments>(entity =>
@@ -75,12 +85,19 @@ namespace API.Models
                 entity.HasIndex(e => e.QuestionId)
                     .HasName("questionId_idx");
 
+                entity.HasIndex(e => e.UserId)
+                    .HasName("userId_idx");
+
                 entity.Property(e => e.CommentId)
                     .HasColumnName("commentId")
                     .HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.QuestionId)
                     .HasColumnName("questionId")
+                    .HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("userId")
                     .HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.Author)
@@ -90,12 +107,23 @@ namespace API.Models
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasColumnName("description")
+                    .HasColumnType("tinytext");
 
                 entity.Property(e => e.ParentId)
                     .HasColumnName("parentId")
                     .HasColumnType("int(10) unsigned")
                     .HasDefaultValueSql("0");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("userIdComment");
             });
 
             modelBuilder.Entity<Questions>(entity =>
@@ -117,19 +145,19 @@ namespace API.Models
                     .HasColumnType("int(10) unsigned");
 
                 entity.Property(e => e.Anonymous)
-                    .IsRequired()
                     .HasColumnName("anonymous")
-                    .HasColumnType("binary(1)")
+                    .HasColumnType("int(10)")
                     .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Answers)
-                    .HasColumnName("comments")
-                    .HasColumnType("int(10) unsigned zerofill")
-                    .HasDefaultValueSql("0000000000");
+                    .HasColumnName("answers")
+                    .HasColumnType("int(10) unsigned")
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -138,8 +166,8 @@ namespace API.Models
 
                 entity.Property(e => e.Rating)
                     .HasColumnName("rating")
-                    .HasColumnType("int(10) unsigned zerofill")
-                    .HasDefaultValueSql("0000000000");
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -190,11 +218,8 @@ namespace API.Models
                     .HasColumnName("location")
                     .HasColumnType("varchar(100)");
 
-                entity.Property(e => e.MemberSince)
-                    .HasColumnName("memberSince")
-                    .HasColumnType("date");
-
                 entity.Property(e => e.Password)
+                    .IsRequired()
                     .HasColumnName("password")
                     .HasColumnType("char(64)");
 

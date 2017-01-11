@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
-using API.Helpers;
 using System.Web.Http;
 using Newtonsoft.Json;
 using System.Collections;
 using Microsoft.AspNetCore.Cors;
+
 
 namespace API.Controllers
 {
@@ -17,13 +17,13 @@ namespace API.Controllers
     [EnableCors("AllowAll")]
     public class QuestionController : ApiController
     {
-        // QUESTION API CALLS -------------------------------------------------
+        questionoverflowContext context = new questionoverflowContext();
+
         // GET api/questions/1
         [HttpGet("{questionId}")]
         public ActionResult Get(int questionId)
         {
-            QuestionHelper qh = new QuestionHelper();
-            Questions question = qh.getQuestion(questionId);
+            Questions question = context.Questions.FirstOrDefault(q => q.QuestionId == questionId);
 
             if (question == null) return NotFound();
             else return Ok(question);
@@ -33,36 +33,77 @@ namespace API.Controllers
         [HttpGet("{order}/{page}")]
         public ActionResult Get(int page, String order)
         {
-            QuestionHelper qh = new QuestionHelper();
 
-            ArrayList questionList = qh.getAll(1, order);
+            var questionList = new List<Questions>();
+            if(order == "date")
+            {
+                questionList = context.Questions.OrderByDescending(q => q.Date).Skip((page - 1) * 5).Take(5).ToList();
+            }
+            else if (order == "rating")
+            {
+                questionList = context.Questions.OrderByDescending(q => q.Rating).Skip((page - 1) * 5).Take(5).ToList();
+            }
+            else if (order == "answers")
+            {
+                questionList = context.Questions.OrderByDescending(q => q.Answers).Skip((page - 1) * 5).Take(5).ToList();
+            }
 
+            
             return Ok(questionList);
         }
 
         // POST api/question
         [HttpPost]
-        public ActionResult Post([FromBody]Questions value)
+        public ActionResult Post([FromBody]Questions question)
         {
-            QuestionHelper uh = new QuestionHelper();
-            int questionId = (int)uh.newQuestion(value);
-            value.QuestionId = questionId;
-
-            if (questionId <= 0) return BadRequest("Query not successful - question not posted");
-
-            else {
-                return Created(new Uri(Request.RequestUri, String.Format("question/{0}", questionId)), JsonConvert.SerializeObject(value));
+            MySql.Data.MySqlClient.MySqlConnection connection = null;
+            string _connectionString;
+            _connectionString = "server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
+            try
+            {
+                connection = new MySql.Data.MySqlClient.MySqlConnection();
+                connection.ConnectionString = _connectionString;
+                connection.Open();
             }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            String sqlString = String.Format("insert into questions (userId, title, description, anonymous) values ({0}, '{1}', '{2}', {3})",
+                question.UserId, question.Title, question.Description.Replace("\'", "\\'"), question.Anonymous);
+
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sqlString, connection);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            long id = cmd.LastInsertedId;
+
+            return Ok("Question posted id:" + id);
         }
 
         // PUT api/question/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Questions value)
         {
-            QuestionHelper qh = new QuestionHelper();
-            bool success = qh.updateQuestion(id, value);
-
-            if (success) return Ok("Question successfuly changed");
+            Questions question = context.Questions.FirstOrDefault(q => q.QuestionId == id);
+            if (question != null)
+            {
+                question.Rating = question.Rating + value.Rating;
+                context.SaveChanges();
+                return Ok("Question successfuly updated");
+            }
 
             else return BadRequest("Question not updated");
         }

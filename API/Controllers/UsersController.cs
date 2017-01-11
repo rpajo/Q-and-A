@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
-using API.Helpers;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
@@ -17,61 +16,44 @@ namespace API.Controllers
     [EnableCors("AllowAll")]
     public class UsersController : ApiController
     {
-        /*
-        private questionoverflowContext _context;
+        questionoverflowContext context = new questionoverflowContext();
 
-        public UsersController(questionoverflowContext context)
-        {
-            _context = context;
-            _context.Database.EnsureCreated();
-        }
-        */
-        // GET api/users
-        
+        // GET api/users 
         [HttpGet]
         public ActionResult Get()
-        {   
-            /*
-            Users user = new Models.Users();
-            user.UserId = 1;
-            user.Username = "burek";
-            user.Email = "as@gmail.com";
-            user.Password = "adsds123adsads321afa";
-            user.Description = "i am a giant douche";
-            user.MemberSince = DateTime.Now;
-            user.Location = "Ribnica, SLovenija";
-            user.Answers = 11;
-            user.Questions = 3;
-            user.Reputation = -44;
-            */
-            return Ok("API successfuly started");
+        {
+
+            return Ok("API started");
         }
 
         [HttpPut("login")]
         public ActionResult Put([FromBody] Users credentials)
         {
-            UsersHelper uh = new UsersHelper();
-            int logged = uh.login(credentials);
-
-            return Ok(logged);
+            var user = context.Users.SingleOrDefault(u => u.Email == credentials.Email);
+            if (user == null)
+            {
+                return BadRequest("No user with this email");
+            }
+            else
+            {
+                if (user.Password == credentials.Password) return Ok(user);
+                else return BadRequest("Invalid password");
+            }
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            UsersHelper uh = new UsersHelper();
-            Users user = uh.getUser(id);
-
+            Users user =  context.Users.FirstOrDefault(u => u.UserId == id);
             return Ok(user);
         }
 
-        // GET api/users/5
+        // GET api/users/5/recent
         [HttpGet("{id}/recent")]
         public ActionResult GetRecent(int id)
         {
-            UsersHelper uh = new UsersHelper();
-            ArrayList recentList = uh.getRecent(id);
+            var recentList = context.Questions.Where(q => q.UserId == id).OrderBy(q => q.Date).Take(8).ToList();
 
             return Ok(recentList);
         }
@@ -80,36 +62,57 @@ namespace API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]Users value)
         {
-            UsersHelper uh = new UsersHelper();
-            int id = (int)uh.savePerson(value);
-            value.UserId = id;
 
-            if (id == -1) return BadRequest("Query not successful - user not created");
-
-            else if (id < -1) return BadRequest("User already exists");
-
-            else
+            int existUser = context.Users.Count(u => u.Username == value.Username);
+            int  existEmail = context.Users.Count(u => u.Email == value.Email);
+            if (existUser == 0 && existEmail == 0)
             {
-                return Created(new Uri(Request.RequestUri, String.Format("users/{0}", id)), JsonConvert.SerializeObject(value));
+                Users newUser = new Users
+                {
+                    Username = value.Username,
+                    Email = value.Email,
+                    Password = value.Password,
+                    MemberSince = DateTime.Now
+                };
+                context.Add(newUser);
+                context.SaveChanges();
+
+                return Ok("User Saved");
             }
+            else if (existUser > 0) return BadRequest("Username alerady taken");
+            else return BadRequest("Email already taken");
+            
+
         }
 
         // PUT api/users/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Users value)
         {
-            UsersHelper uh = new UsersHelper();
-            bool success = uh.updateUser(id, value);
 
-            if (success) return Ok("User successfuly changed");
-
+            var user = context.Users.SingleOrDefault(u => u.UserId == id);
+            if (user != null)
+            {
+                user.Description = value.Description;
+                user.Location = value.Location;
+                context.SaveChanges();
+                return Ok("User updated");
+            }
+            
             else return BadRequest("User not found");
         }
 
         // DELETE api/users/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            Users delUser = context.Users.SingleOrDefault(u => u.UserId == id);
+            if (delUser != null)
+            {
+                context.Users.Remove(delUser);
+                return Ok("User deleted");
+            }
+            else return BadRequest("No such user");
         }
     }
 }
