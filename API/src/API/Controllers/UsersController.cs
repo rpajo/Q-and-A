@@ -8,6 +8,8 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
 using System.Collections;
+using System.Security.Cryptography;
+using PasswordSecurity;
 
 namespace API.Controllers
 {
@@ -36,7 +38,11 @@ namespace API.Controllers
             }
             else
             {
-                if (user.Password == credentials.Password) return Ok(user);
+                var verifyPassword = PasswordStorage.VerifyPassword(credentials.Password, user.Password);
+                if (verifyPassword)
+                {
+                    return Ok(user);
+                }
                 else return BadRequest("Invalid password");
             }
         }
@@ -71,9 +77,10 @@ namespace API.Controllers
                 {
                     Username = value.Username,
                     Email = value.Email,
-                    Password = value.Password,
+                    Password = PasswordStorage.CreateHash(value.Password),
                     MemberSince = DateTime.Now
                 };
+
                 context.Add(newUser);
                 context.SaveChanges();
 
