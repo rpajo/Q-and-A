@@ -11,6 +11,7 @@
         <script type='text/javascript' src='js/jquery-3.1.1.min.js'></script>
         <script type='text/javascript' src='js/knockout.js'></script>
         <script type='text/javascript' src='js/knockout-postbox.min.js'></script>
+        <!--<script type='text/javascript' src='js/ko.localizationbinding.js'></script>-->
         <script type='text/javascript' src='js/sammy.js'></script>
         <script type='text/javascript' src='js/index.js'></script>
         <script type='text/javascript' src='app.js'></script>
@@ -216,17 +217,19 @@
                                     <li>
                                         <p data-bind="text: description"></p>
                                         <span class="font-color-dark-grey">
-                                            <br><sub data-bind="text: author + ' on ' + date">Author on date</sub>
+                                            <sub data-bind="text: author + ' on ' + date">Author on date</sub>
                                         </span>
                                     </li>
 
                                 </ul>
                                 <ul class="list font-small margin-t" data-bind="ifnot: $root.userLoggedIn() == 0">
                                     <li>
+                                        <!-- ko if: $root.userLoggedIn -->
                                         <input data-bind="attr: {id: 'comment' + 0}" class="input commentInput" type="text" maxlength="70">
                                         <span class="font-color-dark-grey clickable" data-bind="click: function(){$root.postComment(0)}">
                                             Add Comment
                                         </span>
+                                        <!--/ko-->
                                     </li>
                                 </ul>
                             </div>
@@ -263,16 +266,18 @@
                                             <li>
                                                 <p data-bind="text: description"></p> 
                                                 <span class="font-color-dark-grey">
-                                                     <br><sub data-bind="text: author + ' on ' + date">Author on date</sub>
+                                                     <sub data-bind="text: author + ' on ' + date">Author on date</sub>
                                                 </span>
                                             </li>
                                         </ul>
                                         <ul class="list font-small margin-t" data-bind="ifnot: $root.userLoggedIn() == 0">
                                             <li>
+                                                <!-- ko if: $root.userLoggedIn -->
                                                 <input data-bind="attr: {id: 'comment' + answerId}" class="input commentInput" type="text" maxlength="70">
                                                 <span class="font-color-dark-grey clickable" data-bind="click: function(){$root.postComment(answerId)}">
                                                     Add Comment
                                                 </span>
+                                                <!--/ko-->
                                             </li>
                                         </ul>
                                     </div>
@@ -286,10 +291,13 @@
                                 <div id="answerField" class="padding-16" data-bind="ifnot: $root.userLoggedIn() == 0">
                                     <textarea name="answer" id="answer" required="required"></textarea>
                                     <br>
+                                    <!-- ko if: $root.userLoggedIn -->
                                     <button type="button" class="btn-block color-dark-grey hover-color-default" data-bind="click: $root.submitAnswer">Submit</button>
+                                    <!--/ko-->
                                 </div>
-
-                                <h4 data-bind="if: $root.userLoggedIn() == 0" class="center">YOU MUST BE LOGGED IN TO COMMENT AND POST ANSWERS</h4>
+                                <!-- ko ifnot: $root.userLoggedIn -->
+                                <h4 class="center">YOU MUST BE LOGGED IN TO COMMENT AND POST ANSWERS</h4>
+                                <!--/ko-->
                             </div>
                         </div>
                     </div>
