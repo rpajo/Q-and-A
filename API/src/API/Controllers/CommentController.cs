@@ -78,5 +78,18 @@ namespace API.Controllers
         {
             return NotFound();
         }
+
+        // DELETE api/comment/5
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            Comments delComment = context.Comments.SingleOrDefault(c => c.CommentId == id);
+            if (delComment != null)
+            {
+                context.Comments.Remove(delComment);
+                return Ok("Comment deleted");
+            }
+            else return BadRequest("No such comment");
+        }
     }
 }

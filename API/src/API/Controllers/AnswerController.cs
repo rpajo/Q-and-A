@@ -68,5 +68,18 @@ namespace API.Controllers
 
             else return BadRequest("Answer not updated");
         }
+
+        // DELETE api/answers/:id
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            Answers delAnswer = context.Answers.SingleOrDefault(a => a.AnswerId == id);
+            if (delAnswer != null)
+            {
+                context.Answers.Remove(delAnswer);
+                return Ok("Answer deleted");
+            }
+            else return BadRequest("No such answer");
+        }
     }
 }

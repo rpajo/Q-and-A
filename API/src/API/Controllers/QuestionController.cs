@@ -108,10 +108,17 @@ namespace API.Controllers
             else return BadRequest("Question not updated");
         }
 
-        // DELETE api/users/5
+        // DELETE api/question/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            Questions delQuestion = context.Questions.SingleOrDefault(a => a.QuestionId == id);
+            if (delQuestion != null)
+            {
+                context.Questions.Remove(delQuestion);
+                return Ok("Question deleted");
+            }
+            else return BadRequest("No such question");
         }
 
     }
