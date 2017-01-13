@@ -117,6 +117,7 @@ namespace API.Controllers
             if (delUser != null)
             {
                 context.Users.Remove(delUser);
+                context.SaveChanges();
                 return Ok("User deleted");
             }
             else return BadRequest("No such user");

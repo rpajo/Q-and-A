@@ -68,25 +68,20 @@ namespace API.Controllers
 
             long id = cmd.LastInsertedId;
 
-            if (id > 0) return Ok("Comment posted id: " + id);
+            if (id > 0) return Ok(id);
             else return BadRequest("Comment not posted");
         }
 
-        // PUT api/comment/{questionId}
-        [HttpPut("{questionId}")]
-        public ActionResult Put(int id, [FromBody]Answers value)
-        {
-            return NotFound();
-        }
 
-        // DELETE api/comment/5
+        // DELETE api/comment/:commentId
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            Comments delComment = context.Comments.SingleOrDefault(c => c.CommentId == id);
+            Comments delComment = context.Comments.SingleOrDefault(c => c.CommentId == id );
             if (delComment != null)
             {
                 context.Comments.Remove(delComment);
+                context.SaveChanges();
                 return Ok("Comment deleted");
             }
             else return BadRequest("No such comment");

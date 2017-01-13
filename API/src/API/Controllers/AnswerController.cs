@@ -77,6 +77,7 @@ namespace API.Controllers
             if (delAnswer != null)
             {
                 context.Answers.Remove(delAnswer);
+                context.SaveChanges();
                 return Ok("Answer deleted");
             }
             else return BadRequest("No such answer");

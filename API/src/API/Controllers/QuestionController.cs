@@ -90,7 +90,7 @@ namespace API.Controllers
 
             long id = cmd.LastInsertedId;
 
-            return Ok("Question posted id:" + id);
+            return Ok(id);
         }
 
         // PUT api/question/5
@@ -116,6 +116,7 @@ namespace API.Controllers
             if (delQuestion != null)
             {
                 context.Questions.Remove(delQuestion);
+                context.SaveChanges();
                 return Ok("Question deleted");
             }
             else return BadRequest("No such question");
