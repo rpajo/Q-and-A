@@ -502,6 +502,17 @@ $(document).ready(function(){
         };
     }).run('#/');
 
+    $("[data-localize]").localize("lang", {language:"si"});
+
+    $('#changeLocale').change(function() { 
+        var newLang = $(this).val();
+        console.log(newLang)
+        $("[data-localize]").localize('lang', {language: newLang}); 
+        //$('#greeting').val(greeting); 
+        //$('#languages').val(newLang); 
+
+    }).
+    change();
 
 });
 
