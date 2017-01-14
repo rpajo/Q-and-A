@@ -31,7 +31,7 @@ namespace API.Controllers
         */
 
         /// <summary>
-        /// Login with an enail and password. Returns Ok() if credentials are correct
+        /// Login with an email and password. Returns Ok() if credentials are correct
         /// </summary>
         /// <param name="credentials"></param>
         /// <response code="400">Bad request</response>

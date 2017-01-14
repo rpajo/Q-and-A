@@ -84,8 +84,8 @@ namespace API.Controllers
                 Console.WriteLine(ex.Message);
             }
 
-            String sqlString = String.Format("insert into questions (userId, author, title, description, anonymous) values ({0}, '{1}', '{2}', '{3}', {4})",
-                question.UserId, question.Author, question.Title, question.Description.Replace("\'", "\\'"), question.Anonymous);
+            String sqlString = String.Format("insert into questions (userId, author, title, description, anonymous, date) values ({0}, '{1}', '{2}', '{3}', {4}, '{5}')",
+                question.UserId, question.Author, question.Title, question.Description.Replace("\'", "\\'"), question.Anonymous, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
             MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sqlString, connection);
             try
