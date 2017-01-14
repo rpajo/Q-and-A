@@ -24,5 +24,33 @@
 	"recent": "Moja Vprašanja",
 	"settings": "Nastavitve",
 	"logout": "Izpišo Me",
-	"searchTerm": "Vnesi Iskalni Niz"
+	"searchTerm": "Vnesi Iskalni Niz",
+	"searchTermP": {
+		"Placeholder":"Vnesi Iskalni Niz"
+	},
+	"questionTitle": {
+		"placeholder": "Prosimo, vnesite željen naslov vprašanja..."
+	},
+	"questionDesc": {
+		"placeholder": "Opišite vaše vprašanje. Prosimo, preverite če je bilo vaše vprešanje že zastavljeno in celo odgovorjeno. Uporabite isaklno orodje is poskusite najdi kar iščete."
+	},
+	"where": "Od kod prihajaš?",
+	"about": "O tebi",
+	"aboutP":{
+		"placeholder": "Povej nam nekaj o tebi, da vas bodo lahko ostali malo spoznali"
+	},
+	"save": "Shrani Spremembe",
+	"username": {
+		"placeholder": "Uporabniško ime"
+	},
+	"password": {
+		"placeholder":"Geslo"
+	},
+	"passwordAgain": {
+		"placeholder": "Ponovi geslo"
+	},
+	"PROFILE": "PROFIL",
+	"SETTINGS": "NASTAVITVE",
+	"ACTIVITY": "AKTIVNOST",
+	"noPosted": "Uporabnik še ni objavil vprašanja"
 }

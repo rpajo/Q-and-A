@@ -14,12 +14,11 @@
         <script type='text/javascript' src='js/knockout-postbox.min.js'></script>
         <script type='text/javascript' src='js/sammy.js'></script>
         <script type='text/javascript' src='js/index.js'></script>
-        <script type='text/javascript' src='app.js'></script>
 
         <title>Question Overflow</title>
         <!-- <link rel='stylesheet' type='text/css' href='style.css'/> -->
     </head>
-    <body onload="loadCategories()">
+    <body>
 
     <div class="container color-red">
         <h1 class="center lobster" onclick="location.href='index.html'">Question Overflow</h1>
@@ -62,7 +61,7 @@
                                         <div class="row">
                                             <div class="col s12 m5">
                                                 <label data-localize="searchTerm">Enter Search Term:</label>
-                                                <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text" placeholder="Enter search term"/>
+                                                <input id="searchTerm" class="searchInput input margin-t-8 margin-b-8" type="text"  data-localize="searchTermP.placeholder" placeholder=""/>
                                             </div>
                                             <!--<div class="col s12 m3">
                                                 <label>Enter tags:</label>
@@ -210,8 +209,13 @@
                                     <span data-bind="text: comments().length + ' Comments'"></span>
                                 </span>
                                 
-                                <i class="fa fa-clock-o right clickable" style="padding-top:4px" aria-hidden="true"><span data-bind="text:'  ' + author + ' on ' + date, click: function(){$root.goToUser(userId)}"></span></i>
-
+                                <div data-bind="if: anonymous != 1"> 
+                                    <i class="fa fa-clock-o right clickable" style="padding-top:4px" aria-hidden="true"><span data-bind="text:'  ' + author + ' on ' + date, click: function(){$root.goToUser(userId)}"></span></i>
+                                </div>
+                                
+                                <div data-bind="ifnot: anonymous != 1">
+                                    <i class="fa fa-clock-o right clickable" style="padding-top:4px" aria-hidden="true"><span data-bind="text:'  Anonymous on ' + date, click: function(){$root.goToUser(userId)}"></span></i>
+                                </div>
                                 <hr>
                                 
                                 <ul class="list font-small margin-t" data-bind="foreach: comments">
@@ -317,14 +321,14 @@
             <div class="col m12 l9">
                 <div class="tabs">
                     <input id="tab1" type="radio" name="tabsP" value="profile" data-bind="checked: profileSection">
-                    <label for="tab1"><i class="fa fa-user" aria-hidden="true"></i><span> PROFILE</span></label>
+                    <label for="tab1"><i class="fa fa-user" aria-hidden="true"></i><span data-localize="PROFILE"> PROFILE</span></label>
                     
                     <input id="tab2" type="radio" name="tabsP" value="activity" data-bind="checked: profileSection">
-                    <label for="tab2"><i class="fa fa-fire" aria-hidden="true"></i><span> ACTIVITY</span></label>
+                    <label for="tab2"><i class="fa fa-fire" aria-hidden="true"></i><span data-localize="ACTIVITY"> ACTIVITY</span></label>
                     
                     <!-- ko if: $root.hasSettings() -->
                     <input id="tab3" type="radio" name="tabsP" value="settings" data-bind="checked: profileSection">
-                    <label for="tab3"><i class="fa fa-cog" aria-hidden="true"></i><span> SETTINGS</span></label>
+                    <label for="tab3"><i class="fa fa-cog" aria-hidden="true"></i><span data-localize="SETTINGS"> SETTINGS</span></label>
                     <!-- /ko -->
                     <section id="content1" data-bind="with: user">
                         <div class="row">
@@ -354,7 +358,7 @@
                             <h3 data-bind="text: username + '\'s recent questions'"></h3>
                         </div>
                         
-                        <h4 class="center" data-bind="if: recentQuestions().length == 0">User has no posted questions</h4>
+                        <h4 class="center" data-bind="if: recentQuestions().length == 0" data-localize="noPosted">User has no posted questions</h4>
                         <ul class="list" data-bind="foreach: recentQuestions">
                             <li>
                                 <span data-bind="text: title"></span>
@@ -390,13 +394,13 @@
                             <div class="col s12 m8">
                                 <!--<label>Display name:</label>
                                 <input id="editName" class="input margin-t-8 margin-b-8" type="text" data-bind="value: username"/>-->
-                                <label>Where are you from:</label>
+                                <label  data-localize="where">Where are you from:</label>
                                 <input id="editLocation" class="input margin-t-8 margin-b-8" type="text" data-bind="value: location"/>
-                                <label>About you:</label>
-                                <textarea class="margin-t-8 margin-b-8" name="editAbout" id="editAbout" placeholder="Tell us a little bit about yourself so people can get to know you" data-bind="value: description"></textarea>
+                                <label  data-localize="about">About you:</label>
+                                <textarea class="margin-t-8 margin-b-8" name="editAbout" id="editAbout" data-localize="aboutP.placeholder" placeholder="" data-bind="value: description"></textarea>
 
                             </div>
-                            <button class="btn-block color-accent1 hover-color-accent2" data-bind="click: $root.updateProfile">Save Changes</button>
+                            <button class="btn-block color-accent1 hover-color-accent2" data-bind="click: $root.updateProfile"  data-localize="save">Save Changes</button>
                         </div>
                     </section>
                 </div>
@@ -423,20 +427,20 @@
 
                         <input id="usernameLogin" class="input margin-b-8 margin-t-8" type="text" placeholder="Email">
 
-                        <input id="passwordLogin" class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
+                        <input id="passwordLogin" class="input margin-b-8 margin-t-8" type="password" data-localize="password.placeholder" placeholder="Password">
 
                         <button id="btnLogin" class="btn-block color-accent1 margin-t" data-bind="click: $root.login" data-localize="login">LOG IN</button>
-                        
+                        <span class="font-small" id="loginStatus"></span>
                     </div>
 
                     <input id="register" type="checkbox" >
                     <label for="register"><span data-localize="register"> Sign Up</span></label>
 
                     <div class="container" id="regForm">
-                        <input class="input margin-b-8 margin-t-8" type="text" placeholder="username">
-                        <input class="input margin-b-8 margin-t-8" type="email" placeholder="email">
-                        <input class="input margin-b-8 margin-t-8" type="password" placeholder="Password">
-                        <input class="input margin-b-8 margin-t-8" type="password" placeholder="Re-enter password">
+                        <input class="input margin-b-8 margin-t-8" type="text" data-localize="username.placeholder" placeholder="username">
+                        <input class="input margin-b-8 margin-t-8" type="email" placeholder="Email">
+                        <input class="input margin-b-8 margin-t-8" type="password" data-localize="password.placeholder" placeholder="Password">
+                        <input class="input margin-b-8 margin-t-8" type="password" data-localize="passwordAgain.placeholder" placeholder="Re-enter password">
                         <button class="btn-block color-accent1 margin-t" data-bind="click: $root.register" data-localize="register">Register</button>
                         <span class="font-small" id="registerStatus"></span>
                     </div>

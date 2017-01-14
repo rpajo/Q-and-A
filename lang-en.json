@@ -24,5 +24,33 @@
 	"recent": "My Questions",
 	"settings": "Profile Settings",
 	"logout": "Log Out",
-	"searchTerm": "Enter Search Term"
+	"searchTerm": "Enter Search Term",
+	"searchTermP": {
+		"Placeholder":"Enter Search Term"
+	},
+	"questionTitle": {
+		"placeholder": "Please enter the desired question tile..."
+	},
+	"questionDesc": {
+		"placeholder": "Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."
+	},
+	"where": "Where are you from?",
+	"about": "About you",
+	"aboutP":{
+		"placeholder": "Tell us a little bit about yourself so people can get to know you"
+	},
+	"save": "Save Changes",
+	"username": {
+		"placeholder": "Username"
+	},
+	"password": {
+		"placeholder":"Password"
+	},
+	"passwordAgain": {
+		"placeholder": "Re-enter Password"
+	},
+	"PROFILE": "PROFILE",
+	"SETTINGS": "SETTINGS",
+	"ACTIVITY": "ACTIVITY",
+	"noPosted": "User has no posted questions"
 }

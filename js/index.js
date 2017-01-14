@@ -321,9 +321,9 @@ function widgetViewModel() {
     self.login = function() {
         var username = $("#usernameLogin")[0].value;
         var password = $("#passwordLogin")[0].value;
-
+        var status = $("#loginStatus");
         $("#btnLogin").attr("disable", true);
-        $("#btnLogin").text("Logging in");
+
         $.ajaxSetup({
             contentType : 'application/json',
             processData : false
@@ -333,9 +333,8 @@ function widgetViewModel() {
             url: "http://localhost:62713/api/users/login",
             data: JSON.stringify({"email": username, "password": password}),
             success: function (user, response) {
-                console.log(user, response);
+                console.log(response);
                 $("#btnLogin").attr("disable", false);
-                $("#btnLogin").text("LOG IN");;
                 
                 self.userLoggedIn(user);
                 /*if (id > 0) {
@@ -352,7 +351,8 @@ function widgetViewModel() {
                 //to do display error message                 
             },
             error : function(err){
-                console.log(err);
+                var responseErr = JSON.parse(err.responseText);
+                status.text(responseErr.Message)
             }
 
         });
@@ -449,7 +449,7 @@ function profileViewModel() {
 
     self.user = ko.observable();
     self.recentQuestions = ko.observableArray([]);
-    self.recentAnswers = ko.observableArray([]);
+    //self.recentAnswers = ko.observableArray([]);
 
     /** Get data of a user
      * @param {int} userId - unique user Id
@@ -467,14 +467,16 @@ function profileViewModel() {
                 success: function (response) {
                     console.log(response);
                     self.user(response);
-
+                    self.recentQuestions([]);
                     $.ajax({
                         type: "get",
                         url: "http://localhost:62713/api/users/" + userId + "/recent",
                         dataType: "json",
                         success: function (response) {
-                            self.recentQuestions(response[0]);
-                            self.recentAnswers(response[1]);
+                            console.log(response);
+                            if(response.length > 0) self.recentQuestions(response);
+                            else self.recentQuestions([]);
+                            //self.recentAnswers(response[1]);
                         }
                     });
 
@@ -594,3 +596,15 @@ $(document).ready(function(){
 
 });
 
+var hideShow = function(div) {
+    var form = document.getElementById(div);
+        
+        if (form.clientHeight) {
+        form.style.height = '0';
+    }
+    else {
+        var measure = document.getElementById(div+"Measure");
+        form.style.height = measure.clientHeight + 16 +'px';
+    }
+    
+}
