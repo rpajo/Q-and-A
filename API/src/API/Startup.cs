@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 //using MySQL.Data.EntityFrameworkCore.Extensions;
 using Microsoft.AspNetCore.Cors;
 using API.Models;
+using Swashbuckle.Swagger.Model;
 
 namespace API
 {
@@ -50,6 +51,24 @@ namespace API
                        .AllowAnyHeader();
             }));
 
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "QuestionOverflow API",
+                    Description = "API za dostopanje in urejanje baze mySql",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "Rok Pajnič"},
+                });
+
+                //Determine base path for the application.
+                var basePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
+
+                //Set the comments path for the swagger json and ui.
+                var xmlPath = System.IO.Path.Combine(basePath, "API.xml");
+                options.IncludeXmlComments(xmlPath);
+            });
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen();
 

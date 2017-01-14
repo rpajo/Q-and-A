@@ -19,7 +19,11 @@ namespace API.Controllers
     {
         questionoverflowContext context = new questionoverflowContext();
 
-        // GET api/questions/1
+        /// <summary>
+        /// Get question details
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <returns></returns>
         [HttpGet("{questionId}")]
         public ActionResult Get(int questionId)
         {
@@ -29,7 +33,12 @@ namespace API.Controllers
             else return Ok(question);
         }
 
-        // GET api/question/top/1
+        /// <summary>
+        /// Get a list of question based on order and page
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="order">date/rating/answers</param>
+        /// <returns></returns>
         [HttpGet("{order}/{page}")]
         public ActionResult Get(int page, String order)
         {
@@ -52,7 +61,12 @@ namespace API.Controllers
             return Ok(questionList);
         }
 
-        // POST api/question
+        /// <summary>
+        ///  Post a new question
+        /// </summary>
+        /// <param name="question"></param>
+        /// <response code="400">Bad request</response>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Post([FromBody]Questions question)
         {
@@ -90,10 +104,17 @@ namespace API.Controllers
 
             long id = cmd.LastInsertedId;
 
-            return Ok(id);
+            if (id <= 0) return BadRequest();
+            else return Ok(id);
         }
 
-        // PUT api/question/5
+        /// <summary>
+        /// Update a question
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <response code="400">Bad request</response>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Questions value)
         {
@@ -108,7 +129,12 @@ namespace API.Controllers
             else return BadRequest("Question not updated");
         }
 
-        // DELETE api/question/5
+        /// <summary>
+        /// Delete a question
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <response code="400">Bad request</response>
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

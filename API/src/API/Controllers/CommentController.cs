@@ -18,7 +18,12 @@ namespace API.Controllers
     {
         questionoverflowContext context = new questionoverflowContext();
 
-        // GET api/comment/{quiestionId}
+        /// <summary>
+        /// Get a list of comment to a question thread
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <response code="400">Bad request</response>
+        /// <returns></returns>
         [HttpGet("{questionId}")]
         public ActionResult Get(int questionId)
         {
@@ -29,7 +34,13 @@ namespace API.Controllers
             else return Ok(commentList);
         }
 
-        // POST api/comment/{questionId}
+        /// <summary>
+        /// Posts a new comment
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <param name="comment"></param>
+        /// <response code="400">Bad request</response>
+        /// <returns></returns>
         [HttpPost("{questionId}")]
         public ActionResult Post(int questionId, [FromBody]Comments comment)
         {
@@ -73,7 +84,12 @@ namespace API.Controllers
         }
 
 
-        // DELETE api/comment/:commentId
+        /// <summary>
+        /// Deletes a comment with it's id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="400">Bad request</response>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

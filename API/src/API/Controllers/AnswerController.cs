@@ -19,7 +19,12 @@ namespace API.Controllers
 
         questionoverflowContext context = new questionoverflowContext();
 
-        // GET api/answer/{order}/1
+        /// <summary>
+        /// Get a list of answers based on order
+        /// </summary>
+        /// <param name="order"> date/-date/rating</param>
+        /// <param name="questionId"></param>
+        /// <returns></returns>
         [HttpGet("{order}/{questionId}")]
         public ActionResult Get(string order, int questionId)
         {
@@ -42,7 +47,12 @@ namespace API.Controllers
             else return Ok(answerList);
         }
 
-        // POST api/answer/{questionId}
+        /// <summary>
+        /// Posts a new answer
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
         [HttpPost("{questionId}")]
         public ActionResult Post(int questionId, [FromBody]Answers answer)
         {
@@ -54,7 +64,13 @@ namespace API.Controllers
             return Ok("Answer submited");
         }
 
-        // PUT api/answer/5
+        /// <summary>
+        /// Update a question
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <response code="400">Bad request</response>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Answers value)
         {
@@ -69,7 +85,11 @@ namespace API.Controllers
             else return BadRequest("Answer not updated");
         }
 
-        // DELETE api/answers/:id
+        /// <summary>
+        /// Deletes an answer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

@@ -20,6 +20,7 @@ namespace API.Controllers
     {
         questionoverflowContext context = new questionoverflowContext();
 
+        /*
         // GET api/users 
         [HttpGet]
         public ActionResult Get()
@@ -27,7 +28,13 @@ namespace API.Controllers
 
             return Ok("API started");
         }
+        */
 
+        /// <summary>
+        /// Login with an enail and password. Returns Ok() if credentials are correct
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <response code="400">Bad request</response>
         [HttpPut("login")]
         public ActionResult Put([FromBody] Users credentials)
         {
@@ -47,7 +54,11 @@ namespace API.Controllers
             }
         }
 
-        // GET api/users/5
+        /// <summary>
+        /// Gets the user with id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -55,7 +66,11 @@ namespace API.Controllers
             return Ok(user);
         }
 
-        // GET api/users/5/recent
+        /// <summary>
+        /// Returns a list(max 8) of recent user questions
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}/recent")]
         public ActionResult GetRecent(int id)
         {
@@ -64,7 +79,11 @@ namespace API.Controllers
             return Ok(recentList);
         }
 
-        // POST api/users
+        /// <summary>
+        /// Creates a new user
+        /// </summary>
+        /// <param name="User"></param>
+        /// <response code="400">Bad request</response>
         [HttpPost]
         public ActionResult Post([FromBody]Users value)
         {
@@ -92,7 +111,12 @@ namespace API.Controllers
 
         }
 
-        // PUT api/users/5
+        /// <summary>
+        /// Update users info
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <response code="400">Bad request</response>
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody]Users value)
         {
@@ -109,7 +133,11 @@ namespace API.Controllers
             else return BadRequest("User not found");
         }
 
-        // DELETE api/users/5
+        /// <summary>
+        /// Deletes a user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <response code="400">Bad request</response>
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
