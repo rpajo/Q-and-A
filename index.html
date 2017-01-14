@@ -92,8 +92,8 @@
                                 <div class="container">
                                     <form data-bind="submit: $root.submitQuestion" id="askField" class="margin-t-8 margin-b-8">
                                         <label data-localize="qTitle"></label>
-                                        <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" required="required" type="text" placeholder="Please enter the desired question tile.."/>
-                                        <textarea name="question" id="questionDesc" required="required" placeholder="Describe your question. Please make sure the your question has not already been asked and answered. Use the search tool and try to find what you are looking for."></textarea>
+                                        <input id="questionTitle" class="searchInput input margin-t-8 margin-b-8" required="required" type="text" data-localize="questionTitle.placeholder" placeholder=""/>
+                                        <textarea name="question" id="questionDesc" required="required" data-localize="questionDesc.placeholder"placeholder=""></textarea>
                                         <br>
                                         <!--<div class="row">
                                             <div class="col s12 m4 margin-r-8"> 
@@ -155,7 +155,7 @@
                                             <span data-bind="text: 'Rating ' + rating"></span>
                                         </span>
                                         
-                                        <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true" data-bind="text: 'Asked on: ' + date"></i>
+                                        <i class="fa fa-clock-o right" style="padding-top:4px" aria-hidden="true" data-bind="text:'  ' + author + ' on ' + date"></i>
                                     </div>
                                 </div>
                                 <button class="btn-block color-dark-grey hover-color-default" data-bind="click: $root.goToQuestion" data-localize="openT">Open Thread</button>
@@ -210,7 +210,7 @@
                                     <span data-bind="text: comments().length + ' Comments'"></span>
                                 </span>
                                 
-                                <i class="fa fa-clock-o right"  style="padding-top:4px" aria-hidden="true"><span data-bind="text: date"></span></i>
+                                <i class="fa fa-clock-o right clickable" style="padding-top:4px" aria-hidden="true"><span data-bind="text:'  ' + author + ' on ' + date, click: function(){$root.goToUser(userId)}"></span></i>
 
                                 <hr>
                                 
@@ -261,8 +261,12 @@
                                     </div>
                                     <div class="container col s10 container">
                                         <p data-bind="text: description"></p>
-                                        
+
+                                        <i class="fa fa-clock-o right clickable" style="padding-top:4px" aria-hidden="true" 
+                                            data-bind="text:'  ' + author + ' on ' + date, click: function(){$root.goToUser(userId)}"></i>
+                                        <br>
                                         <hr>
+
                                         <ul class="list font-small margin-t" data-bind="foreach: $data.comments">
                                             <li>
                                                 <p data-bind="text: description"></p> 
@@ -448,9 +452,9 @@
                     </header>
                     <div>
                         <ul class="clickable list">
-                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'profile') }" data-localize="profile"></li>
-                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'activity') }" data-localize="welcome"></li>
-                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'settings') }" data-localize="settings"></li>
+                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'profile') }" data-localize="profile">My Profile</li>
+                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'activity') }" data-localize="recent">My Questions</li>
+                            <li class="hover-color-accent2" data-bind="click: function(){ $root.goToProfile(userLoggedIn().userId, 'settings') }" data-localize="settings">Profile Settings</li>
                             <li class="hover-color-accent2" data-bind="click: $root.logOut" data-localize="logout">Log Out</li>                            
                         </ul>
                     </div>

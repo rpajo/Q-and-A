@@ -50,6 +50,11 @@ namespace API
                     .HasColumnType("int(10) unsigned")
                     .HasDefaultValueSql("0");
 
+                entity.Property(e => e.Author)
+                    .IsRequired()
+                    .HasColumnName("author")
+                    .HasColumnType("varchar(45)");
+
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
                     .HasColumnType("datetime");
@@ -144,6 +149,11 @@ namespace API
                     .HasColumnName("userId")
                     .HasColumnType("int(10) unsigned");
 
+                entity.Property(e => e.Author)
+                    .IsRequired()
+                    .HasColumnName("author")
+                    .HasColumnType("varchar(45)");
+
                 entity.Property(e => e.Anonymous)
                     .HasColumnName("anonymous")
                     .HasColumnType("int(10)")
@@ -221,7 +231,7 @@ namespace API
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnName("password")
-                    .HasColumnType("char(64)");
+                    .HasColumnType("char(256)");
 
                 entity.Property(e => e.Questions)
                     .HasColumnName("questions")

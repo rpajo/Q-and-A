@@ -7,6 +7,7 @@ namespace API.Models
     {
         public int QuestionId { get; set; }
         public int UserId { get; set; }
+        public string Author { get; set; }
         public int Anonymous { get; set; }
         public int Answers { get; set; }
         public DateTime Date { get; set; }

@@ -1,5 +1,7 @@
 
-// View Model for Questions
+/** @constructor Main View Model 
+ *
+*/
 function mainViewModel() {
     var self = this;
     self.navigation = ko.observable().publishOn("navigation");
@@ -9,7 +11,11 @@ function mainViewModel() {
     self.questionList = ko.observableArray();
     self.page = ko.observable(1);
 
-
+    /** Submit question function
+     * @param {string} title - Question title
+     * @param {string} description - Question description
+     * @param {int} anonymous - 0: not anonymous, 1: anonymous
+     */
     self.submitQuestion = function(form) {
         var title = $("#questionTitle")[0].value;
         var description = $("#questionDesc")[0].value;
@@ -22,7 +28,7 @@ function mainViewModel() {
             $.ajax({
                 type: "post",
                 url: "http://localhost:62713/api/question/",
-                data: JSON.stringify({ "userId": self.userLoggedIn().userId, "title": title, "description": description, "anonymous": anonymous }),
+                data: JSON.stringify({ "userId": self.userLoggedIn().userId, "author": self.userLoggedIn().username, "title": title, "description": description, "anonymous": anonymous }),
                 success: function (response) {
                     //console.log(response);
                     self.getQuestions();
@@ -42,6 +48,10 @@ function mainViewModel() {
 
     };
 
+    /** Get question list 
+     * @param {string} order[global] - order questions by date, rating, no. answers
+     * @param {string} page[global] - page of questions
+     */
     self.getQuestions = function() {
         //console.log(self.order());
         $.ajax({
@@ -59,13 +69,19 @@ function mainViewModel() {
         return true;
     };
 
+    /** Go to question details
+     * @param {int} questionId - unique Id of a questions
+     */
     self.goToQuestion = function(q) {
         location.hash = '/question/' + q.questionId;
 
         return true;
     };
 
-    self.changePage = function(nav) {
+    /** Submit question function
+     * @param {int} page: -1: previous page, 1: next page
+     */
+    self.changePage = function(page) {
         var p = self.page();
         console.log(self.page(), self.questionList().length)
         if (self.page() + nav >= 1) {
@@ -78,7 +94,8 @@ function mainViewModel() {
 
 };
 
-
+/** @namespace Question View Model
+ */
 function questionViewModel() {
     var self = this;
     self.navigation = ko.observable().subscribeTo("navigation");;
@@ -90,8 +107,11 @@ function questionViewModel() {
     self.comments = ko.observableArray();
     self.order = ko.observable("-date");
     
+    /** Get full qustion with answers
+      * @param {int} qId[global] - unique question Id
+     * @param {string} order[global] - order answers by date, -date, rating
+     */
     self.getAnswers = function() {
-        //console.log(self.order());  
         $.ajax({
             type: "get",
             url: "http://localhost:62713/api/question/" + self.qId,
@@ -121,6 +141,9 @@ function questionViewModel() {
         return true;
     }
 
+    /** Get question/answer comments
+     * @param {int} qId[global] - unique question Id
+     */
     self.getComments = function() {
         $.ajax({
             type: "get",
@@ -144,7 +167,7 @@ function questionViewModel() {
                                 answer.comments.push(comment);
                             }
                         });
-                        console.log(self.answers());
+                        //console.log(self.answers());
                     }
                 });
             }
@@ -153,6 +176,11 @@ function questionViewModel() {
         return true;    
     };
 
+    /** Submit Answer to question
+     * @param {stirng} text[from html]
+     * @param {int} qId[global] - unique question Id
+     * @param {User} User[global] -> user.id, user.username
+     */
     self.submitAnswer = function() {
         var text = $("#answer")[0].value;
         if ($.trim(text).length > 0) {
@@ -162,7 +190,7 @@ function questionViewModel() {
             $.ajax({
                 type: "post",
                 url: "http://localhost:62713/api/answer/" + self.qId,
-                data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "description": text}),
+                data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "author": self.userLoggedIn().username,"description": text}),
                 success: function (response) {
                     //console.log(response);
                     self.getAnswers();
@@ -177,6 +205,12 @@ function questionViewModel() {
         return true;
     };
 
+    /** Post Comment to answer/question
+     * @param {stirng} text[from html]
+     * @param {int} qId[global] - unique question Id
+     * @param {User} User[global] -> user.id, user.username
+     * @param {int} answerId - unique answer Id
+     */
     self.postComment = function(answerId) {
         var text = $("#comment" + answerId)[0].value;
 
@@ -209,6 +243,12 @@ function questionViewModel() {
         return true;
     };
 
+
+    /** Rate Post +1/-1
+     * @param {int} qId[global] - unique question Id
+     * @param {int} answerId - unique answer Id
+     * @param {int} rating - 1: rateUp, -1: rateDown
+     */
     self.editPost = function(answerId, rating) {
         var data;
         if (rating != 0) data = JSON.stringify( {"rating": rating} );
@@ -255,15 +295,29 @@ function questionViewModel() {
         return true;
     };
 
+    /** Go to user page
+     * @param {int} userId - unique user Id
+     */
+    self.goToUser = function(userId) {
+        console.log(userId);
+        location.hash = '/profile/' + userId;
+    }
+
 };
 
+/**@namespace Widget View Model
+ * 
+ */
 function widgetViewModel() {
     var self = this;
 
     self.userLoggedIn = ko.observable(0).publishOn("logged");       // 0 - user not logged in, else it stores the userId
     self.profileSection = ko.observable('profile').syncWith("profileSection");;
 
-
+    /** Login user
+     * @param {stirng} username[from html]
+     * @param {string} password[from html]
+     */
     self.login = function() {
         var username = $("#usernameLogin")[0].value;
         var password = $("#passwordLogin")[0].value;
@@ -306,12 +360,20 @@ function widgetViewModel() {
         return true;
     };
 
+    /** Log out user
+     * 
+     */
     self.logOut = function() {
         self.userLoggedIn(0);
 
         return true;
     };
 
+    /** Register new user
+     * @param {stirng} username
+     * @param {int} email
+     * @param {User} password
+     */
     self.register = function() {
         var regForm = $("#regForm :input");
         var status = $("#registerStatus");
@@ -364,12 +426,19 @@ function widgetViewModel() {
         return true;
     };
 
+    /** Go to logged in profile
+     * @param {stirng} userId - Id of logged user
+     * @param {string} section - section of profile page:profile, recent, settings
+     */
     self.goToProfile = function(userId, section) {
         location.hash = '/profile/' + userId;
         self.profileSection(section);        
     }
 };
 
+/**@namespace Profile View Model 
+ * 
+*/
 function profileViewModel() {
     var self = this;
 
@@ -382,6 +451,9 @@ function profileViewModel() {
     self.recentQuestions = ko.observableArray([]);
     self.recentAnswers = ko.observableArray([]);
 
+    /** Get data of a user
+     * @param {int} userId - unique user Id
+     */
     self.getUser = function(userId) {
         //console.log(self.userLoggedIn());
         if (self.userLoggedIn() != undefined && userId == self.userLoggedIn().userId) {
@@ -426,6 +498,11 @@ function profileViewModel() {
         }
     };
 
+    /** Update profile data
+     * @param {stirng} location[from html] - user location
+     * @param {string} description[from html] - user "about me" description
+     * @param {int} userId[global] - userId of logged user
+     */
     self.updateProfile = function() {
         var location = $("#editLocation")[0].value;
         var about = $("#editAbout")[0].value;
@@ -464,6 +541,7 @@ function profileViewModel() {
     };
 }
 
+// Load view models on page loads   
 $(document).ready(function(){
     var mainVM = new mainViewModel();
     ko.applyBindings(mainVM, $("#mainSection")[0]);

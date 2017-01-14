@@ -70,8 +70,8 @@ namespace API.Controllers
                 Console.WriteLine(ex.Message);
             }
 
-            String sqlString = String.Format("insert into questions (userId, title, description, anonymous) values ({0}, '{1}', '{2}', {3})",
-                question.UserId, question.Title, question.Description.Replace("\'", "\\'"), question.Anonymous);
+            String sqlString = String.Format("insert into questions (userId, author, title, description, anonymous) values ({0}, '{1}', '{2}', '{3}', {4})",
+                question.UserId, question.Author, question.Title, question.Description.Replace("\'", "\\'"), question.Anonymous);
 
             MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sqlString, connection);
             try
