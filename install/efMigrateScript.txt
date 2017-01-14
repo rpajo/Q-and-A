@@ -1,0 +1,65 @@
+D:\Fax\3. Letnik\SP\Q-and-A\API\src\API>dotnet ef migrations script
+CREATE TABLE `__EFMigrationsHistory` (
+    `MigrationId` varchar(95) NOT NULL,
+    `ProductVersion` varchar(32) NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+);
+CREATE TABLE `users` (
+    `userId` int AUTO_INCREMENT NOT NULL,
+    `answers` int(11) DEFAULT 0,
+    `description` text,
+    `email` varchar(200) NOT NULL,
+    `location` varchar(100),
+    `MemberSince` datetime(6) NOT NULL,
+    `password` char(256) NOT NULL,
+    `questions` int(11) DEFAULT 0,
+    `reputation` int(11) DEFAULT 0,
+    `username` varchar(45) NOT NULL,
+    CONSTRAINT `userId_UNIQUE` PRIMARY KEY (`userId`)
+);
+CREATE TABLE `answers` (
+    `answerId` int(11) NOT NULL,
+    `questionId` int(10) unsigned NOT NULL,
+    `userId` int(10) unsigned NOT NULL DEFAULT 0,
+    `author` varchar(45) NOT NULL,
+    `date` datetime NOT NULL,
+    `description` mediumtext NOT NULL,
+    `rating` int(11) DEFAULT 0,
+    CONSTRAINT `PK_answers` PRIMARY KEY (`answerId`, `questionId`, `userId`),
+    CONSTRAINT `FK_answers_users_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION
+);
+CREATE TABLE `comments` (
+    `commentId` int(10) unsigned NOT NULL,
+    `questionId` int(10) unsigned NOT NULL,
+    `userId` int(10) unsigned NOT NULL,
+    `author` varchar(45) NOT NULL,
+    `date` datetime NOT NULL,
+    `description` tinytext NOT NULL,
+    `parentId` int(10) unsigned NOT NULL DEFAULT 0,
+    CONSTRAINT `PK_comments` PRIMARY KEY (`commentId`, `questionId`, `userId`),
+    CONSTRAINT `FK_comments_users_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION
+);
+CREATE TABLE `questions` (
+    `questionId` int(10) unsigned NOT NULL,
+    `userId` int(10) unsigned NOT NULL,
+    `author` varchar(45) NOT NULL,
+    `anonymous` int(10) NOT NULL DEFAULT 0,
+    `answers` int(10) unsigned NOT NULL DEFAULT 0,
+    `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `description` mediumtext NOT NULL,
+    `rating` int(11) NOT NULL DEFAULT 0,
+    `title` varchar(100) NOT NULL,
+    CONSTRAINT `PK_questions` PRIMARY KEY (`questionId`, `userId`),
+    CONSTRAINT `FK_questions_users_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION
+);
+CREATE UNIQUE INDEX `answerId_UNIQUE` ON `answers` (`answerId`);
+CREATE INDEX `questionIdAnswer` ON `answers` (`questionId`);
+CREATE INDEX `userId_idx` ON `answers` (`userId`);
+CREATE UNIQUE INDEX `commentId_UNIQUE` ON `comments` (`commentId`);
+CREATE INDEX `questionId_idx` ON `comments` (`questionId`);
+CREATE INDEX `userId_idx` ON `comments` (`userId`);
+CREATE INDEX `userId_idx` ON `questions` (`userId`);
+CREATE UNIQUE INDEX `email_UNIQUE` ON `users` (`email`);
+CREATE UNIQUE INDEX `username_UNIQUE` ON `users` (`username`);
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20170114101937_questionOverflow', '1.1.0-rtm-22752');
