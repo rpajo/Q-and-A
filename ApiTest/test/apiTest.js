@@ -51,7 +51,7 @@ describe("Question API Tests", function() {
 
 	
 	it("Post a new question", function(done) {
-		var newQuestion = {"title": "Api Test Question", "description": "Test description", "userId": user.userId, "anonymous": 0};
+		var newQuestion = {"title": "Api Test Question", "description": "Test description", "userId": user.userId, "anonymous": 0, "author": "MochaTest"};
 		api.post("/question")
 			.send(newQuestion)
 			.end(function(err, res) {
