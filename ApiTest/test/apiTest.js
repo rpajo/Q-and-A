@@ -94,7 +94,7 @@ describe("Comment API tests", function() {
 
 	it("Post new comment to question", function(done) {
 		api.post("/comment/" + questionId)
-			.send({"userId": user.userId, "paerntId": 0, "description": "This is a test comment", "author": "MochaTest"})
+			.send({"userId": user.userId, "parentId": 0, "description": "This is a test comment", "author": "MochaTest"})
 			.end(function(err, res) {
 				res.status.should.equal(200);
 				commentId = res.body;
