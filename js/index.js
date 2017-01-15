@@ -86,8 +86,8 @@ function mainViewModel() {
      */
     self.changePage = function(page) {
         var p = self.page();
-        if (self.page() + nav >= 1) {
-            self.page(p + nav);
+        if (self.page() + page >= 1) {
+            self.page(p + page);
             self.getQuestions();
         }
         
