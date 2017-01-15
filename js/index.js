@@ -389,8 +389,6 @@ function widgetViewModel() {
         var pass = regForm[2].value;
         var pass2 = regForm[3].value;
         
-        console.log(username, email, pass, pass2);
-
         if ($.trim(username).length == 0 || $.trim(email).length == 0 || $.trim(pass).length == 0) {
             status.text("Form not valid");
         }
@@ -412,15 +410,14 @@ function widgetViewModel() {
                 type: "post",
                 url: apiUrl + "api/users/",
                 data: JSON.stringify({"username": username, "email": email, "password": pass, "description": ""}),
-                dataType: "json",
                 success: function (response) {
                     console.log(response);
                     status.text("User Created");
                     $(btn).html("Done");
                 },
                 error: function(err) {
-                    status.text("Username or email already in use");
-                    console.log("Error ", err);
+                    var responseErr = JSON.parse(err.responseText);
+                    status.text(err.responseText);
                     $(btn).attr("disabled", false);
                     $(btn).html("REGISTER");
                 }

@@ -73,6 +73,7 @@ namespace API.Controllers
             MySql.Data.MySqlClient.MySqlConnection connection = null;
             string _connectionString;
             _connectionString = "server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
+            //_connectionString = "server=questionoverflow.ckztk2rxcoxz.us-west-2.rds.amazonaws.com;Uid =admin; Pwd=iamroot1;";
             try
             {
                 connection = new MySql.Data.MySqlClient.MySqlConnection();
