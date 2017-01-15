@@ -48,6 +48,8 @@ namespace API.Controllers
                 var verifyPassword = PasswordStorage.VerifyPassword(credentials.Password, user.Password);
                 if (verifyPassword)
                 {
+
+                    if (credentials.Username == "ADMIN") return Ok(PasswordStorage.CreateHash(credentials.Username + "/" + credentials.Password));
                     return Ok(user);
                 }
                 else return BadRequest("Invalid password");
@@ -140,7 +142,7 @@ namespace API.Controllers
         /// <response code="400">Bad request</response>
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
-        {
+        {   
             Users delUser = context.Users.SingleOrDefault(u => u.UserId == id);
             if (delUser != null)
             {

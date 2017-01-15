@@ -25,6 +25,7 @@ CREATE TABLE `answers` (
     `date` datetime NOT NULL,
     `description` mediumtext NOT NULL,
     `rating` int(11) DEFAULT 0,
+    `solved` int(10) DEFAULT 0,
     CONSTRAINT `PK_answers` PRIMARY KEY (`answerId`, `questionId`, `userId`),
     CONSTRAINT `FK_answers_users_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE NO ACTION
 );

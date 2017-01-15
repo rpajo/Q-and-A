@@ -61,7 +61,7 @@ function mainViewModel() {
             type: "get",
             url: apiUrl + "api/question/" + self.order() + "/" + self.page(),
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 self.questionList(response);
             },
             error : function(err) {
@@ -86,9 +86,7 @@ function mainViewModel() {
      */
     self.changePage = function(page) {
         var p = self.page();
-        console.log(self.page(), self.questionList().length)
         if (self.page() + nav >= 1) {
-            console.log(self.questionList().length)
             self.page(p + nav);
             self.getQuestions();
         }
@@ -133,7 +131,7 @@ function questionViewModel() {
                             element.comments = ko.observableArray([]);
                         });
                         self.answers(response);
-                        console.log(self.answers());
+                        //console.log(self.answers());
 
                         self.getComments();
                     }
@@ -154,23 +152,16 @@ function questionViewModel() {
             dataType: "json",
             success: function (response) {
                 self.comments(response);
-                //console.log(self.comments());
-                //console.log("Sorting comments");
                 self.comments().forEach(function(comment) {
-                    //console.log(comment);
                     if (comment.parentId == 0) {
-                        //console.log("comment to question");
                         self.question().comments.push(comment);
                     }
                     else {
                         self.answers().forEach(function(answer) {
-                            //console.log(answer);
                             if (answer.answerId == comment.parentId) {
-                                //console.log("comment to answer with id: " + answer.answerId);
                                 answer.comments.push(comment);
                             }
                         });
-                        //console.log(self.answers());
                     }
                 });
             }
@@ -226,7 +217,8 @@ function questionViewModel() {
                 url: apiUrl + "api/comment/" + self.qId,
                 data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "parentId": answerId, "description": text, "author": self.userLoggedIn().username}),
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
+                    
                     //clear comments
                     self.question().comments([]);
                     self.answers().forEach(function(answer) {
@@ -253,7 +245,7 @@ function questionViewModel() {
      * @param {int} rating - 1: rateUp, -1: rateDown
      */
     self.editPost = function(answerId, rating) {
-        console.log("edit post", rating);
+        //console.log("edit post", rating);
         var data;
         if (rating != 0 && rating != 'solved') data = JSON.stringify( {"rating": rating} );
         else if (rating == 'solved') data = JSON.stringify( {"solved": 1, "rating": 0});
@@ -277,9 +269,7 @@ function questionViewModel() {
             });
         }
 
-        else {
-            console.log(apiUrl + "api/answer/" + answerId);
-            
+        else {            
             $.ajaxSetup({
                 contentType : 'application/json'
             });
@@ -304,7 +294,6 @@ function questionViewModel() {
      * @param {int} userId - unique user Id
      */
     self.goToUser = function(userId) {
-        console.log(userId);
         location.hash = '/profile/' + userId;
     }
 
@@ -338,7 +327,7 @@ function widgetViewModel() {
             url: apiUrl + "api/users/login",
             data: JSON.stringify({"email": username, "password": password}),
             success: function (user, response) {
-                console.log(response);
+                //console.log(response);
                 $("#btnLogin").attr("disable", false);
                 
                 self.userLoggedIn(user);
@@ -411,7 +400,7 @@ function widgetViewModel() {
                 url: apiUrl + "api/users/",
                 data: JSON.stringify({"username": username, "email": email, "password": pass, "description": ""}),
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     status.text("User Created");
                     $(btn).html("Done");
                 },
@@ -458,36 +447,32 @@ function profileViewModel() {
      */
     self.getUser = function(userId) {
         //console.log(self.userLoggedIn());
-        if (self.userLoggedIn() != undefined && userId == self.userLoggedIn().userId) {
-            self.user(self.userLoggedIn());
-        }
-        else {
-            $.ajax({
-                type: "get",
-                url: apiUrl + "api/users/" + userId,
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
-                    self.user(response);
-                    self.recentQuestions([]);
-                    $.ajax({
-                        type: "get",
-                        url: apiUrl + "api/users/" + userId + "/recent",
-                        dataType: "json",
-                        success: function (response) {
-                            console.log(response);
-                            if(response.length > 0) self.recentQuestions(response);
-                            else self.recentQuestions([]);
-                            //self.recentAnswers(response[1]);
-                        }
-                    });
+        $.ajax({
+            type: "get",
+            url: apiUrl + "api/users/" + userId,
+            dataType: "json",
+            success: function (response) {
+                //console.log(response);
+                self.user(response);
+                self.recentQuestions([]);
+                $.ajax({
+                    type: "get",
+                    url: apiUrl + "api/users/" + userId + "/recent",
+                    dataType: "json",
+                    success: function (response) {
+                        //console.log(response);
+                        if(response.length > 0) self.recentQuestions(response);
+                        else self.recentQuestions([]);
+                        //self.recentAnswers(response[1]);
+                    }
+                });
 
-                },
-                error: function(err) {
-                    console.log("Error: " + err);
-                }
-            });
-        }
+            },
+            error: function(err) {
+                console.log("Error: " + err);
+            }
+        });
+        
 
         return true;
     };
@@ -519,7 +504,7 @@ function profileViewModel() {
             url: apiUrl + "api/users/" + self.user().userId,
             data: JSON.stringify({"location": location, "description": about}),
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 $.ajax({
                     type: "get",
                     url: apiUrl + "api/users/" + self.user().userId,
@@ -591,7 +576,6 @@ $(document).ready(function(){
     var newLang = "en"
     $('#changeLocale').change(function() { 
         newLang = $(this).val();
-        console.log(newLang)
         $("[data-localize]").localize('lang', {language: newLang}); 
         //$('#greeting').val(greeting); 
         //$('#languages').val(newLang); 

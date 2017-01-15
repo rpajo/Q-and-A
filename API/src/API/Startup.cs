@@ -72,8 +72,8 @@ namespace API
             // Inject an implementation of ISwaggerProvider with defaulted settings applied
             services.AddSwaggerGen();
 
-            var connection = @"server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
-            services.AddDbContext<questionoverflowContext>(options => options.UseMySql(connection));
+            //var connection = @"server=localhost;database=questionoverflow;Uid =root; Pwd=admin;";
+            //services.AddDbContext<questionoverflowContext>(options => options.UseMySql(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
