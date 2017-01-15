@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using System.Web.Http;
-using Newtonsoft.Json;
-using System.Collections;
 using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
@@ -41,6 +38,7 @@ namespace API.Controllers
             {
                 answerList = context.Answers.Where(a => a.QuestionId == questionId).OrderByDescending(q => q.Rating).ToList();
             }
+            else return BadRequest("Order must be date/rating/-date");
 
             if (answerList == null) return BadRequest();
 
@@ -70,7 +68,9 @@ namespace API.Controllers
                 Console.WriteLine(ex.Message);
             }
 
-        String sqlString = String.Format("insert into answers(questionId, userId, description, rating, date, author) values ({0}, {1}, '{2}', '{3}', '{4}', '{5}')",
+            if (questionId <= 0 || answer.UserId <= 0 || answer.Description.Length == 0 || answer.Author.Length == 0) return BadRequest("Request not valid");
+
+            String sqlString = String.Format("insert into answers(questionId, userId, description, rating, date, author) values ({0}, {1}, '{2}', '{3}', '{4}', '{5}')",
                 questionId, answer.UserId, answer.Description.Replace("\'", "\\'"), answer.Rating != null ? answer.Rating : 0, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), answer.Author);
 
         MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sqlString, connection);

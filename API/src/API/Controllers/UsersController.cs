@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using System.Web.Http;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
-using System.Collections;
-using System.Security.Cryptography;
 using PasswordSecurity;
 
 namespace API.Controllers

@@ -248,13 +248,13 @@
                         <hr>
                         <div class="tabs low">
                             <input id="tab2" type="radio" name="tabsQ" value="-date" data-bind="checked: order, click: $root.getAnswers">
-                            <label for="tab2" onclick="getAnswers('new')"><i class="fa fa-clock-o" aria-hidden="true"></i><span data-localize="mostRecent"> Most Recent</span></label>
+                            <label for="tab2"><i class="fa fa-clock-o" aria-hidden="true"></i><span data-localize="mostRecent"> Most Recent</span></label>
                             
                             <input id="tab3" type="radio" name="tabsQ" value="date" data-bind="checked: order, click: $root.getAnswers">
-                            <label for="tab3" onclick="getAnswers('old')"><i class="fa fa-history" aria-hidden="true"></i><span data-localize="oldest"> Oldest</span></label>
+                            <label for="tab3"><i class="fa fa-history" aria-hidden="true"></i><span data-localize="oldest"> Oldest</span></label>
                             
                             <input id="tab1" type="radio" name="tabsQ" value="rating" data-bind="checked: order, click: $root.getAnswers">
-                            <label for="tab1" onclick="getAnswers('top')"><i class="fa fa-star" aria-hidden="true"></i><span data-localize="bestRated"> Best Rated</span></label>
+                            <label for="tab1"><i class="fa fa-star" aria-hidden="true"></i><span data-localize="bestRated"> Best Rated</span></label>
 
                             <section class="showQA" data-bind="foreach: answers">
                                 <div class="row">

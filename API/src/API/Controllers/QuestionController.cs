@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using System.Web.Http;
-using Newtonsoft.Json;
-using System.Collections;
 using Microsoft.AspNetCore.Cors;
 
 
@@ -44,7 +41,7 @@ namespace API.Controllers
         {
 
             var questionList = new List<Questions>();
-            if(order == "date")
+            if (order == "date")
             {
                 questionList = context.Questions.OrderByDescending(q => q.Date).Skip((page - 1) * 5).Take(5).ToList();
             }
@@ -56,6 +53,8 @@ namespace API.Controllers
             {
                 questionList = context.Questions.OrderByDescending(q => q.Answers).Skip((page - 1) * 5).Take(5).ToList();
             }
+            else return BadRequest("Order must be date/rating/answers");
+            if (page <= 0) return BadRequest("Page must be positive integer");
 
             
             return Ok(questionList);
@@ -84,6 +83,10 @@ namespace API.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
+
+            if (question.UserId <= 0 || question.Author.Length == 0 || question.Title.Length == 0 ||
+                question.Description.Length == 0 || question.Anonymous > 1 || question.Anonymous < 0)
+                return BadRequest("Request not valid");
 
             String sqlString = String.Format("insert into questions (userId, author, title, description, anonymous, date) values ({0}, '{1}', '{2}', '{3}', {4}, '{5}')",
                 question.UserId, question.Author, question.Title, question.Description.Replace("\'", "\\'"), question.Anonymous, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));

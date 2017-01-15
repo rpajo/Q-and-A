@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using System.Web.Http;
-using Newtonsoft.Json;
-using System.Collections;
 using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
@@ -59,6 +55,10 @@ namespace API.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
+
+            if (questionId <= 0 || comment.UserId <= 0 || comment.ParentId <= 0 ||
+                comment.Description.Length <= 0 || comment.Author.Length <= 0)
+                return BadRequest("Request not valid");
 
             String sqlString = String.Format("insert into comments (questionId, userId, parentId, description, author, date) values ({0}, {1}, {2}, '{3}', '{4}', '{5}')",
                 questionId, comment.UserId, comment.ParentId, comment.Description.Replace("\'", "\\'"), comment.Author, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
