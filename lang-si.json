@@ -52,5 +52,9 @@
 	"PROFILE": "PROFIL",
 	"SETTINGS": "NASTAVITVE",
 	"ACTIVITY": "AKTIVNOST",
-	"noPosted": "Uporabnik še ni objavil vprašanja"
+	"noPosted": "Uporabnik še ni objavil vprašanja",
+	"mostRecent": " Najnovejša",
+	"oldest": " Najstarejša",
+	"bestRated": " Najbolje ocenjeni",
+	"solved": "  Ta odgovoril je rešil vprašanje"
 }

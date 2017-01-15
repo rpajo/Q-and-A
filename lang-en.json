@@ -52,5 +52,9 @@
 	"PROFILE": "PROFILE",
 	"SETTINGS": "SETTINGS",
 	"ACTIVITY": "ACTIVITY",
-	"noPosted": "User has no posted questions"
+	"noPosted": "User has no posted questions",
+	"mostRecent": " Most Recent",
+	"oldest": " Oldest",
+	"bestRated": " Best Rated",
+	"solved": "  This answer solved the question"
 }
