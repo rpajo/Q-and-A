@@ -7,6 +7,7 @@ namespace API
 {
     public partial class questionoverflowContext : DbContext
     {
+        public string connectionString = @"Server=localhost;User Id=root;Password=admin;Database=questionoverflow";
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
@@ -15,7 +16,7 @@ namespace API
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseMySql(@"Server=localhost;User Id=root;Password=admin;Database=questionoverflow");
+            optionsBuilder.UseMySql(connectionString);
             //optionsBuilder.UseMySql(@"Server=questionoverflow.ckztk2rxcoxz.us-west-2.rds.amazonaws.com;User Id=admin;Password=iamroot1;Database=questionoverflow");
         }
 

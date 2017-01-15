@@ -56,13 +56,42 @@ namespace API.Controllers
         [HttpPost("{questionId}")]
         public ActionResult Post(int questionId, [FromBody]Answers answer)
         {
-            answer.Rating = 0;
-            answer.Date = DateTime.Now;
-            context.Add(answer);
-            context.SaveChanges();
+            MySql.Data.MySqlClient.MySqlConnection connection = null;
+            string _connectionString;
+            _connectionString = context.connectionString;
+            try
+            {
+                connection = new MySql.Data.MySqlClient.MySqlConnection();
+                connection.ConnectionString = _connectionString;
+                connection.Open();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        String sqlString = String.Format("insert into answers(questionId, userId, description, rating, date, author) values ({0}, {1}, '{2}', '{3}', '{4}', '{5}')",
+                questionId, answer.UserId, answer.Description.Replace("\'", "\\'"), answer.Rating != null ? answer.Rating : 0, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), answer.Author);
+
+        MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sqlString, connection);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
 
-            return Ok("Answer submited");
+            long id = cmd.LastInsertedId;
+
+            if (id < 0) return BadRequest("Answer not submited");
+            else return Ok(id);
         }
 
         /// <summary>
