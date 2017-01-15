@@ -16,6 +16,7 @@ namespace API
         {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
             optionsBuilder.UseMySql(@"Server=localhost;User Id=root;Password=admin;Database=questionoverflow");
+            //optionsBuilder.UseMySql(@"Server=questionoverflow.ckztk2rxcoxz.us-west-2.rds.amazonaws.com;User Id=admin;Password=iamroot1;Database=questionoverflow");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -67,6 +68,11 @@ namespace API
                 entity.Property(e => e.Rating)
                     .HasColumnName("rating")
                     .HasColumnType("int(11)")
+                    .HasDefaultValueSql("0");
+
+                entity.Property(e => e.Solved)
+                    .HasColumnName("solved")
+                    .HasColumnType("int(10)")
                     .HasDefaultValueSql("0");
 
                 entity.HasOne(d => d.User)

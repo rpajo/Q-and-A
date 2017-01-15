@@ -1,4 +1,7 @@
 
+var apiUrl = "http://localhost:62713/";
+//var apiUrl = "http://qoapi.azurewebsites.net/"
+
 /** @constructor Main View Model 
  *
 */
@@ -27,7 +30,7 @@ function mainViewModel() {
             });
             $.ajax({
                 type: "post",
-                url: "http://localhost:62713/api/question/",
+                url: apiUrl + "api/question/",
                 data: JSON.stringify({ "userId": self.userLoggedIn().userId, "author": self.userLoggedIn().username, "title": title, "description": description, "anonymous": anonymous }),
                 success: function (response) {
                     //console.log(response);
@@ -56,7 +59,7 @@ function mainViewModel() {
         //console.log(self.order());
         $.ajax({
             type: "get",
-            url: "http://localhost:62713/api/question/" + self.order() + "/" + self.page(),
+            url: apiUrl + "api/question/" + self.order() + "/" + self.page(),
             success: function(response) {
                 console.log(response);
                 self.questionList(response);
@@ -114,16 +117,16 @@ function questionViewModel() {
     self.getAnswers = function() {
         $.ajax({
             type: "get",
-            url: "http://localhost:62713/api/question/" + self.qId,
+            url: apiUrl + "api/question/" + self.qId,
             dataType: "json",
             success: function (response) {
                 response.comments = ko.observableArray([]);
                 self.question(response);
-                console.log(self.question());
+                //console.log(self.question());
 
                 $.ajax({
                     type: "get",
-                    url: "http://localhost:62713/api/answer/" + self.order() + "/" + self.qId,
+                    url: apiUrl + "api/answer/" + self.order() + "/" + self.qId,
                     dataType: "json",
                     success: function (response) {
                         response.forEach(function(element) {
@@ -147,7 +150,7 @@ function questionViewModel() {
     self.getComments = function() {
         $.ajax({
             type: "get",
-            url: "http://localhost:62713/api/comment/" + self.qId,
+            url: apiUrl + "api/comment/" + self.qId,
             dataType: "json",
             success: function (response) {
                 self.comments(response);
@@ -189,7 +192,7 @@ function questionViewModel() {
             });
             $.ajax({
                 type: "post",
-                url: "http://localhost:62713/api/answer/" + self.qId,
+                url: apiUrl + "api/answer/" + self.qId,
                 data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "author": self.userLoggedIn().username,"description": text}),
                 success: function (response) {
                     //console.log(response);
@@ -220,7 +223,7 @@ function questionViewModel() {
             });
             $.ajax({
                 type: "post",
-                url: "http://localhost:62713/api/comment/" + self.qId,
+                url: apiUrl + "api/comment/" + self.qId,
                 data: JSON.stringify({ "questionId": self.qId, "userId": self.userLoggedIn().userId, "parentId": answerId, "description": text, "author": self.userLoggedIn().username}),
                 success: function (response) {
                     console.log(response);
@@ -250,15 +253,17 @@ function questionViewModel() {
      * @param {int} rating - 1: rateUp, -1: rateDown
      */
     self.editPost = function(answerId, rating) {
+        console.log("edit post", rating);
         var data;
-        if (rating != 0) data = JSON.stringify( {"rating": rating} );
+        if (rating != 0 && rating != 'solved') data = JSON.stringify( {"rating": rating} );
+        else if (rating == 'solved') data = JSON.stringify( {"solved": 1, "rating": 0});
         if (answerId == 0) {
             $.ajaxSetup({
                 contentType : 'application/json'
             });
             $.ajax({
                 type: "put",
-                url: "http://localhost:62713/api/question/" + self.qId,
+                url: apiUrl + "api/question/" + self.qId,
                 data: data,
                 success: function (response) {
                     //self.getAnswers();
@@ -273,14 +278,14 @@ function questionViewModel() {
         }
 
         else {
-            console.log("http://localhost:62713/api/answer/" + answerId);
+            console.log(apiUrl + "api/answer/" + answerId);
             
             $.ajaxSetup({
                 contentType : 'application/json'
             });
             $.ajax({
                 type: "put",
-                url: "http://localhost:62713/api/answer/" + answerId,
+                url: apiUrl + "api/answer/" + answerId,
                 data: data,
                 success: function (response) {
                     self.getAnswers();
@@ -330,7 +335,7 @@ function widgetViewModel() {
         });
         $.ajax({
             type: "put",
-            url: "http://localhost:62713/api/users/login",
+            url: apiUrl + "api/users/login",
             data: JSON.stringify({"email": username, "password": password}),
             success: function (user, response) {
                 console.log(response);
@@ -340,7 +345,7 @@ function widgetViewModel() {
                 /*if (id > 0) {
                     $.ajax({
                         type: "get",
-                        url: "http://localhost:62713/api/users/" + id,
+                        url: apiUrl + "api/users/" + id,
                         dataType: "json",
                         success: function (user, response) {
                             console.log(user, response);
@@ -405,7 +410,7 @@ function widgetViewModel() {
             });
             $.ajax({
                 type: "post",
-                url: "http://localhost:62713/api/users/",
+                url: apiUrl + "api/users/",
                 data: JSON.stringify({"username": username, "email": email, "password": pass, "description": ""}),
                 dataType: "json",
                 success: function (response) {
@@ -462,7 +467,7 @@ function profileViewModel() {
         else {
             $.ajax({
                 type: "get",
-                url: "http://localhost:62713/api/users/" + userId,
+                url: apiUrl + "api/users/" + userId,
                 dataType: "json",
                 success: function (response) {
                     console.log(response);
@@ -470,7 +475,7 @@ function profileViewModel() {
                     self.recentQuestions([]);
                     $.ajax({
                         type: "get",
-                        url: "http://localhost:62713/api/users/" + userId + "/recent",
+                        url: apiUrl + "api/users/" + userId + "/recent",
                         dataType: "json",
                         success: function (response) {
                             console.log(response);
@@ -514,13 +519,13 @@ function profileViewModel() {
         });
         $.ajax({
             type: "put",
-            url: "http://localhost:62713/api/users/" + self.user().userId,
+            url: apiUrl + "api/users/" + self.user().userId,
             data: JSON.stringify({"location": location, "description": about}),
             success: function (response) {
                 console.log(response);
                 $.ajax({
                     type: "get",
-                    url: "http://localhost:62713/api/users/" + self.user().userId,
+                    url: apiUrl + "api/users/" + self.user().userId,
                     dataType: "json",
                     success: function (response) {
                         self.user(response);
@@ -563,6 +568,7 @@ $(document).ready(function(){
 
             mainVM.navigation('main');
             //questionVM.navigation('main');
+            $("[data-localize]").localize('lang', {language: newLang}); 
         });
         
         this.get('#/question/:id', function(context) {
@@ -570,11 +576,13 @@ $(document).ready(function(){
             questionVM.getAnswers();
             mainVM.navigation('question');
             //questionVM.navigation('question');
+            $("[data-localize]").localize('lang', {language: newLang}); 
         });
 
         this.get("#/profile/:userId", function(context) {
             mainVM.navigation('profile');
             profileVM.getUser(context.params.userId);
+            $("[data-localize]").localize('lang', {language: newLang}); 
         });
 
         this._checkFormSubmission = function(form) {
@@ -582,10 +590,10 @@ $(document).ready(function(){
         };
     }).run('#/');
 
-    $("[data-localize]").localize("lang", {language:"si"});
-
+    $("[data-localize]").localize("lang", {language:"en"});
+    var newLang = "en"
     $('#changeLocale').change(function() { 
-        var newLang = $(this).val();
+        newLang = $(this).val();
         console.log(newLang)
         $("[data-localize]").localize('lang', {language: newLang}); 
         //$('#greeting').val(greeting); 

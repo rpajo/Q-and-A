@@ -56,6 +56,7 @@ namespace API.Controllers
         [HttpPost("{questionId}")]
         public ActionResult Post(int questionId, [FromBody]Answers answer)
         {
+            answer.Rating = 0;
             answer.Date = DateTime.Now;
             context.Add(answer);
             context.SaveChanges();
@@ -77,7 +78,9 @@ namespace API.Controllers
             Answers answer = context.Answers.FirstOrDefault(q => q.AnswerId == id);
             if (answer != null)
             {
+
                 answer.Rating = answer.Rating + value.Rating;
+                if (value.Solved == 1) answer.Solved = 1;
                 context.SaveChanges();
                 return Ok("Answer successfuly updated");
             }

@@ -21,7 +21,7 @@
     <body>
 
     <div class="container color-red">
-        <h1 class="center lobster" onclick="location.href='index.html'">Question Overflow</h1>
+        <h1 class="center lobster" onclick="location.href='index.html#/'">Question Overflow</h1>
     </div>
 
     <div class=" container row wrapper margin-t-16">
@@ -262,9 +262,17 @@
                                         <i class="fa fa-angle-up fa-2x" aria-hidden="true" data-bind="click: function(){$root.editPost(answerId, 1)}"></i>
                                         <span class="tagRound color-accent2" data-bind="text: rating"></span>
                                         <i class="fa fa-angle-down fa-2x" aria-hidden="true" data-bind="click: function(){$root.editPost(answerId, -1)}"></i>
+
+                                        <span data-bind="if: solved == 0 && $root.userLoggedIn() != 0 && $root.userLoggedIn().userId == userId">
+                                            <i class="fa fa-check-square fa-2x" aria-hidden="true" data-bind="click: function(){$root.editPost(answerId, 'solved')}"></i>
+                                        </span>
                                     </div>
                                     <div class="container col s10 container">
                                         <p data-bind="text: description"></p>
+                                        
+                                        <span data-bind="if: solved == 1">
+                                            <i class="fa fa-check-square" aria-hidden="true"><span>  This answer solved the question</span></i>
+                                        </span>
 
                                         <i class="fa fa-clock-o right clickable" style="padding-top:4px" aria-hidden="true" 
                                             data-bind="text:'  ' + author + ' on ' + date, click: function(){$root.goToUser(userId)}"></i>
