@@ -4,4 +4,4 @@ sudo: required
 mono: none
 dotnet: 1.0.0-preview2-003121
 script:
-  - dotnet build API/src/API
+  - dotnet restore API/src/API && dotnet build API/src/API
